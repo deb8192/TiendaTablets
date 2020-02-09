@@ -1,4 +1,37 @@
 /* Hoja de estilos */
-.red {
-    color: red;
+* {
+    text-decoration: none;
+}
+
+header {
+	background-color: #08B;
+}
+
+nav ul {
+	display: flex;
+	list-style: none;
+}
+
+nav ul li {
+	padding: 5px;
+}
+
+.contenedor {
+	background-color: rgb(174, 0, 255);
+	border: 1px solid #000;
+}
+
+footer {
+	color:#fff;
+	background-color: #273232;
+}
+
+footer a {
+	color:#fff;
+}
+
+.ir-arriba {
+	padding:10px;
+	background:#024959;
+	cursor:pointer;
 }
