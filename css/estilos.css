@@ -65,8 +65,13 @@ footer a {
 	padding: 20px 0 20px 0;
     min-width: 250px;
     border: 2px solid #0174DF;
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 10px 10px #27323229;
+}
+
+.grid article:hover {
+	background-color: #5396d624;
+	cursor: pointer;
 }
 
 .grid h2 {
