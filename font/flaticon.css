@@ -25,8 +25,7 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
-        font-size: 20px;
-font-style: normal;
+  font-style: normal;
 }
 
 .flaticon-next:before { content: "\f100"; }

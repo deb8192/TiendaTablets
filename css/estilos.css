@@ -3,6 +3,12 @@
     text-decoration: none;
 }
 
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #ebeced;
+}
+
 header {
 	background-color: #08B;
 }
@@ -14,42 +20,6 @@ nav ul,  .paginacion ul {
 
 nav ul li {
 	padding: 5px;
-}
-
-footer {
-	color:#fff;
-	background-color: #273232;
-}
-
-footer a {
-	color:#fff;
-}
-
-.ir-arriba {
-	padding:10px;
-	background:#024959;
-	cursor:pointer;
-}
-
-.paginacion ul li {
-
-}
-
-.paginacion a {
-	color: #000;
-	border-radius: 5px;
-	padding: 10px;
-}
-  
-.paginacion a.active {
-	background-color: #08b;
-	color: white;
-	border-radius: 5px;
-}
-  
-.paginacion a:hover:not(.active) {
-	background-color: #ddd;
-	border-radius: 5px;
 }
 
 .grid {
@@ -64,9 +34,9 @@ footer a {
 .grid article {
 	padding: 20px 0 20px 0;
     min-width: 250px;
-    border: 2px solid #0174DF;
     border-radius: 5px;
-    box-shadow: 10px 10px #27323229;
+    box-shadow: 5px 5px #27323229;
+    background-color: #fff;
 }
 
 .grid article:hover {
@@ -100,7 +70,6 @@ footer a {
 	padding-left: 20px;
     padding-right: 20px;
     display: flex;
-    flex-wrap: wrap;
 }
 
 .flaticon-gallery, .flaticon-user {
@@ -113,4 +82,69 @@ footer a {
 	white-space: nowrap;
 	width: 86%;
 	overflow: hidden;
+}
+
+.paginacion {
+	display: flex;
+	justify-content: center;
+	margin: 10px 0;
+}
+
+.paginacion a {
+	color: #145;
+	border-radius: 5px;
+	padding: 10px;
+}
+  
+.paginacion a.active {
+	background-color: #08b;
+	color: white;
+	border-radius: 5px;
+}
+  
+.paginacion a:hover:not(.active) {
+	background-color: #90b8c7;
+	border-radius: 5px;
+}
+
+.puntitos {
+	padding-top: 5px;
+    margin: 0 10px;
+    color: #145;
+}
+
+footer {
+	display: flex;
+    justify-content: center;
+	color:#fff;
+	background-color: #0d455a;
+	min-height: 70px;
+	border-top: 5px solid #026f98;
+}
+
+footer div {
+	display: flex;
+    margin-top: 25px;
+    font-size: 1.3em;
+}
+
+footer p {
+	margin: 0;
+    margin-right: 50px;
+}
+
+footer a {
+	color:#fff;
+}
+
+.ir-arriba {
+	padding: 10px;
+    background: #026f98;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    text-align: center;
 }
