@@ -7,18 +7,13 @@ header {
 	background-color: #08B;
 }
 
-nav ul {
+nav ul,  .paginacion ul {
 	display: flex;
 	list-style: none;
 }
 
 nav ul li {
 	padding: 5px;
-}
-
-.contenedor {
-	background-color: rgb(174, 0, 255);
-	border: 1px solid #000;
 }
 
 footer {
@@ -34,4 +29,83 @@ footer a {
 	padding:10px;
 	background:#024959;
 	cursor:pointer;
+}
+
+.paginacion ul li {
+
+}
+
+.paginacion a {
+	color: #000;
+	border-radius: 5px;
+	padding: 10px;
+}
+  
+.paginacion a.active {
+	background-color: #08b;
+	color: white;
+	border-radius: 5px;
+}
+  
+.paginacion a:hover:not(.active) {
+	background-color: #ddd;
+	border-radius: 5px;
+}
+
+.grid {
+	display: grid;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+    grid-gap: 30px 40px;
+}
+
+.grid article {
+	padding: 20px 0 20px 0;
+    min-width: 250px;
+    border: 2px solid #0174DF;
+    border-radius: 20px;
+    box-shadow: 10px 10px #27323229;
+}
+
+.grid h2 {
+	min-height: 55px;
+    padding: 5px 0 5px 0;
+    color: white;
+    background-color: #08b;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	margin: 10px 0;
+}
+
+.grid img {
+	width: 100%;
+}
+
+.grid div > p {
+	font-size: 25px;
+	margin: 0;
+}
+
+.grid div {
+	padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flaticon-gallery, .flaticon-user {
+	margin-left: auto;
+}
+
+.grid p:last-child {
+	padding-left: 20px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 86%;
+	overflow: hidden;
 }
