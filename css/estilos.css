@@ -114,6 +114,7 @@ aside input {
 	display: flex;
 	justify-content: center;
 	margin: 30px 0 20px 0;
+	font-family: 'Fira Sans', sans-serif;
 }
 
 .paginacion a {
@@ -174,3 +175,32 @@ footer a {
 	text-align: center;
 	border-radius: 3px;
 }
+
+/* Buscar */
+#precio {
+	-webkit-appearance: none;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity .2s;
+}
+
+#precio:hover {
+	opacity: 1;
+  }
+  
+  #precio::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 15px;
+	height: 25px;
+	background: #08b;
+	cursor: pointer;
+  }
+  
+  #precio::-moz-range-thumb {
+	width: 15px;
+	height: 25px;
+	background: #08b;
+	cursor: pointer;
+  }
