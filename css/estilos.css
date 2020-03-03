@@ -1,4 +1,6 @@
 /* Hoja de estilos */
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
 * {
 	text-decoration: none;
 	margin: 0;
@@ -50,12 +52,17 @@ aside input {
     min-width: 250px;
     border-radius: 5px;
     box-shadow: 5px 5px #27323229;
-    background-color: #fff;
+	background-color: #fff;
+	font-family: 'Pacifico', cursive;
 }
 
 .grid article:hover {
-	background-color: #5396d624;
 	cursor: pointer;
+	transform: scale(1.1);
+}
+
+.grid article i[class^='flaticon'] {
+	font-size: 1.3em;
 }
 
 .grid h2 {
@@ -68,7 +75,8 @@ aside input {
     display: flex;
     justify-content: center;
 	align-items: center;
-	margin: 10px 0;
+	margin: 2px 0;
+	font-family: 'Fira Sans', sans-serif;
 }
 
 .grid img {
@@ -87,6 +95,10 @@ aside input {
 
 .flaticon-gallery, .flaticon-user {
 	margin-left: auto;
+}
+
+.flaticon-gallery, .flaticon-user {
+	padding-top: 5px;
 }
 
 .grid p:last-child {
@@ -159,5 +171,6 @@ footer a {
     height: 30px;
     width: 30px;
     cursor: pointer;
-    text-align: center;
+	text-align: center;
+	border-radius: 3px;
 }
