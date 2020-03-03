@@ -61,6 +61,10 @@ aside input {
 	transform: scale(1.1);
 }
 
+.grid article a {
+	color: #000;
+}
+
 .grid article i[class^='flaticon'] {
 	font-size: 1.3em;
 }
@@ -187,20 +191,20 @@ footer a {
 
 #precio:hover {
 	opacity: 1;
-  }
+}
   
-  #precio::-webkit-slider-thumb {
+#precio::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	appearance: none;
 	width: 15px;
 	height: 25px;
 	background: #08b;
 	cursor: pointer;
-  }
+}
   
-  #precio::-moz-range-thumb {
+#precio::-moz-range-thumb {
 	width: 15px;
 	height: 25px;
 	background: #08b;
 	cursor: pointer;
-  }
+}
