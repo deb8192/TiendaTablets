@@ -1,8 +1,86 @@
 /* Hoja de estilos */
+body
+{
+    margin: 0;
+}
+
 .red {
     color: red;
 }
 #fotoRegistro
 {
     visibility: hidden;
+}
+ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    box-sizing: border-box;
+}
+a
+{
+    color: #000;
+    text-decoration: none;
+    transition: background-color 0.3s ease-out 0.2s;
+}
+a:hover
+{
+    background-color: #aaa;
+}
+
+/* Menu lateral (ancho < 480px) */
+
+.menu_lateral>ul
+{    
+    left: -105%;
+
+}
+
+.menu_lateral>ul>li>a
+{
+    display: block;
+    padding: 1em;
+}
+
+.menu_lateral
+{
+    height: 64px;
+}
+
+#m_lateral
+{
+    display: none;
+}
+
+#m_lateral:checked + .menu_lateral>ul
+{
+    left: 0;
+}
+
+#m_lateral:checked + .menu_lateral
+{
+    height: fit-content
+}
+
+/* Menu lateral (ancho > 480px) */
+
+@media all and (min-width: 480px)
+{
+    .menu_lateral>ul
+    {
+        display: flex;
+        transition: left 0.5s ease-out;
+        transition-delay: 0.2s;
+        left: 0%;
+    }
+    .menu_lateral>ul>li
+    {
+        flex-grow: 1;
+    }
+    .menu_lateral>label
+    {
+        display: none;
+    }
 }
