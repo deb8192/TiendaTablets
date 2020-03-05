@@ -33,9 +33,10 @@ a:hover
 /* Menu lateral (ancho < 480px) */
 
 .menu_lateral>ul
-{    
+{
+    transition: left 0.5s ease-out;
+    transition-delay: 0.2s;
     left: -105%;
-
 }
 
 .menu_lateral>ul>li>a
@@ -54,15 +55,16 @@ a:hover
     display: none;
 }
 
-#m_lateral:checked + .menu_lateral>ul
+#m_lateral:checked + ul
 {
     left: 0;
 }
-
-#m_lateral:checked + .menu_lateral
+.menu_lateral ~ #m_lateral:checked
 {
-    height: fit-content
+    height: auto;
 }
+
+
 
 /* Menu lateral (ancho > 480px) */
 
@@ -71,8 +73,6 @@ a:hover
     .menu_lateral>ul
     {
         display: flex;
-        transition: left 0.5s ease-out;
-        transition-delay: 0.2s;
         left: 0%;
     }
     .menu_lateral>ul>li

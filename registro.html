@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <htlm>
     <head>
         <meta lang="es">
@@ -11,16 +11,19 @@
     <body>
         <header>
             <nav class="menu_lateral">
-                <label for="m_lateral">O<input type="checkbox" class="checkMenu" id="m_lateral"/></label>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="buscar.html">Buscar</a></li>
-                    <li><a href="index.html">Nuevo</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="login.html">Logout</a></li>
-                    <li><a href="registro.html">Registro</a></li>
-                    <li><a href="login.html">Acerca</a></li>
-                </ul>
+                <div>
+                    <label for="m_lateral">O</label>
+                    <input type="checkbox" class="checkMenu" name="m_lateral" id="m_lateral"/>
+                    <ul id="menu_options">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="buscar.html">Buscar</a></li>
+                        <li><a href="index.html">Nuevo</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="login.html">Logout</a></li>
+                        <li><a href="registro.html">Registro</a></li>
+                        <li><a href="login.html">Acerca</a></li>
+                    </ul>
+                </div>
             </nav>
         </header>
         <h1>Registro</h1>
@@ -39,7 +42,7 @@
                 <p><label for="apellidos">Apellidos <span class=asterisco>* </span></label>
                     <input type="text" id="apellidos"  placeholder="Ej: Pérez García" required/></p>
                 <p><label for="email">Email <span class=asterisco>* </span></label><input type="email" id="email" placeholder="Ej: fulanito_94@email.com" required/></p>
-                <p><label for="fotoRegistro"><img src="img/user-img.png" alt="foto usuario"/></br> 
+                <p><label for="fotoRegistro"><img src="img/user-img.png" alt="foto usuario"/></br>
                     <span>Buscar foto</span></label>
                     <input id="fotoRegistro" type="file" value="Buscar foto"/></p>
                 <p><input type="reset" value="Borrar formulario"/></p>
