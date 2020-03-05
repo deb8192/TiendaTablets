@@ -7,6 +7,10 @@
     padding: 0;
 }
 
+html {
+	--azul: #08B;
+}
+
 body {
 	background-color: #ebeced;
 }
@@ -16,7 +20,7 @@ body, .grid article h2 {
 }
 
 header {
-	background-color: #08B;
+	background-color: var(--azul);
 }
 
 nav ul,  .paginacion ul {
@@ -84,7 +88,7 @@ aside input {
 	min-height: 55px;
     padding: 5px 0 5px 0;
     color: white;
-    background-color: #08b;
+    background-color: var(--azul);
     width: 100%;
     text-align: center;
     display: flex;
@@ -137,7 +141,7 @@ aside input {
 }
   
 .paginacion a.active {
-	background-color: #08b;
+	background-color: var(--azul);
 	color: white;
 	border-radius: 5px;
 }
@@ -190,30 +194,3 @@ footer a {
 }
 
 /* Buscar */
-#precio {
-	-webkit-appearance: none;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  transition: opacity .2s;
-}
-
-#precio:hover {
-	opacity: 1;
-}
-  
-#precio::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	appearance: none;
-	width: 15px;
-	height: 25px;
-	background: #08b;
-	cursor: pointer;
-}
-  
-#precio::-moz-range-thumb {
-	width: 15px;
-	height: 25px;
-	background: #08b;
-	cursor: pointer;
-}
