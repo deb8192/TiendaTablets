@@ -4,26 +4,28 @@
         <meta charset="utf-8">
 		<meta name ="viewport" content = "width = device-width, initial-scale = 1.0">
         <link rel="stylesheet" href="./css/estilos.css">
+        <!--<link rel="stylesheet" href="font/flaticon.css">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="description" content="Pagina de registro de la web de PCW">
         <title>Registro</title>
     </head>
     <body>
         <header>
             <nav class="menu_lateral">
-                <label for="m_lateral">O</label>
+                <label for="m_lateral"><i class="fa fa-bars"></i></label>
                 <input type="checkbox" class="checkMenu" name="m_lateral" id="m_lateral"/>
                 <ul id="menu_options">
-                    <li><a href="index.html"><i class="flaticon-home-run"></i> Inicio</a></li>
-                    <li><a href="buscar.html"><i class="flaticon-loupe"></i> Buscar</a></li>
-                    <li><a href="index.html"><i class="flaticon-plus"></i> Nuevo</a></li>
-                    <li><a href="login.html"><i class="flaticon-enter"></i> Login</a></li>
-                    <li><a href="index.html"><i class="flaticon-logout"></i>Logout</a></li>
-                    <li><a href="registro.html"><i class="flaticon-id-card"></i>Registro</a></li>
-                    <li><a href="login.html"><i class="flaticon-user"></i> Acerca</a></li>
+                    <li title = "Inicio"><a href="index.html"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+                    <li title = "Buscar"><a href="buscar.html"><i class="fa fa-search"></i> <span>Buscar</span></a></li>
+                    <li title = "Nuevo"><a href="index.html"><i class="fa fa-plus-circle"></i> <span>Nuevo</span></a></li>
+                    <li title = "Login"><a href="login.html"><i class="fa fa-sign-in"></i> <span>Login</span></a></li>
+                    <li title = "Logout"><a href="index.html"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                    <li title = "Registro"><a href="registro.html"><i class="fa fa-vcard"></i> <span>Registro</span></a></li>
+                    <li title = "Acerca"><a href="login.html"><i class="fa fa-user"></i> <span>Acerca</span></a></li>
                 </ul>
             </nav>
         </header>
-        <div class="cuerpo">
+        <section class="registro">
             <h1>Registro</h1>
             <section>
                 <!--<article> TO DO: PREGUNTAR AL PROFESOR SI PONER ARTICLES CUANDO SÓLO HAY UNO-->
@@ -51,7 +53,7 @@
                 </form>
                 <!--</article>-->
             </section>
-        </div>
+        </section>
         <footer></footer>
     </body>
 </html>

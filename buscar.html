@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/estilos.css">
-        <link rel="stylesheet" type="text/css" href="font/flaticon.css">
+        <!--<link rel="stylesheet" href="font/flaticon.css">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="description" content="P&aacute;gina de buscar de la web de PCW">
         <title>Buscar</title>
     </head>
@@ -11,14 +12,17 @@
         <header>
             <h1 id="logo">Walacom</h1>
             <h2>Tu tablet al mejor precio</h2>
-            <nav>
-                <ul>
-                    <li><i class="flaticon-home-run"></i> Inicio</li>
-                    <li><i class="flaticon-loupe"></i> Buscar</li>
-                    <li><i class="flaticon-enter"></i> Login</li>
-                    <li><i class="flaticon-id-card"></i>Registro</li>
-                    <li><i class="flaticon-plus"></i>Nuevo art&iacute;culo</li>
-                    <li><i class="flaticon-logout"></i>Logout</li>
+            <nav class="menu_lateral">
+                <label for="m_lateral"><i class="fa fa-bars"></i></label>
+                <input type="checkbox" class="checkMenu" name="m_lateral" id="m_lateral"/>
+                <ul id="menu_options">
+                    <li title = "Inicio"><a href="index.html"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+                    <li title = "Buscar"><a href="buscar.html"><i class="fa fa-search"></i> <span>Buscar</span></a></li>
+                    <li title = "Nuevo"><a href="index.html"><i class="fa fa-plus-circle"></i> <span>Nuevo</span></a></li>
+                    <li title = "Login"><a href="login.html"><i class="fa fa-sign-in"></i> <span>Login</span></a></li>
+                    <li title = "Logout"><a href="index.html"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                    <li title = "Registro"><a href="registro.html"><i class="fa fa-vcard"></i> <span>Registro</span></a></li>
+                    <li title = "Acerca"><a href="login.html"><i class="fa fa-user"></i> <span>Acerca</span></a></li>
                 </ul>
             </nav>
         </header>
