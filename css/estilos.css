@@ -55,18 +55,23 @@ ul
     box-sizing: border-box;
 }
 
-/* Formularios */
+/* Buscar y Formularios */
 form>p, h1
 {
     margin: 10px 0;
 }
 
-.registro
+#login
+{
+    margin-bottom: 10px;
+}
+
+#registro_principal
 {  
     padding: 180px 15%;
     background-color: #fff;
 }
-.login
+#login_principal
 {
     padding: 180px 20%;
     background-color: #fff; 
@@ -78,12 +83,24 @@ form>p, h1
     border-radius: 4px;
     border: 2px solid #e1e1e1;
 }
+
+input:hover
+{
+    transition: background-color .5s;
+    background-color: #fec;
+}
+
+input:focus, #registro>p>input:focus, #login>p>input:focus
+{
+    border: solid 3px #edb;
+    background-color: #fec;
+}
+
 #registro>input, #login>input
 {
     border: 2px solid #e1e1e1;
 }
 
-/* Buscar y Formularios */
 #buscar form p {
 	margin: 10px 0 10px 50px;
 }
@@ -118,18 +135,6 @@ form>p, h1
 .ir-arriba:hover,
 #art-nuevo input[type='submit']:hover {
 	opacity: 1;
-}
-
-input:hover
-{
-    transition: background-color .5s;
-    background-color: #fec;
-}
-
-input:focus
-{
-    border: solid 3px #edb;
-    background-color: #fec;
 }
 
 #resultados h2, #fotos-nuevas h2 {
@@ -268,12 +273,19 @@ aside, #buscar {
 	background-color: #fff;
 	font-family: 'Pacifico', cursive;
 }
-.grid article, #registro>p:nth-last-child(3)
+
+#login_principal>section>a
+{
+    display: block;
+    width: fit-content;
+}
+
+.grid article, #registro>p:nth-last-child(3), #login_principal>section>a
 {
 	transition: .3s;
 }
 
-.grid article:hover, #registro>p:nth-last-child(3):hover{
+.grid article:hover, #registro>p:nth-last-child(3):hover, #login_principal>section>a:hover{
 	cursor: pointer;
 	transform: scale(1.1);
 }
@@ -433,13 +445,13 @@ footer a:hover {
 @media all and (min-width: 640px)
 {
 
-    .registro
+    #registro_principal
     {
         margin: 0 15%; 
         padding: 180px 10%;
         background-color: #fff;
     }
-    .login
+    #login_principal
     {
         margin: 180px 20%; 
         padding: 100px 10%;
@@ -455,13 +467,13 @@ footer a:hover {
 
 @media all and (min-width: 980px)
 {    
-    .registro
+    #registro_principal
     {
         margin: 0 20%; 
         padding: 180px 15%;
         background-color: #fff;
     }
-    .login
+    #login_principal
     {
         margin: 180px 30%; 
         padding: 100px 10%;
