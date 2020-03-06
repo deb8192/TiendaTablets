@@ -1,6 +1,7 @@
 /* Hoja de estilos */
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+
 * {
 	text-decoration: none;
 	margin: 0;
@@ -61,14 +62,10 @@ aside, #buscar {
 .grid {
 	display: grid;
     width: 100%;
-    grid-template-columns: repeat(
-		auto-fill, minmax(14em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
 	grid-gap: 30px 30px;
 }
 
-.grid article::before {
-	transition: 0.3s;
-}
 .grid article {
 	padding: 20px 0 20px 0;
     min-width: 250px;
@@ -95,14 +92,12 @@ aside, #buscar {
 .grid h2 {
 	min-height: 55px;
     padding: 5px 0 5px 0;
-    color: fff;
+    color: #fff;
     background-color: var(--azul);
-    width: 100%;
-    text-align: center;
     display: flex;
     justify-content: center;
 	align-items: center;
-	margin: 2px 0;
+	text-align: center;
 }
 
 .grid img {
@@ -110,7 +105,7 @@ aside, #buscar {
 }
 
 .grid div > p {
-	font-size: 25px;
+	font-size: 1.6em;
 }
 
 .grid div {
@@ -145,7 +140,6 @@ aside, #buscar {
 
 .paginacion a {
 	color: #145;
-	border-radius: 5px;
 	padding: 10px;
 }
   
@@ -202,7 +196,6 @@ footer a:hover {
     right: 10px;
     height: 30px;
     width: 30px;
-	text-align: center;
 	border-radius: 3px;
 }
 
