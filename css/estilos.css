@@ -62,13 +62,13 @@ form>p, h1
 }
 
 .registro
-{ 
-    padding: 128px 15%;
+{  
+    padding: 180px 15%;
     background-color: #fff;
 }
 .login
 {
-    padding: 100px 20%;
+    padding: 180px 20%;
     background-color: #fff; 
 
 }
@@ -161,7 +161,7 @@ header
     width: 100%;
     left: 0;
     top: 0;
-    box-shadow: 0 2px 6px;
+    box-shadow: 0 2px 6px #333;
     z-index: 1;
     color: #fff;
 }
@@ -207,7 +207,7 @@ header
     top: -1.3em;
     text-align: center;
     background-color: var(--azul);
-    box-shadow: 0 2px 4px
+    box-shadow: 0 2px 4px #333;
 }
 
 
@@ -436,12 +436,12 @@ footer a:hover {
     .registro
     {
         margin: 0 15%; 
-        padding: 128px 10%;
+        padding: 180px 10%;
         background-color: #fff;
     }
     .login
     {
-        margin: 128px 20%; 
+        margin: 180px 20%; 
         padding: 100px 10%;
         background-color: #fff; 
     }
@@ -458,12 +458,12 @@ footer a:hover {
     .registro
     {
         margin: 0 20%; 
-        padding: 128px 15%;
+        padding: 180px 15%;
         background-color: #fff;
     }
     .login
     {
-        margin: 128px 30%; 
+        margin: 180px 30%; 
         padding: 100px 10%;
         background-color: #fff; 
     }
