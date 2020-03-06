@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/estilos.css">
         <link rel="stylesheet" type="text/css" href="font/flaticon.css">
-        <meta description ="Pagina de buscar de la web de PCW">
+        <meta name="description" content="Pagina de buscar de la web de PCW">
         <title>Buscar</title>
     </head>
     <body>
@@ -28,12 +28,12 @@
                 <input type="search" id="texto" placeholder="Buscar..." required autofocus/>
 
                 <p><label for="desde">Desde:</label>
-                    <input type="number" id="desde" min="0" max="1000" step="1" value="0" maxlength="4">
+                    <input type="number" id="desde" min="0" max="1000" step="1" value="0">
                     <label for="hasta">Hasta:</label>
-                    <input type="number" id="hasta" min="1001" max="2000" step="1" value="2000" maxlength="4"> €</p>
+                    <input type="number" id="hasta" min="1001" max="2000" step="1" value="2000"> €</p>
 
                 <p><label for="categoria">Categor&iacute;a </label>
-                    <select name="categoria">
+                    <select id="categoria" name="categoria">
                         <option value="todas" selected>Todas</option> 
                         <option value="tableta">Tableta</option>
                         <option value="stylus">Stylus</option>
