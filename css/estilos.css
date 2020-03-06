@@ -231,6 +231,13 @@ header
     width: fit-content;
 }
 
+/* Acerca */
+#acerca_principal>section
+{
+    display: flex;
+    width: fit-content;
+}
+
 /* Cuerpo comun */
 aside, #principal, 
 #buscar, #resultados,
@@ -240,7 +247,7 @@ aside, #principal,
     margin: 0 auto;
 }
 
-aside, #buscar {
+aside, #buscar, #acerca_principal {
     margin-bottom: 25px;
     margin-top: 180px;
 }
