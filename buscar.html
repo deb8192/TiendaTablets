@@ -9,8 +9,8 @@
     </head>
     <body>
         <header>
-            <h1 id="logo">Empresa</h1>
-            <h2>subtítulo explicativo del objetivo del sitio</h2>
+            <h1 id="logo">Walacom</h1>
+            <h2>Tu tablet al mejor precio</h2>
             <nav>
                 <ul>
                     <li><i class="flaticon-home-run"></i> Inicio</li>
@@ -22,33 +22,39 @@
                 </ul>
             </nav>
         </header>
-        <section class="buscar">
-            <h2>Buscar</h2>
-
-            <form id="buscar" enctype="multipart/form-data" action="buscar.html" method="post">
+        <section id="buscar">
+            <form action="buscar.html" method="post">
                 
                 <input type="search" id="texto" placeholder="Buscar..." required autofocus/>
+
+                <p><label for="desde">Desde:</label>
+                    <input type="number" id="desde" min="0" max="1000" step="1" value="0" maxlength="4">
+                    <label for="hasta">Hasta:</label>
+                    <input type="number" id="hasta" min="1001" max="2000" step="1" value="2000" maxlength="4"> €</p>
+
+                <p><label for="categoria">Categor&iacute;a </label>
+                    <select name="categoria">
+                        <option value="todas" selected>Todas</option> 
+                        <option value="tableta">Tableta</option>
+                        <option value="stylus">Stylus</option>
+                        <option value="soporte">Soporte</option>
+                        </select>
+                </p>
                 
-                <p><label for="vendedor">Por vendedor </label>
-                    <input type="checkbox" id="vendedor"/></p>
+                <p><span><label for="vendedor">Por vendedor </label>
+                    <input type="checkbox" id="vendedor"/></span>
 
-                <p><label for="categoria">Por categoría </label>
-                    <input type="checkbox" id="categoria"/></p>
+                <span><label for="art-follow">Art&iacute;culos que sigo </label>
+                    <input type="checkbox" id="art-follow"/></span>
 
-                <p><label for="precio">Precio </label>
-                    <input type="range" id="precio" min="1" max="3000" value="1500"/></p>
-
-                <p><label for="art-follow">Artículos que sigo </label>
-                    <input type="checkbox" id="art-follow"/></p>
-
-                <p><label for="art-me">Mis artículos </label>
-                    <input type="checkbox" id="art-me"/></p>
+                <span><label for="art-me">Mis art&iacute;culos </label>
+                    <input type="checkbox" id="art-me"/></span></p>
 
                 <input type="submit" value ="Buscar"/>
 
             </form>
         </section>
-        <section class="resultados">
+        <section id="resultados">
             <h2>Resultados</h2>
             <section class="grid">
                 
@@ -228,7 +234,7 @@
                 <p>&copy;2020 MD Design</p>
                 <a href="acerca.html" title="Contacto">Contacto</a>
             </div>
-            <a href="#logo" class="ir-arriba"><i class="flaticon-up-arrow"></i></a>
+            <a href="#logo" class="ir-arriba" title="Arriba"><i class="flaticon-up-arrow"></i></a>
         </footer>
     </body>
 </html>

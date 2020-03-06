@@ -21,6 +21,7 @@ body, .grid article h2 {
 
 header {
 	background-color: var(--azul);
+	margin-bottom: 20px;
 }
 
 nav ul,  .paginacion ul {
@@ -32,18 +33,19 @@ nav ul li {
 	padding: 5px;
 }
 
-aside {
-	display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-aside form {
+/* Cuerpo comun */
+aside, #principal, 
+#buscar, #resultados {
 	width: 100%;
     max-width: 1080px;
+    margin: 0 auto;
 }
 
-aside input {
+aside, #buscar {
+	margin-bottom: 25px;
+}
+
+#busqueda, #texto {
 	width: 100%;
 	height: 50px;
     padding-left: 1em;
@@ -52,16 +54,21 @@ aside input {
     border-radius: 10px;
 }
 
+#busqueda {
+	box-sizing: border-box;
+}
+
 .grid {
 	display: grid;
     width: 100%;
-    max-width: 1080px;
-    margin: 0 auto;
-    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
-	grid-gap: 30px 40px;
-	padding-left: 10px;
+    grid-template-columns: repeat(
+		auto-fill, minmax(14em, 1fr));
+	grid-gap: 30px 30px;
 }
 
+.grid article::before {
+	transition: 0.3s;
+}
 .grid article {
 	padding: 20px 0 20px 0;
     min-width: 250px;
@@ -69,6 +76,7 @@ aside input {
     box-shadow: 5px 5px #27323229;
 	background-color: #fff;
 	font-family: 'Pacifico', cursive;
+	transition: 0.3s;
 }
 
 .grid article:hover {
@@ -87,7 +95,7 @@ aside input {
 .grid h2 {
 	min-height: 55px;
     padding: 5px 0 5px 0;
-    color: white;
+    color: fff;
     background-color: var(--azul);
     width: 100%;
     text-align: center;
@@ -132,6 +140,7 @@ aside input {
 	display: flex;
 	justify-content: center;
 	margin: 30px 0 20px 0;
+	padding-left: 10px;
 }
 
 .paginacion a {
@@ -142,7 +151,7 @@ aside input {
   
 .paginacion a.active {
 	background-color: var(--azul);
-	color: white;
+	color: #fff;
 	border-radius: 5px;
 }
   
@@ -180,6 +189,11 @@ footer a {
 	color:#fff;
 }
 
+footer a:hover {
+	color:rgb(255, 166, 0);
+	font-weight: bold;
+}
+
 .ir-arriba {
 	padding: 10px;
     background: #026f98;
@@ -188,9 +202,42 @@ footer a {
     right: 10px;
     height: 30px;
     width: 30px;
-    cursor: pointer;
 	text-align: center;
 	border-radius: 3px;
 }
 
 /* Buscar */
+#buscar form p {
+	margin: 10px 0 10px 50px;
+}
+
+#buscar form p span {
+	margin-right: 5em;
+}
+
+#buscar input[type='submit'] {
+	background-color: var(--azul);
+    border: none;
+    color: #fff;
+    padding: 15px 0;
+    font-size: 1.2em;
+    border-radius: 8px;
+	width: 80%;
+	display: block;
+	margin: 20px auto 0 auto;
+}
+
+#buscar input[type='submit'], .ir-arriba {
+	cursor: pointer;
+	opacity: 0.6;
+	transition: 0.3s;
+	text-align: center;
+}
+
+#buscar input[type='submit']:hover,
+.ir-arriba:hover {opacity: 1}
+
+#resultados h2 {
+	border-bottom: 5px solid var(--azul);
+    margin-bottom: 20px;
+}
