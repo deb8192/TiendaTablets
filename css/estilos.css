@@ -21,6 +21,10 @@ body
     color: #333;
     height: inherit;
 }
+a
+{
+    color: #333;
+}
 
 body, .grid article h2
 {
@@ -126,6 +130,11 @@ input:focus
 {
     border: solid 3px #edb;
     background-color: #fec;
+}
+
+#resultados h2, #fotos-nuevas h2 {
+	border-bottom: 5px solid var(--azul);
+    margin-bottom: 20px;
 }
 
 /* Formulario registro */
@@ -261,7 +270,7 @@ aside, #buscar {
 }
 .grid article, #registro>p:nth-last-child(3)
 {
-	transition: 0.3s;
+	transition: .3s;
 }
 
 .grid article:hover, #registro>p:nth-last-child(3):hover{
@@ -300,6 +309,14 @@ aside, #buscar {
 	padding-left: 20px;
     padding-right: 20px;
     display: flex;
+}
+
+.flaticon-gallery, .flaticon-user {
+	margin-left: auto;
+}
+
+.flaticon-gallery, .flaticon-user {
+	padding-top: 5px;
 }
 
 .grid p:last-child {
