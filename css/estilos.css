@@ -1,7 +1,14 @@
 /* Hoja de estilos */
+html
+{
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* DÉBORA */
 body
 {
-    margin: 0;
+    background-color: #fff;
+    height: inherit;
 }
 
 .red {
@@ -9,8 +16,10 @@ body
 }
 #fotoRegistro
 {
-    visibility: hidden;
+    display: none;
 }
+
+/* Estilo general de listas y enlaces */
 ul
 {
     list-style: none;
@@ -21,48 +30,133 @@ ul
 }
 a
 {
-    color: #000;
+    color: #333;
     text-decoration: none;
-    transition: background-color 0.3s ease-out 0.2s;
 }
-a:hover
+
+/* Formularios */
+
+.cuerpo
 {
-    background-color: #aaa;
+    margin: 64px 0 0 0; 
+    padding: 1px 15%;
+    background-color: #fff;
 }
-
-/* Menu lateral (ancho < 480px) */
-
-.menu_lateral>ul
+.login
 {
-    transition: left 0.5s ease-out;
-    transition-delay: 0.2s;
-    left: -105%;
-}
+    margin: 0; 
+    padding: 100px 20%;
+    background-color: #fff; 
 
-.menu_lateral>ul>li>a
+}
+input
+{
+    width: 100%;
+}
+input[type=submit], #registro>p:nth-last-child(2)
 {
     display: block;
-    padding: 1em;
+    width: fit-content;
+    margin: 1em auto;
+}
+
+input:hover
+{
+    transition: background-color .5s;
+    background-color: #ddd;
+}
+
+input:focus
+{
+    border: solid 3px #edb;
+    background-color: #fec;
+}
+
+/* Formulario registro */
+
+#registro>p>label>img
+{
+    display: block;
+    margin: 0 auto; 
+    height: 128px;
+    width: 128px;
+}
+#registro>p:nth-last-child(3)
+{
+    text-align: center;
+    padding: 15px 0;
+}
+
+#registro>p:nth-last-child(3):hover
+{
+    transition: background-color .5s .2s;
+    background-color: #ddd;
+}
+
+
+/* Menu lateral (ancho < 480px) */
+header
+{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    box-shadow: 0 2px 6px
+}
+
+#menu_options>li>a
+{
+    transition: background-color .3s ease-out .2s, border-top .3s ease-out .2s;
+    border-top: solid 5px #8cf;
+    display: block;
+    padding: 1.3em;
+    transition-delay: 0.2s;
+}
+
+#menu_options>li>a:hover
+{
+    background-color: #bef;
+    border-top: solid 5px #37a;
+}
+#menu_options>li>a:active
+{
+    transition: background-color 0s 0s;
+    background-color: #37a
 }
 
 .menu_lateral
 {
-    height: 64px;
+    height: 69px;
+    background-color: #8cf;
 }
+
+#menu_options
+{
+    margin-top: 69px;
+    transition: left 0.5s ease-out;
+    left: -105%;
+    top: -1.3em;
+    text-align: center;
+    background-color: #8cf;
+    box-shadow: 0 2px 4px
+}
+
 
 #m_lateral
 {
     display: none;
 }
 
-#m_lateral:checked + ul
+#m_lateral:checked + #menu_options
 {
     left: 0;
 }
-.menu_lateral ~ #m_lateral:checked
+.menu_lateral>label
 {
-    height: auto;
+    text-align: right;
+    width: fit-content;
 }
+
 
 
 
@@ -70,17 +164,67 @@ a:hover
 
 @media all and (min-width: 480px)
 {
-    .menu_lateral>ul
+    #menu_options
     {
+        margin-top: 0;
         display: flex;
         left: 0%;
+        top: 0;
+        box-shadow: 0 0 0;
     }
-    .menu_lateral>ul>li
+    #menu_options>li>a
+    {
+        border-top: solid 5px #bef;
+    }
+    #menu_options>li
     {
         flex-grow: 1;
     }
     .menu_lateral>label
     {
         display: none;
+    }
+}
+
+@media all and (min-width: 640px)
+{
+    body 
+    {
+        background-color: #ddd;
+    }
+
+    .cuerpo
+    {
+        margin: 64px 15% 0 15%; 
+        padding: 1px 10%;
+        background-color: #fff;
+    }
+    .login
+    {
+        margin: 128px 20%; 
+        padding: 100px 10%;
+        background-color: #fff; 
+    }
+    
+    #registro>p>label>img
+    {
+        height: 256px;
+        width: 256px;
+    }
+}
+
+@media all and (min-width: 1280px)
+{    
+    .cuerpo
+    {
+        margin: 64px 20% 0 20%; 
+        padding: 1px 15%;
+        background-color: #fff;
+    }
+    .login
+    {
+        margin: 128px 30%; 
+        padding: 100px 10%;
+        background-color: #fff; 
     }
 }

@@ -1,27 +1,42 @@
 <!DOCTYPE html>
-<htlm>
+<htlm lang="es">
     <head>
-        <meta lang="es">
         <meta charset="utf-8">
         <link rel="stylesheet" href="./css/estilos.css">
         <meta description ="Pagina de login de la web de PCW">
         <title>Login</title>
     </head>
     <body>
-        <header></header>
-        <h1>Login</h1>
-        <section>
-            <!--<article> TO DO: PREGUNTAR AL PROFESOR SI PONER ARTICLES CUANDO SÓLO HAY UNO-->
-            <form id="login" enctype="multipart/form-data" action="login.html" method="post">
-                <p><label for="login">Login  </span></label>
-                    <input type="text" id="login" required autofocus/></p>
-                <p><label for="password">Contraseña  </span></label>
-                    <input type="password" id="password" required/></p>
-                <input type="submit" value ="Enviar"/>
-            </form>
-            <a href="registro.html">Registro</a>
-            <!--</article>-->
-        </section>
+        <header>
+            <nav class="menu_lateral">
+                <label for="m_lateral">O</label>
+                <input type="checkbox" class="checkMenu" name="m_lateral" id="m_lateral"/>
+                <ul id="menu_options">
+                    <li><a href="index.html"><i class="flaticon-home-run"></i> Inicio</a></li>
+                    <li><a href="buscar.html"><i class="flaticon-loupe"></i> Buscar</a></li>
+                    <li><a href="index.html"><i class="flaticon-plus"></i> Nuevo</a></li>
+                    <li><a href="login.html"><i class="flaticon-enter"></i> Login</a></li>
+                    <li><a href="index.html"><i class="flaticon-logout"></i>Logout</a></li>
+                    <li><a href="registro.html"><i class="flaticon-id-card"></i>Registro</a></li>
+                    <li><a href="login.html"><i class="flaticon-user"></i> Acerca</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="login">
+            <h1>Login</h1>
+            <section>
+                <!--<article> TO DO: PREGUNTAR AL PROFESOR SI PONER ARTICLES CUANDO SÓLO HAY UNO-->
+                <form id="login" enctype="multipart/form-data" action="login.html" method="post">
+                    <p><label for="login">Login  </span></label>
+                        <input type="text" id="login" required autofocus/></p>
+                    <p><label for="password">Contraseña  </span></label>
+                        <input type="password" id="password" required/></p>
+                    <input type="submit" value ="Enviar"/>
+                </form>
+                <a href="registro.html">Registro</a>
+                <!--</article>-->
+            </section>
+        </div>
         <footer></footer>
     </body>
 </htlm>
