@@ -240,3 +240,8 @@ footer a:hover {
 	border-bottom: 5px solid var(--azul);
     margin-bottom: 20px;
 }
+
+#fotoRegistro
+{
+    visibility: hidden;
+}
