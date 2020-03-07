@@ -134,8 +134,8 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 #buscar input[type='submit'], #registro input[type='submit'], #registro>p>input[type='reset'], #login input[type='submit'], .ir-arriba,
 #art-nuevo input[type='submit'] {
 	cursor: pointer;
-	opacity: 0.6;
-	transition: 0.3s;
+	opacity: .6;
+	transition: .3s;
 	text-align: center;
 }
 
@@ -194,8 +194,9 @@ header
     border-top: solid 5px var(--azul);
     display: block;
     padding: 1.4em;
-    transition-delay: 0.2s;
+    transition-delay: .2s;
     color: #fff;
+    font-size: 1.1em;
 }
 
 #menu_options>li>a:hover
@@ -610,7 +611,7 @@ aside, #buscar {
     box-shadow: 5px 5px #27323229;
 	background-color: #fff;
 	font-family: 'Pacifico', cursive;
-	transition: 0.3s;
+	transition: .3s;
 }
 
 .grid article:hover {
@@ -761,8 +762,8 @@ footer a:hover {
 #buscar input[type='submit'], .ir-arriba,
 #art-nuevo input[type='submit'] {
 	cursor: pointer;
-	opacity: 0.6;
-	transition: 0.3s;
+	opacity: .6;
+	transition: .3s;
 	text-align: center;
 }
 
