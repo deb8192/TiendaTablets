@@ -55,10 +55,20 @@ ul
     box-sizing: border-box;
 }
 
-/* Buscar y Formularios */
-form>p, h1
+/* Buscar, Acerca y Formularios */
+form>p, #acerca_principal>section>p,  #acerca_principal>section>div>article>div>p, h1, h2
 {
     margin: 10px 0;
+}
+
+#acerca_principal>section>div>article>div
+{
+    margin: 10px 5%;
+}
+
+#acerca_principal>section>p, #acerca_principal>section>div>article>div>p
+{
+    text-align: justify;
 }
 
 #login
@@ -150,7 +160,7 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
     height: 128px;
     width: 128px;
 }
-#acerca_principal>section:nth-child(4)>article>img
+#acerca_principal>section>div>article>img
 {
     display: block;
     margin: 0 auto; 
@@ -237,12 +247,12 @@ header
 }
 
 /* Acerca */
-#acerca_principal>section:nth-child(4)
+#acerca_principal>section>div
 {
     width: 100%;
 }
 
-#acerca_principal>section, #acerca_principal>section>article
+#acerca_principal>section, #acerca_principal>section>div>article
 {
     width: 100%;
 }
@@ -258,7 +268,10 @@ aside, #principal,
 
 aside, #buscar, #acerca_principal {
     margin-bottom: 25px;
-    margin-top: 180px;
+}
+
+aside, #buscar {
+    margin-bottom: 25px;
 }
 
 #busqueda, #texto {
@@ -479,12 +492,13 @@ footer a:hover {
         height: 256px;
         width: 256px;
     }
-    #acerca_principal>section:nth-child(4)
+    #acerca_principal>section>div
     {
         display: flex;
         width: 100%;
     }
-    #acerca_principal>section:nth-child(4)>article>img
+    
+    #acerca_principal>section>div>article>img
     {
         height: 128px;
         width: 128px;
@@ -517,7 +531,7 @@ footer a:hover {
         display: inline;
     }
     
-    #acerca_principal>section:nth-child(4)>article>img
+    #acerca_principal>section>div>article>img
     { 
         height: 192px;
         width: 192px;
@@ -526,7 +540,7 @@ footer a:hover {
 
 @media all and (min-width: 1280px)
 {
-    #acerca_principal>section:nth-child(4)>article>img
+    #acerca_principal>section>div>article>img
     {
         height: 256px;
         width: 256px;
