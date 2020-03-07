@@ -66,7 +66,7 @@ form>p, h1
     margin-bottom: 10px;
 }
 
-#registro_principal
+#registro_principal, #acerca_principal
 {  
     padding: 180px 15%;
     background-color: #fff;
@@ -75,7 +75,6 @@ form>p, h1
 {
     padding: 180px 20%;
     background-color: #fff; 
-
 }
 #registro>p>input, #login>p>input
 {
@@ -151,6 +150,14 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
     height: 128px;
     width: 128px;
 }
+#acerca_principal>section:nth-child(4)>article>img
+{
+    display: block;
+    margin: 0 auto; 
+    height: 192px;
+    width: 192px;
+}
+
 #registro>p:nth-last-child(3)
 {
     text-align: center;
@@ -193,9 +200,9 @@ header
     background-color: #37a
 }
 
-#menu_options>li>a>i
+.menu_lateral>label>i
 {
-    padding: 1em;
+    padding: 1.3em;
 }
 
 .menu_lateral
@@ -206,10 +213,8 @@ header
 
 #menu_options
 {
-    margin-top: 69px;
     transition: left .5s ease-out .2s;
     left: -105%;
-    top: -1.3em;
     text-align: center;
     background-color: var(--azul);
     box-shadow: 0 2px 4px #333;
@@ -232,10 +237,14 @@ header
 }
 
 /* Acerca */
-#acerca_principal>section
+#acerca_principal>section:nth-child(4)
 {
-    display: flex;
-    width: fit-content;
+    width: 100%;
+}
+
+#acerca_principal>section, #acerca_principal>section>article
+{
+    width: 100%;
 }
 
 /* Cuerpo comun */
@@ -452,7 +461,7 @@ footer a:hover {
 @media all and (min-width: 640px)
 {
 
-    #registro_principal
+    #registro_principal, #acerca_principal
     {
         margin: 0 15%; 
         padding: 180px 10%;
@@ -470,6 +479,16 @@ footer a:hover {
         height: 256px;
         width: 256px;
     }
+    #acerca_principal>section:nth-child(4)
+    {
+        display: flex;
+        width: 100%;
+    }
+    #acerca_principal>section:nth-child(4)>article>img
+    {
+        height: 128px;
+        width: 128px;
+    }
 }
 
 @media all and (min-width: 980px)
@@ -478,6 +497,12 @@ footer a:hover {
     {
         margin: 0 20%; 
         padding: 180px 15%;
+        background-color: #fff;
+    }
+    #acerca_principal
+    {
+        margin: 0 20%; 
+        padding: 180px 10%;
         background-color: #fff;
     }
     #login_principal
@@ -490,6 +515,21 @@ footer a:hover {
     #menu_options>li>a>span
     {
         display: inline;
+    }
+    
+    #acerca_principal>section:nth-child(4)>article>img
+    { 
+        height: 192px;
+        width: 192px;
+    }
+}
+
+@media all and (min-width: 1280px)
+{
+    #acerca_principal>section:nth-child(4)>article>img
+    {
+        height: 256px;
+        width: 256px;
     }
 }
 /*=======
