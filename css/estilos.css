@@ -12,6 +12,8 @@
 html
 {
     --azul: #6ad;
+    min-height: 100%;
+    position: relative;
 }
 /* DÉBORA */
 body
@@ -20,6 +22,12 @@ body
     color: #333;
     height: inherit;
 }
+
+header div img {
+    width: 100px;
+    height: 100px;
+}
+
 a
 {
     color: #333;
@@ -392,7 +400,7 @@ aside, #buscar, #art-nuevo {
 .paginacion {
 	display: flex;
 	justify-content: center;
-	margin: 30px 0 20px 0;
+	margin: 30px 0 100px 0;
 	padding-left: 10px;
 }
 
@@ -427,8 +435,11 @@ footer {
     justify-content: center;
 	color:#fff;
 	background-color: #0d455a;
-	min-height: 70px;
-	border-top: 5px solid #026f98;
+    border-top: 5px solid #026f98;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 70px;
 }
 
 footer div {
@@ -724,7 +735,9 @@ footer a:hover {
 
 #principal h1, #buscar h1, 
 #resultados h2, #art-nuevo h1,
-#fotos-nuevas h2 {
+#fotos-nuevas h2,
+#acerca_principal h1,
+#articulo_principal h2 {
 	border-bottom: 5px solid var(--azul);
     margin-bottom: 20px;
 }
