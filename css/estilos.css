@@ -142,11 +142,6 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 	opacity: 1;
 }
 
-#resultados h2, #fotos-nuevas h2 {
-	border-bottom: 5px solid var(--azul);
-    margin-bottom: 20px;
-}
-
 /* Formulario registro */
 
 #registro>p>label>img
@@ -459,7 +454,8 @@ footer a:hover {
     font-size: 3em;
 }
 
-.add-img div + label:hover {
+.add-img div + label:hover,
+.add-img div + label:active {
     border-color: #ffa600;
     color: #ffa600;
     box-shadow: 2px 2px 6px #ffa600;
@@ -469,7 +465,8 @@ footer a:hover {
     border-radius: 3px;
 }
 
-.add-img img:hover {
+.add-img img:hover,
+.add-img img:active {
     box-shadow: 2px 2px 6px #333;
 }
 
@@ -492,7 +489,8 @@ footer a:hover {
     left: 2em;
 }
 
-.add-img div label .flaticon-plus:hover {
+.add-img div label .flaticon-plus:hover,
+.add-img div label .flaticon-plus:active {
     background-color: #4ac2ee;
     box-shadow: 0 2px 6px #08b;
 }
