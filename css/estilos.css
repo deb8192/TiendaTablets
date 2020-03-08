@@ -23,9 +23,21 @@ body
     height: inherit;
 }
 
+header div {
+    margin-left: 4%;
+    color: #222a26;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.1em;
+}
+
 header div img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+}
+
+header div,header div a {
+    display: flex;
+    align-items: center;
 }
 
 a
@@ -40,7 +52,7 @@ body, .grid article h2
 
 #articulo_principal h2
 {
-    font-size: 1.3em;
+    font-size: 1em;
 }
 
 .paginacion ul {
@@ -737,7 +749,7 @@ footer a:hover {
 #resultados h2, #art-nuevo h1,
 #fotos-nuevas h2,
 #acerca_principal h1,
-#articulo_principal h2 {
+#articulo_principal h1 {
 	border-bottom: 5px solid var(--azul);
     margin-bottom: 20px;
 }
