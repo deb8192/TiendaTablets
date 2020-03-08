@@ -270,7 +270,7 @@ aside, #buscar, #acerca_principal {
     margin-bottom: 25px;
 }
 
-aside, #buscar {
+aside, #buscar, #art-nuevo {
     margin-top: 180px;
 }
 
@@ -678,7 +678,9 @@ footer a:hover {
     }
 }
 
-#resultados h2, #fotos-nuevas h2 {
+#principal h1, #buscar h1, 
+#resultados h2, #art-nuevo h1,
+#fotos-nuevas h2 {
 	border-bottom: 5px solid var(--azul);
     margin-bottom: 20px;
 }
