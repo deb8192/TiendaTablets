@@ -1,5 +1,4 @@
 /* Hoja de estilos */
-/**<<<<<<< HEAD*/
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
 
@@ -35,19 +34,13 @@ body, .grid article h2
 	display: flex;
 }
 
-.red {
-    color: red;
-}
 #fotoRegistro
 {
     display: none;
+    visibility: hidden;
 }
 
 /* Estilo general de icons, listas y enlaces */
-i.fa
-{
-    font-size: larger;
-}
 ul
 {
     list-style: none;
@@ -110,6 +103,7 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
     border: 2px solid #e1e1e1;
 }
 
+/* Buscar */
 #buscar form p {
 	margin: 10px 0 10px 50px;
 }
@@ -118,7 +112,8 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 	margin-right: 5em;
 }
 
-#buscar input[type='submit'], #registro input[type='submit'], #registro>p>input[type='reset'], #login input[type='submit'],
+#buscar input[type='submit'], #registro input[type='submit'], 
+#registro>p>input[type='reset'], #login input[type='submit'],
 #art-nuevo input[type='submit'] {
 	background-color: var(--azul);
     border: none;
@@ -131,8 +126,9 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 	margin: 20px auto 0 auto;
 }
 
-#buscar input[type='submit'], #registro input[type='submit'], #registro>p>input[type='reset'], #login input[type='submit'], .ir-arriba,
-#art-nuevo input[type='submit'] {
+#buscar input[type='submit'], #registro input[type='submit'], 
+#registro>p>input[type='reset'], #login input[type='submit'], 
+.ir-arriba, #art-nuevo input[type='submit'] {
 	cursor: pointer;
 	opacity: .6;
 	transition: .3s;
@@ -140,8 +136,8 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 }
 
 #buscar input[type='submit']:hover, #buscar input[type='submit']:hover, 
-#registro input[type='submit']:hover, #registro>p>input[type='reset']:hover, #login input[type='submit']:hover,
-.ir-arriba:hover,
+#registro input[type='submit']:hover, #registro>p>input[type='reset']:hover, 
+#login input[type='submit']:hover, .ir-arriba:hover,
 #art-nuevo input[type='submit']:hover {
 	opacity: 1;
 }
@@ -271,10 +267,6 @@ aside, #buscar, #acerca_principal {
     margin-bottom: 25px;
 }
 
-aside, #buscar {
-    margin-bottom: 25px;
-}
-
 #busqueda, #texto {
 	width: 100%;
 	height: 50px;
@@ -352,11 +344,11 @@ aside, #buscar {
     display: flex;
 }
 
-.flaticon-gallery, .flaticon-user {
+.grid .flaticon-gallery, .grid .flaticon-user {
 	margin-left: auto;
 }
 
-.flaticon-gallery, .flaticon-user {
+.grid .flaticon-gallery, .grid .flaticon-user {
 	padding-top: 5px;
 }
 
@@ -422,7 +414,7 @@ footer a {
 }
 
 footer a:hover {
-	color:rgb(255, 166, 0);
+	color: #ffa600;
 	font-weight: bold;
 }
 
@@ -618,239 +610,8 @@ footer a:hover {
         width: 256px;
     }
 }
-/*=======
 
-html {
-	--azul: #08B;
-}
-
-body {
-	background-color: #ebeced;
-}
-
-body, .grid article h2 {
-	font-family: 'Fira Sans', sans-serif;
-}
-
-header {
-	background-color: var(--azul);
-	margin-bottom: 20px;
-}
-
-.paginacion ul {
-	display: flex;
-}
-*/
-/* Cuerpo comun */
-/*aside, #principal, 
-#buscar, #resultados,
-#art-nuevo, #fotos-nuevas {
-	width: 100%;
-    max-width: 1080px;
-    margin: 0 auto;
-}
-
-aside, #buscar {
-    margin-bottom: 25px;
-    margin-top: 180px;
-}
-
-#busqueda, #texto {
-	width: 100%;
-	height: 50px;
-    padding-left: 1em;
-    font-size: 1.2em;
-    border-radius: 10px;
-    border: 2px solid #e1e1e1;
-}
-
-#busqueda {
-	box-sizing: border-box;
-}
-
-.grid {
-	display: grid;
-    width: 100%;
-    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
-	grid-gap: 30px 30px;
-}
-
-.grid article {
-	padding: 20px 0 20px 0;
-    min-width: 250px;
-    border-radius: 5px;
-    box-shadow: 5px 5px #27323229;
-	background-color: #fff;
-	font-family: 'Pacifico', cursive;
-	transition: .3s;
-}
-
-.grid article:hover {
-	cursor: pointer;
-	transform: scale(1.1);
-}
-
-.grid article a {
-	color: #000;
-}
-
-.grid article i[class^='flaticon'] {
-	font-size: 1.3em;
-}
-
-.grid h2 {
-	min-height: 55px;
-    padding: 5px 0 5px 0;
-    color: #fff;
-    background-color: var(--azul);
-    display: flex;
-    justify-content: center;
-	align-items: center;
-	text-align: center;
-}
-
-.grid img {
-	width: 100%;
-}
-
-.grid div > p {
-	font-size: 1.6em;
-}
-
-.grid div {
-	padding-left: 20px;
-    padding-right: 20px;
-    display: flex;
-}
-*/
-/*.flaticon-gallery, .flaticon-user {
-	margin-left: auto;
-}
-
-.flaticon-gallery, .flaticon-user {
-	padding-top: 5px;
-}
-*/
-/*.grid p:last-child {
-	padding-left: 20px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 86%;
-	overflow: hidden;
-	margin-top: 10px;
-}
-
-.paginacion {
-	display: flex;
-	justify-content: center;
-	margin: 30px 0 20px 0;
-	padding-left: 10px;
-}
-
-.paginacion a {
-	color: #145;
-	padding: 10px;
-}
-  
-.paginacion a.active {
-	background-color: var(--azul);
-	color: #fff;
-	border-radius: 5px;
-}
-  
-.paginacion a:hover:not(.active) {
-	background-color: #90b8c7;
-	border-radius: 5px;
-}
-
-.puntitos {
-	padding-top: 5px;
-    margin: 0 10px;
-    color: #145;
-}
-
-footer {
-	display: flex;
-    justify-content: center;
-	color:#fff;
-	background-color: #0d455a;
-	min-height: 70px;
-	border-top: 5px solid #026f98;
-}
-
-footer div {
-	display: flex;
-    margin-top: 25px;
-    font-size: 1.3em;
-}
-
-footer p {
-    margin-right: 50px;
-}
-
-footer a {
-	color:#fff;
-}
-
-footer a:hover {
-	color:rgb(255, 166, 0);
-	font-weight: bold;
-}
-
-.ir-arriba {
-	padding: 10px;
-    background: #026f98;
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    height: 30px;
-    width: 30px;
-	border-radius: 3px;
-}*/
-
-/* Buscar */
-/*#buscar form p {
-	margin: 10px 0 10px 50px;
-}
-
-#buscar form p span {
-	margin-right: 5em;
-}
-
-#buscar input[type='submit'],
-#art-nuevo input[type='submit'] {
-	background-color: var(--azul);
-    border: none;
-    color: #fff;
-    padding: 15px 0;
-    font-size: 1.2em;
-    border-radius: 8px;
-	width: 80%;
-	display: block;
-	margin: 20px auto 0 auto;
-}
-
-#buscar input[type='submit'], .ir-arriba,
-#art-nuevo input[type='submit'] {
-	cursor: pointer;
-	opacity: .6;
-	transition: .3s;
-	text-align: center;
-}
-
-#buscar input[type='submit']:hover,
-.ir-arriba:hover,
-#art-nuevo input[type='submit']:hover {
-	opacity: 1;
-}
-*/
 #resultados h2, #fotos-nuevas h2 {
 	border-bottom: 5px solid var(--azul);
     margin-bottom: 20px;
 }
-
-#fotoRegistro
-{
-    visibility: hidden;
-}
-/*>>>>>>> 3cdc45a3c5376726395dd58ce6f07a445ee4b549*/
