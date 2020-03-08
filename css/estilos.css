@@ -69,7 +69,7 @@ form>p, #acerca_principal>section>p,  #acerca_principal>section>div>article>div>
     margin-bottom: 10px;
 }
 
-#registro_principal, #acerca_principal
+#registro_principal, #acerca_principal, #articulo_principal
 {  
     padding: 180px 15%;
     background-color: #fff;
@@ -144,6 +144,12 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 
 /* Formulario registro */
 
+#articulo_principal img
+{
+    display: block;
+    margin: auto;
+}
+
 #registro>p>label>img
 {
     display: block;
@@ -205,6 +211,8 @@ header
 .menu_lateral>label>i
 {
     padding: 1.3em;
+    display: block;
+    width: fit-content;
 }
 
 .menu_lateral
@@ -260,6 +268,10 @@ aside, #principal,
 
 aside, #buscar, #acerca_principal {
     margin-bottom: 25px;
+}
+
+aside, #buscar {
+    margin-top: 180px;
 }
 
 #busqueda, #texto {
@@ -339,7 +351,7 @@ aside, #buscar, #acerca_principal {
 	font-size: 1.6em;
 }
 
-.grid div {
+.grid div, #articulo_principal div {
 	padding: 0 20px;
     display: flex;
 }
@@ -428,6 +440,7 @@ footer a:hover {
     width: 30px;
 	border-radius: 3px;
 }
+
 
 /* Nuevo articulo - Subir fotos */
 .add-img img,
@@ -520,6 +533,23 @@ footer a:hover {
     position: absolute;
     z-index: -1;
 }
+/* Artículo */
+#articulo_principal
+{
+    font-family: 'Pacifico', cursive;
+    font-size: 1.3em;
+    text-align: justify;
+}
+#articulo_principal img
+{
+    width: 256px;
+}
+
+#articulo_principal div>p, #articulo_principal div>i
+{
+    flex-grow: 1;
+    text-align: center;
+}
 
 /* Menu lateral (ancho > 480px) */
 
@@ -540,6 +570,7 @@ footer a:hover {
     #menu_options>li
     {
         flex-grow: 1;
+        text-align: center;
     }
     #menu_options>li>a>span
     {
@@ -553,12 +584,13 @@ footer a:hover {
     {
        padding: 0;
     }
+        
 }
 
 @media all and (min-width: 640px)
 {
 
-    #registro_principal, #acerca_principal
+    #registro_principal, #acerca_principal, #articulo_principal 
     {
         margin: 0 15%; 
         padding: 180px 10%;
@@ -576,6 +608,7 @@ footer a:hover {
         height: 256px;
         width: 256px;
     }
+
     #acerca_principal>section>div
     {
         display: flex;
@@ -602,7 +635,7 @@ footer a:hover {
         padding: 180px 15%;
         background-color: #fff;
     }
-    #acerca_principal
+    #acerca_principal, #articulo_principal
     {
         margin: 0 20%; 
         padding: 180px 10%;
@@ -625,6 +658,11 @@ footer a:hover {
         height: 192px;
         width: 192px;
     }
+    
+    #articulo_principal img
+    {
+        width: 360px;
+    }
 }
 
 @media all and (min-width: 1280px)
@@ -633,6 +671,10 @@ footer a:hover {
     {
         height: 256px;
         width: 256px;
+    }
+    #articulo_principal img
+    {
+        width: 512px;
     }
 }
 
