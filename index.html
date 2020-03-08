@@ -5,7 +5,6 @@
         <meta name ="viewport" content = "width = device-width, initial-scale = 1.0">
         <link rel="stylesheet" href="css/estilos.css">
         <link rel="stylesheet" href="font/flaticon.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="description" content="P&aacute;gina de inicio de la web de PCW">
         <title>Inicio</title>
     </head>
@@ -14,25 +13,25 @@
             <h1 id="logo">Walacom</h1>
             <h2>Tu tablet al mejor precio</h2>
             <nav class="menu_lateral">
-                <label for="m_lateral"><i class="fa fa-bars"></i></label>
+                <label for="m_lateral"><i class="flaticon-list"></i></label>
                 <input type="checkbox" class="checkMenu" name="m_lateral" id="m_lateral"/>
                 <ul id="menu_options">
-                    <li title = "Inicio"><a href="index.html"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
-                    <li title = "Buscar"><a href="buscar.html"><i class="fa fa-search"></i> <span>Buscar</span></a></li>
-                    <li title = "Nuevo"><a href="index.html"><i class="fa fa-plus-circle"></i> <span>Nuevo</span></a></li>
-                    <li title = "Login"><a href="login.html"><i class="fa fa-sign-in"></i> <span>Login</span></a></li>
-                    <li title = "Logout"><a href="index.html"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
-                    <li title = "Registro"><a href="registro.html"><i class="fa fa-vcard"></i> <span>Registro</span></a></li>
-                    <li title = "Acerca"><a href="acerca.html"><i class="fa fa-user"></i> <span>Acerca</span></a></li>
+                    <li title = "Inicio"><a href="index.html"><i class="flaticon-home"></i> <span>Inicio</span></a></li>
+                    <li title = "Buscar"><a href="buscar.html"><i class="flaticon-loupe"></i> <span>Buscar</span></a></li>
+                    <li title = "Nuevo"><a href="nuevo.html"><i class="flaticon-plus"></i> <span>Nuevo</span></a></li>
+                    <li title = "Login"><a href="login.html"><i class="flaticon-enter"></i> <span>Login</span></a></li>
+                    <li title = "Logout"><a href="index.html"><i class="flaticon-logout"></i> <span>Logout</span></a></li>
+                    <li title = "Registro"><a href="registro.html"><i class="flaticon-id-card"></i> <span>Registro</span></a></li>
+                    <li title = "Acerca"><a href="acerca.html"><i class="flaticon-user"></i> <span>Acerca</span></a></li>
                 </ul>
             </nav>
         </header>
         <aside>
-            <form action="buscar.html" method="post">
+            <form action="buscar.html" enctype="multipart/form-data" method="post">
                 <input type="text" id="busqueda" name="buscar" placeholder="Buscar en Wallacom...">
             </form>
         </aside>
-        <section id="principal">
+        <main id="principal">
             <section class="grid">
                 
                 <article><a href="articulo.html" title="Art&iacute;culo">
@@ -193,7 +192,7 @@
                     <p>Una perfecta armon&iacute;a creativa entre tu ordenador y t&uacute;. Esboza, dibuja y edita fotos con un l&aacute;piz que transmite una sensaci&oacute;n natural. Esta tablet tiene todo lo que necesitas, por lo que comenzar tu pr&oacute;ximo proyecto ser&aacute; m&aacute;s f&aacute;cil que nunca. No tienes m&aacute;s que conectar el cable USB a tu Mac o PC y descargar e instalar el controlador. M&aacute;s f&aacute;cil imposible.</p>
                 </a></article>
             </section>
-            <section class="paginacion">
+            <div class="paginacion">
                 <ul>
                     <li><a href="#" title="Anterior"><i class="flaticon-left-arrow"></i></a></li>
                     <li><a href="#" title="1">1</a></li>
@@ -203,8 +202,8 @@
                     <li><a href="#" title="8">8</a></li>
                     <li><a href="#" title="Siguiente"><i class="flaticon-next"></i></a></li>
                 </ul>
-            </section>
-        </section>
+            </div>
+        </main>
 
         <footer>
             <div>

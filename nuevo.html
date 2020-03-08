@@ -2,8 +2,9 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="css/estilos.css">
-        <link rel="stylesheet" type="text/css" href="font/flaticon.css">
+		<meta name ="viewport" content = "width = device-width, initial-scale = 1.0">
+        <link rel="stylesheet" href="./css/estilos.css">
+        <link rel="stylesheet" href="font/flaticon.css">
         <meta name="description" content="P&aacute;gina de nuevo art&iacute;culo de la web de PCW">
         <title>Nuevo art&iacute;culo</title>
     </head>
@@ -11,45 +12,58 @@
         <header>
             <h1 id="logo">Walacom</h1>
             <h2>Tu tablet al mejor precio</h2>
-            <nav>
-                <ul>
-                    <li><i class="flaticon-home-run"></i> Inicio</li>
-                    <li><i class="flaticon-loupe"></i> Buscar</li>
-                    <li><i class="flaticon-enter"></i> Login</li>
-                    <li><i class="flaticon-id-card"></i>Registro</li>
-                    <li><i class="flaticon-plus"></i>Nuevo art&iacute;culo</li>
-                    <li><i class="flaticon-logout"></i>Logout</li>
+            <nav class="menu_lateral">
+                <label for="m_lateral"><i class="flaticon-list"></i></label>
+                <input type="checkbox" class="checkMenu" name="m_lateral" id="m_lateral"/>
+                <ul id="menu_options">
+                    <li title = "Inicio"><a href="index.html"><i class="flaticon-home"></i> <span>Inicio</span></a></li>
+                    <li title = "Buscar"><a href="buscar.html"><i class="flaticon-loupe"></i> <span>Buscar</span></a></li>
+                    <li title = "Nuevo"><a href="nuevo.html"><i class="flaticon-plus"></i> <span>Nuevo</span></a></li>
+                    <li title = "Login"><a href="login.html"><i class="flaticon-enter"></i> <span>Login</span></a></li>
+                    <li title = "Logout"><a href="index.html"><i class="flaticon-logout"></i> <span>Logout</span></a></li>
+                    <li title = "Registro"><a href="registro.html"><i class="flaticon-id-card"></i> <span>Registro</span></a></li>
+                    <li title = "Acerca"><a href="acerca.html"><i class="flaticon-user"></i> <span>Acerca</span></a></li>
                 </ul>
             </nav>
         </header>
-        <section id="art-nuevo">
-            <form action="nuevo.html" method="post">
+        <main id="art-nuevo">
+			<h1>Nuevo art&iacute;culo</h1>
+			<form action="nuevo.html" enctype="multipart/form-data" method="post">
 
-                <p><input type="text" id="nom-art" name="nom-art" placeholder="Nombre del art&iacute;culo" maxlength="100" required autofocus></p>
-                
-                <p><textarea id="art-des" rows="4" cols="100" maxlength="300" required>Descripci&oacute;n del art&iacute;culo....</textarea></p>
+				<p><input type="text" id="nom-art" name="nom-art" placeholder="Nombre del art&iacute;culo" maxlength="100" required autofocus></p>
+				
+				<p><textarea id="art-des" rows="4" cols="100" maxlength="300" required>Descripci&oacute;n del art&iacute;culo....</textarea></p>
 
-                <p><label for="precio">Precio:</label>
-                    <input type="number" id="precio" min="0" max="9999" value="1.00" step="0.01" required> €</p>
-                    
-                <p><label for="categoria">Categor&iacute;a </label>
-                    <input type="text" name="categoria" id="categoria" list="categorias" maxlength="100" required>
-                    <datalist id="categorias">
-                        <option value="Todas">
-                        <option value="Tableta">
-                        <option value="Stylus">
-                        <option value="Soporte">
-                    </datalist></p>
-                
-                <input type="submit" value="Publicar"/>
-            </form>
-        </section>
-        <section id="fotos-nuevas">
-            <h2>Fotos del art&iacute;culo</h2>
-            <p><label for="fotoArt"><img src="img/no-img.jpg" alt="Foto art&iacute;culo"/> 
-                <span>Subir foto</span></label>
-                <input id="fotoArt" type="file" accept="image/*"/></p>
-        </section>
+				<p><label for="precio">Precio:</label>
+					<input type="number" id="precio" min="0" max="9999" value="1.00" step="0.01" required> €</p>
+					
+				<p><label for="categoria">Categor&iacute;a </label>
+					<input type="text" name="categoria" id="categoria" list="categorias" maxlength="100" required>
+					<datalist id="categorias">
+						<option value="Todas">
+						<option value="Tableta">
+						<option value="Stylus">
+						<option value="Soporte">
+					</datalist></p>
+				
+				<section id="fotos-nuevas">
+					<h2>Fotos del art&iacute;culo</h2>
+					
+                    <label for="fotoArt"><i class="flaticon-camera"></i></label>
+                    <div class="add-img">
+                        <div>
+                            <label for="fotoArt"><img src="img/no-img.jpg" alt="Foto art&iacute;culo"/></label>
+                            <label for="fotoArt"><i class="flaticon-plus"></i></label>
+                            <button type="button" title="Eliminar foto"><i class="flaticon-trash"></i></button>
+                        </div>
+                        <input id="fotoArt" name="fotoArt" type="file" accept="image/*"/>
+                    </div>
+                        
+				</section>
+				
+				<input type="submit" value="Publicar"/>
+			</form>
+        </main>
         <footer>
             <div>
                 <p>&copy;2020 MD Design</p>
