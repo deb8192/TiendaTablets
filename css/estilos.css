@@ -302,9 +302,14 @@ aside, #buscar, #acerca_principal {
 	transition: .3s;
 }
 
-.grid article:hover, #registro>p:nth-last-child(3):hover, #login_principal>section>a:hover{
+#registro>p:nth-last-child(3):hover, #login_principal>section>a:hover{
 	cursor: pointer;
 	transform: scale(1.1);
+}
+
+.grid article:hover,
+.grid article:active {
+    transform: scale(.9);
 }
 
 .grid article a {
@@ -581,6 +586,11 @@ footer a:hover {
     {
         height: 128px;
         width: 128px;
+    }
+
+    .grid article:hover,
+    .grid article:active {
+        transform: scale(1.1);
     }
 }
 
