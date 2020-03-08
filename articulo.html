@@ -6,12 +6,17 @@
         <link rel="stylesheet" href="css/estilos.css">
         <link rel="stylesheet" href="font/flaticon.css">
         <meta name="description" content="P&aacute;gina de art&iacute;culos de la web de PCW">
-        <title>Acerca</title>
+        <title>Art&iacute;culo</title>
     </head>
     <body>
         <header>
-            <h1 id="logo">Walacom</h1>
-            <h2>Tu tablet al mejor precio</h2>
+            <div>
+                <a href="index.html" title="Walacom">
+                    <h2>Walacom</h2>
+                    <img src="img/logo1.png" alt="Walacom">
+                </a>
+                <h3>Tu tablet al mejor precio</h3>
+            </div>
             <nav class="menu_lateral">
                 <label for="m_lateral"><i class="flaticon-list"></i></label>
                 <input type="checkbox" class="checkMenu" name="m_lateral" id="m_lateral"/>
@@ -30,28 +35,33 @@
             <section>
                 <h1>Wacom Cintiq Pro 32</h1>
                 <article>
-                    <p>Vendido por: <a id="vendedor" href="buscar.html">Huion</a></p>
+                    <div class="vendedor">
+                        <h2>Vendido por: <a id="vendedor" href="buscar.html">Huion</a></h2>
+                        <i class="flaticon-eye"> 200</i>
+                    </div>
+                    
                     <div id=fotos_articulo>
                         <p><img src="img/art1/art1-1.jpg" alt="Wacom Cintiq Pro 32">
                         <img src="img/art1/art1-1.jpg" alt="Wacom Cintiq Pro 32">
                         <img src="img/art1/art1-1.jpg" alt="Wacom Cintiq Pro 32"></p>
                     </div>
-                    <p>Foto 1</p>
+                    <p><i class="flaticon-gallery"> 1/5</i></p>
                     <div class="paginacion">
                         <ul>
                             <li><a href="#" title="Anterior"><i class="flaticon-left-arrow"></i> <span>Anterior</span> </a></li>
                             <li><a href="#" title="Siguiente"> <span>Siguiente</span> <i class="flaticon-next"></i></a></li>
                         </ul>
                     </div>
-                    <div>
-                        <i class="flaticon-eye"> 200</i>
-                        <a href="#preguntas_respuestas">? 3</a>
-                        <i class="flaticon-gallery"> 5</i>
-                    </div>
+
                     <div>
                         <p>2000 €</p>
-                        <i class="flaticon-user"> 2</i>
+                        <p>
+                            <input type="checkbox" name="seguir" id="seguir"/>
+                            <label for="seguir"><i class="flaticon-user"></i></label>
+                            2</p>
+                        <a href="#preguntas_respuestas">? 3</a>
                     </div>
+
                     <p>La mayor pantalla hasta la fecha. Wacom Cintiq Pro 32 presenta una excelente pantalla de 4K, un rendimiento del color de primera calidad y una ausencia casi total de paralaje. Combinado con el Wacom Pro Pen 2, brinda una experiencia diseñada para potenciar cualquier avance creativo.</p>
                 </article>
             </section>
@@ -59,10 +69,13 @@
                 <h2>Preguntas de los usuarios</h2>
                 <article>
                     <h3>Pregunta</h3>
+                    <div>
+                        <p>Autor: Jos&eacute; P&eacute;rez.</p>
+                        <time datetime="2020-01-22T11:25">22-enero-2020, a las 11:25h</time>
+                    </div>
                     <p class="pregunta">¿Hay alg&uacute;n problema con el monitor si se utiliza como pantalla principal
                         aunque no se utilicen sus funciones de tableta digitalizadora?</p>
-                    <p>Autor: Jos&eacute; P&eacute;rez.</p>
-                    <p>Fecha: <time datetime="2020-01-22T11:25">22-enero-2020 a las 11:25h</p>
+                    
                     <h4>Respuesta</h4>
                     <p class="respuesta">Se recomienda utilizarla &uacute;nicamente cuando se vaya a trabajar utilizando sus
                         funciones de tableta digitalizadora ya que así se le alarga su vida &uacute;til.
@@ -70,27 +83,27 @@
                 </article>
                 <article>
                     <h3>Pregunta</h3>
+                    <div>
+                        <p>Autor: Jos&eacute; P&eacute;rez.</p>
+                        <time datetime="2020-01-22T11:25">22-enero-2020, a las 11:25h</time>
+                    </div>
                     <p class="pregunta">¿Hay alg&uacute;n problema con el monitor si se utiliza como pantalla principal
                         aunque no se utilicen sus funciones de tableta digitalizadora?</p>
-                    <p>Autor: Jos&eacute; P&eacute;rez.</p>
-                    <p>Fecha: <time datetime="2020-01-22T11:25">22-enero-2020 a las 11:25h</p>
-                    <h4>Respuesta</h4>
-                    <p class="respuesta">Se recomienda utilizarla &uacute;nicamente cuando se vaya a trabajar utilizando sus
-                        funciones de tableta digitalizadora ya que así se le alarga su vida &uacute;til.
-                    </p>
-                </article>
-                <article>
-                    <h3>Pregunta</h3>
-                    <p class="pregunta">¿Hay alg&uacute;n problema con el monitor si se utiliza como pantalla principal
-                        aunque no se utilicen sus funciones de tableta digitalizadora?</p>
-                    <p>Autor: Jos&eacute; P&eacute;rez.</p>
-                    <p>Fecha: <time datetime="2020-01-22T11:25">22-enero-2020 a las 11:25h</p>
-                    <h4>Respuesta</h4>
-                    <p class="respuesta">Se recomienda utilizarla &uacute;nicamente cuando se vaya a trabajar utilizando sus
-                        funciones de tableta digitalizadora ya que así se le alarga su vida &uacute;til.
-                    </p>
+                        <form action="articulo.html" enctype="multipart/form-data" method="post">
+                            <input type="submit" value="Responder"/>
+                        </form>
+                    
                 </article>
             </section>
+            <section id="form_preguntas">
+                <h2>Dejar pregunta para el vendedor</h2>
+
+                <form action="articulo.html" enctype="multipart/form-data" method="post">
+                    <p><textarea id="art-pre" placeholder="Preguntar..." required autofocus></textarea></p>
+                    <input type="submit" value="Enviar"/>
+                </form>
+            </section>
+
         </main>
         <footer>
             <div>
