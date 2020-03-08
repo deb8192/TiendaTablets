@@ -139,7 +139,9 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 
 #buscar input[type='submit'], #registro input[type='submit'], 
 #registro>p>input[type='reset'], #login input[type='submit'],
-#art-nuevo input[type='submit'] {
+#art-nuevo input[type='submit'],
+#form_preguntas input[type='submit'],
+#preguntas_respuestas input[type='submit'] {
 	background-color: var(--azul);
     border: none;
     color: #fff;
@@ -153,7 +155,9 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 
 #buscar input[type='submit'], #registro input[type='submit'], 
 #registro>p>input[type='reset'], #login input[type='submit'], 
-.ir-arriba, #art-nuevo input[type='submit']{
+.ir-arriba, #art-nuevo input[type='submit'],
+#form_preguntas input[type='submit'],
+#preguntas_respuestas input[type='submit'] {
 	cursor: pointer;
 	opacity: .6;
 	transition: .3s;
@@ -168,7 +172,9 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 #buscar input[type='submit']:hover, #buscar input[type='submit']:hover, 
 #registro input[type='submit']:hover, #registro>p>input[type='reset']:hover, 
 #login input[type='submit']:hover, .ir-arriba:hover,
-#art-nuevo input[type='submit']:hover {
+#art-nuevo input[type='submit']:hover,
+#form_preguntas input[type='submit']:hover,
+#preguntas_respuestas input[type='submit']:hover {
 	opacity: 1;
 }
 
@@ -760,7 +766,14 @@ footer a:hover {
 #resultados h2, #art-nuevo h1,
 #fotos-nuevas h2,
 #acerca_principal h1,
-#articulo_principal h1 {
+#articulo_principal h1,
+#preguntas_respuestas h2,
+#form_preguntas h2 {
 	border-bottom: 5px solid var(--azul);
     margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 100px;
 }
