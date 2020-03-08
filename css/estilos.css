@@ -348,8 +348,7 @@ aside, #buscar {
 }
 
 .grid div {
-	padding-left: 20px;
-    padding-right: 20px;
+	padding-left: 0 20px;
     display: flex;
 }
 
@@ -436,6 +435,78 @@ footer a:hover {
     height: 30px;
     width: 30px;
 	border-radius: 3px;
+}
+
+#fotos-nuevas .flaticon-camera, .add-img img {
+    cursor: pointer;
+}
+
+#fotos-nuevas .flaticon-camera {
+    font-size: 2.5em;
+}
+
+#fotos-nuevas .flaticon-camera:hover {
+    color: #ffa600;
+}
+
+.add-img {
+    width: 230px;
+    height: 230px;
+    position: relative;
+}
+
+.add-img img {
+    border-radius: 3px;
+}
+
+.add-img img:hover {
+    box-shadow: 0 2px 6px #333;
+}
+
+.add-img div label .flaticon-plus, .add-img button {
+    width: 60px;
+    height: 48px;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.add-img div label .flaticon-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #08b;
+    position: absolute;
+    bottom: 1em;
+    left: 2em;
+}
+
+.add-img div label .flaticon-plus:hover {
+    background-color: #4ac2ee;
+    box-shadow: 0 2px 6px #08b;
+}
+
+.add-img button {
+    border: none;
+    text-decoration: none;
+    background-color: #c52222;
+    position: absolute;
+    bottom: 1em;
+    right: 2em;
+}
+
+.add-img button:hover {
+    background-color: #ff2f2f;
+    box-shadow: 0 2px 6px #c52222;
+}
+
+.add-img input {
+    width: .1px;
+    height: .1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 /* Menu lateral (ancho > 480px) */
