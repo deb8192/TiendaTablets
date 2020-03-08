@@ -35,7 +35,7 @@
             <section>
                 <h1>Wacom Cintiq Pro 32</h1>
                 <article>
-                    <div>
+                    <div class="vendedor">
                         <h2>Vendido por: <a id="vendedor" href="buscar.html">Huion</a></h2>
                         <i class="flaticon-eye"> 200</i>
                     </div>
@@ -55,7 +55,10 @@
 
                     <div>
                         <p>2000 €</p>
-                    <p><input type="checkbox" class="flaticon-user" name="seguir" id="seguir"/> 2</p>
+                        <p>
+                            <input type="checkbox" name="seguir" id="seguir"/>
+                            <label for="seguir"><i class="flaticon-user"></i></label>
+                            2</p>
                         <a href="#preguntas_respuestas">? 3</a>
                     </div>
 
@@ -96,7 +99,7 @@
                 <h2>Dejar pregunta para el vendedor</h2>
 
                 <form action="articulo.html" enctype="multipart/form-data" method="post">
-                    <p><textarea id="art-pre" placeholder="Preguntar..." required></textarea></p>
+                    <p><textarea id="art-pre" placeholder="Preguntar..." required autofocus></textarea></p>
                     <input type="submit" value="Enviar"/>
                 </form>
             </section>

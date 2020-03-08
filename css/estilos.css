@@ -11,11 +11,10 @@
 
 html
 {
-    --azul: #6ad;
     min-height: 100%;
     position: relative;
 }
-/* DÉBORA */
+
 body
 {
     background-color: #ddd;
@@ -111,7 +110,7 @@ form>p, #acerca_principal>section>p,  #acerca_principal>section>div>article>div>
     border: 2px solid #e1e1e1;
 }
 
-input:hover
+input:hover, textarea:hover
 {
     transition: background-color .5s;
     background-color: #fec;
@@ -142,7 +141,7 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 #art-nuevo input[type='submit'],
 #form_preguntas input[type='submit'],
 #preguntas_respuestas input[type='submit'] {
-	background-color: var(--azul);
+	background-color: #6ad;
     border: none;
     color: #fff;
     padding: 15px 0;
@@ -211,7 +210,7 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 /* Menu lateral (ancho < 480px) */
 header
 {
-    background-color: var(--azul);
+    background-color: #6ad;
     position: fixed;
     width: 100%;
     left: 0;
@@ -224,7 +223,7 @@ header
 #menu_options>li>a
 {
     transition: .3s ease-out .2s;
-    border-top: solid 5px var(--azul);
+    border-top: solid 5px #6ad;
     display: block;
     padding: 1.4em;
     transition-delay: .2s;
@@ -254,7 +253,7 @@ header
 .menu_lateral
 {
     height: 69px;
-    background-color: var(--azul);
+    background-color: #6ad;
 }
 
 #menu_options
@@ -262,7 +261,7 @@ header
     transition: left .5s ease-out .2s;
     left: -105%;
     text-align: center;
-    background-color: var(--azul);
+    background-color: #6ad;
     box-shadow: 0 2px 4px #333;
 }
 
@@ -350,15 +349,11 @@ aside, #buscar, #art-nuevo {
 	transition: .3s;
 }
 
-#registro>p:nth-last-child(3):hover, #login_principal>section>a:hover, #articulo_principal a:hover
+#registro>p:nth-last-child(3):hover, #login_principal>section>a:hover, 
+#articulo_principal a:hover
 {
 	cursor: pointer;
 	transform: scale(1.1);
-}
-
-#articulo_principal a
-{
-    display: inline-block;
 }
 
 .grid article:hover,
@@ -378,7 +373,7 @@ aside, #buscar, #art-nuevo {
 	min-height: 55px;
     padding: 5px 0 5px 0;
     color: #fff;
-    background-color: var(--azul);
+    background-color: #6ad;
     display: flex;
     justify-content: center;
 	align-items: center;
@@ -428,7 +423,7 @@ aside, #buscar, #art-nuevo {
 }
   
 .paginacion a.active {
-	background-color: var(--azul);
+	background-color: #6ad;
 	color: #fff;
 	border-radius: 5px;
 }
@@ -611,10 +606,9 @@ footer a:hover {
 {
     display: block;
 }
-#articulo_principal div>p, #articulo_principal div>i
+#articulo_principal div>p
 {
     flex-grow: 1;
-    text-align: center;
 }
 
 #articulo_principal p:nth-child(4)
@@ -769,7 +763,7 @@ footer a:hover {
 #articulo_principal h1,
 #preguntas_respuestas h2,
 #form_preguntas h2 {
-	border-bottom: 5px solid var(--azul);
+	border-bottom: 5px solid #6ad;
     margin-bottom: 20px;
 }
 
@@ -777,3 +771,86 @@ textarea {
     width: 100%;
     min-height: 100px;
 }
+
+#articulo_principal input[type="checkbox"] {
+    display: none;
+}
+
+#articulo_principal input[type="checkbox"] + label {
+    display: inline-block;
+    height: 50px;
+    cursor: pointer;
+    font-size: .7em;
+}
+
+#articulo_principal input[type="checkbox"]:checked + label {
+    color: #0b8100;
+}
+
+#articulo_principal input[type="checkbox"] + label:hover,
+#articulo_principal input[type="checkbox"] + label:active {
+    color: #ffa600;
+}
+
+#articulo_principal .paginacion + div p {
+    font-size: 2em;
+}
+
+#articulo_principal .paginacion + div a {
+    border: 2px solid #6ad;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    background-color: #6ad;
+}
+
+#articulo_principal .paginacion + div {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vendedor {
+    align-items: center;
+}
+
+.vendedor i {
+    margin-left: auto;
+    font-size: 1.2em;
+}
+
+#articulo_principal .paginacion {
+    margin: 0;
+}
+
+#vendedor:hover {
+    color: #ffa600;
+}
+
+#preguntas_respuestas, #form_preguntas {
+    margin-top: 3em;
+}
+
+#preguntas_respuestas h3 {
+    color: #145;
+}
+
+#preguntas_respuestas h4 {
+    color: #08b;
+}
+
+#preguntas_respuestas h3 + div {
+    font-size: .9em;
+    color: #85a6b3; 
+}
+
+#preguntas_respuestas article {
+    margin-bottom: 2em;
+}
+    
