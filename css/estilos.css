@@ -142,11 +142,6 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 	opacity: 1;
 }
 
-#resultados h2, #fotos-nuevas h2 {
-	border-bottom: 5px solid var(--azul);
-    margin-bottom: 20px;
-}
-
 /* Formulario registro */
 
 #articulo_principal img
@@ -319,9 +314,14 @@ aside, #buscar {
 	transition: .3s;
 }
 
-.grid article:hover, #registro>p:nth-last-child(3):hover, #login_principal>section>a:hover{
+#registro>p:nth-last-child(3):hover, #login_principal>section>a:hover{
 	cursor: pointer;
 	transform: scale(1.1);
+}
+
+.grid article:hover,
+.grid article:active {
+    transform: scale(.9);
 }
 
 .grid article a {
@@ -441,35 +441,59 @@ footer a:hover {
 	border-radius: 3px;
 }
 
-#fotos-nuevas .flaticon-camera, .add-img img {
+
+/* Nuevo articulo - Subir fotos */
+.add-img img,
+.add-img div + label {
     cursor: pointer;
 }
 
-#fotos-nuevas .flaticon-camera {
-    font-size: 2.5em;
-}
-
-#fotos-nuevas .flaticon-camera:hover {
-    color: #ffa600;
-}
-
 .add-img {
+    display: flex;
+    margin-left: 30px;
+}
+
+.add-img div {
     width: 230px;
     height: 230px;
     position: relative;
+}
+
+.add-img div + label {
+    box-sizing: border-box;
+    width: 230px;
+    height: 230px;
+    margin-left: 30px;
+    border: 3px dashed #66aadd;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+}
+
+.add-img div + label:hover,
+.add-img div + label:active {
+    border-color: #ffa600;
+    color: #ffa600;
+    box-shadow: 2px 2px 6px #ffa600;
 }
 
 .add-img img {
     border-radius: 3px;
 }
 
-.add-img img:hover {
-    box-shadow: 0 2px 6px #333;
+.add-img img:hover,
+.add-img img:active {
+    box-shadow: 2px 2px 6px #333;
 }
 
-.add-img div label .flaticon-plus, .add-img button {
+.add-img div label .flaticon-plus, 
+.add-img button {
     width: 60px;
     height: 48px;
+    position: absolute;
+    bottom: 1em;
     border-radius: 3px;
     color: #fff;
     cursor: pointer;
@@ -480,12 +504,11 @@ footer a:hover {
     align-items: center;
     justify-content: center;
     background-color: #08b;
-    position: absolute;
-    bottom: 1em;
     left: 2em;
 }
 
-.add-img div label .flaticon-plus:hover {
+.add-img div label .flaticon-plus:hover,
+.add-img div label .flaticon-plus:active {
     background-color: #4ac2ee;
     box-shadow: 0 2px 6px #08b;
 }
@@ -494,8 +517,6 @@ footer a:hover {
     border: none;
     text-decoration: none;
     background-color: #c52222;
-    position: absolute;
-    bottom: 1em;
     right: 2em;
 }
 
@@ -598,6 +619,11 @@ footer a:hover {
     {
         height: 128px;
         width: 128px;
+    }
+
+    .grid article:hover,
+    .grid article:active {
+        transform: scale(1.1);
     }
 }
 
