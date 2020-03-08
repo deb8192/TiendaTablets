@@ -38,6 +38,11 @@ body, .grid article h2
     font-family: 'Fira Sans', sans-serif;
 }
 
+#articulo_principal h2
+{
+    font-size: 1.3em;
+}
+
 .paginacion ul {
 	display: flex;
 }
@@ -136,9 +141,14 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 
 #buscar input[type='submit'], #registro input[type='submit'], 
 #registro>p>input[type='reset'], #login input[type='submit'], 
-.ir-arriba, #art-nuevo input[type='submit'] {
+.ir-arriba, #art-nuevo input[type='submit']{
 	cursor: pointer;
 	opacity: .6;
+	transition: .3s;
+	text-align: center;
+}
+#articulo_principal a{
+	cursor: pointer;
 	transition: .3s;
 	text-align: center;
 }
@@ -149,8 +159,6 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
 #art-nuevo input[type='submit']:hover {
 	opacity: 1;
 }
-
-/* Formulario registro */
 
 #articulo_principal img
 {
@@ -172,6 +180,8 @@ input:focus, #registro>p>input:focus, #login>p>input:focus
     height: 192px;
     width: 192px;
 }
+
+/* Formulario registro */
 
 #registro>p:nth-last-child(3)
 {
@@ -322,9 +332,15 @@ aside, #buscar, #art-nuevo {
 	transition: .3s;
 }
 
-#registro>p:nth-last-child(3):hover, #login_principal>section>a:hover{
+#registro>p:nth-last-child(3):hover, #login_principal>section>a:hover, #articulo_principal a:hover
+{
 	cursor: pointer;
 	transform: scale(1.1);
+}
+
+#articulo_principal a
+{
+    display: inline-block;
 }
 
 .grid article:hover,
@@ -402,6 +418,10 @@ aside, #buscar, #art-nuevo {
 .paginacion a:hover:not(.active) {
 	background-color: #90b8c7;
 	border-radius: 5px;
+}
+.paginacion span
+{
+    display: none; 
 }
 
 .puntitos {
@@ -553,12 +573,27 @@ footer a:hover {
 }
 #articulo_principal img
 {
-    width: 256px;
+    width: 192px;
 }
 
+#fotos_articulo img
+{
+    display: none;
+}
+
+
+#fotos_articulo img:first-child
+{
+    display: block;
+}
 #articulo_principal div>p, #articulo_principal div>i
 {
     flex-grow: 1;
+    text-align: center;
+}
+
+#articulo_principal p:nth-child(4)
+{
     text-align: center;
 }
 
@@ -596,6 +631,15 @@ footer a:hover {
        padding: 0;
     }
         
+    .paginacion span
+    {
+        display: inline; 
+    }
+    
+    #articulo_principal img
+    {
+        width: 256px;
+    }
 }
 
 @media all and (min-width: 640px)
