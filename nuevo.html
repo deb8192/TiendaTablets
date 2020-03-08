@@ -48,9 +48,17 @@
 				
 				<section id="fotos-nuevas">
 					<h2>Fotos del art&iacute;culo</h2>
-					<p><label for="fotoArt"><img src="img/no-img.jpg" alt="Foto art&iacute;culo"/> 
-						<span>Subir foto</span></label>
-						<input id="fotoArt" type="file" accept="image/*"/></p>
+					
+                    <label for="fotoArt"><i class="flaticon-camera"></i></label>
+                    <div class="add-img">
+                        <div>
+                            <label for="fotoArt"><img src="img/no-img.jpg" alt="Foto art&iacute;culo"/></label>
+                            <label for="fotoArt"><i class="flaticon-plus"></i></label>
+                            <button type="button" title="Eliminar foto"><i class="flaticon-trash"></i></button>
+                        </div>
+                        <input id="fotoArt" name="fotoArt" type="file" accept="image/*"/>
+                    </div>
+                        
 				</section>
 				
 				<input type="submit" value="Publicar"/>
