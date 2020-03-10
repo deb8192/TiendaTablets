@@ -4,7 +4,7 @@ RewriteEngine On
 # Ruta completa desde htdocs hasta la carpeta "api".
 # Si el path hasta la carpeta es C:\xampp\htdocs\practica2\api,
 # habría que poner lo siguiente: RewriteBase /practica2/api/
-RewriteBase /pcw/curso2019-2020/practicas/practica02/api/
+RewriteBase /pcw/practica02/api/
 
 ##################################################
 ### REGLAS PARA USUARIO
