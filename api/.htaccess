@@ -1,0 +1,88 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+# Ruta completa desde htdocs hasta la carpeta "api".
+# Si el path hasta la carpeta es C:\xampp\htdocs\practica2\api,
+# habría que poner lo siguiente: RewriteBase /practica2/api/
+RewriteBase /pcw/curso2019-2020/practicas/practica02/api/
+
+##################################################
+### REGLAS PARA USUARIO
+##################################################
+### PREGUNTAR DISPONIBILIDAD DE LOGIN
+# Regla que redirige a api/get/usuarios.php
+# Con esta línea de abajo, sólo acepta peticiones GET
+RewriteCond %{THE_REQUEST} ^GET
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^usuarios(.*)$ get/usuarios.php?prm=$1&%{QUERY_STRING} [L]
+
+### HACER LOGIN
+# Regla que redirige a api/post/usuarios/login.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^usuarios/login$ post/usuarios/login.php [L]
+
+### HACER LOGOUT
+# Regla que redirige a api/post/usuarios/logout.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^usuarios/logout$ post/usuarios/logout.php [L]
+
+### HACER REGISTRO
+# Regla que redirige a api/post/usuarios/registro.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^usuarios/registro$ post/usuarios/registro.php [L]
+
+##################################################
+### REGLAS PARA ARTÍCULO
+##################################################
+### PEDIR INFORMACIÓN SOBRE ARTÍCULOS
+# Regla que redirige a api/get/articulo.php
+# Con esta línea de abajo, sólo acepta peticiones GET
+RewriteCond %{THE_REQUEST} ^GET
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^articulos(.*)$ get/articulos.php?prm=$1&%{QUERY_STRING} [L]
+
+### DAR DE ALTA/MODIFICAR UN ARTÍCULO O AÑADIR UNA PREGUNTA
+# Regla que redirige a api/post/articulos.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^articulos(.*)$ post/articulos.php?prm=$1&%{QUERY_STRING} [L]
+
+### CONTESTAR A UNA PREGUNTA
+# Regla que redirige a api/post/preguntas.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^preguntas(.*)$ post/preguntas.php?prm=$1&%{QUERY_STRING} [L]
+
+### DAR DE BAJA UN ARTÍCULO
+# Regla que redirige a api/delete/articulos.php
+# Con esta línea de abajo, sólo acepta peticiones DELETE
+RewriteCond %{THE_REQUEST} ^DELETE
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^articulos(.*)$ delete/articulos.php?prm=$1&%{QUERY_STRING} [L]
+
+##################################################
+### REGLAS PARA CATEGORIAS
+##################################################
+### PEDIR LISTA DE CATEGORÍAS
+# Regla que redirige a api/get/categorias.php
+# Con esta línea de abajo, sólo acepta peticiones GET
+RewriteCond %{THE_REQUEST} ^GET
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^categorias(.*)$ get/categorias.php?prm=$1&%{QUERY_STRING} [L]
