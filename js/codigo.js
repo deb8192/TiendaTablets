@@ -11,7 +11,10 @@ function hacerLogin(frm) {
                             console.log(JSON.stringify(datos));
                             sessionStorage['usuario'] = JSON.stringify(datos);
                         });
-                    } else
+                    } else if(respuesta.status == 401) {
+                        
+                            console.log('Usuario incorrecto - sacar modal');
+                    } else 
                         console.log('Error en la petición fetch');
                 });
 
