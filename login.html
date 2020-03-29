@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="./css/estilos.css">
         <link rel="stylesheet" href="font/flaticon.css">
         <meta name="description" content="P&aacute;gina de login de la web de PCW">
+        <script src="js/codigo.js"></script>
         <title>Login</title>
     </head>
     <body>
@@ -35,11 +36,11 @@
             <section>
                 <h1>Login</h1>
                 <!--<article> TO DO: PREGUNTAR AL PROFESOR SI PONER ARTICLES CUANDO SÓLO HAY UNO-->
-                <form id="login" enctype="multipart/form-data" action="login.html" method="post">
+                <form id="login_f" onsubmit="return hacerLogin(this);">
                     <p><label for="login_name_lg">Login </label>
-                        <input type="text" id="login_name_lg" placeholder="Login" required autofocus/></p>
+                        <input type="text" id="login_name_lg" placeholder="Login" name="login" required autofocus/></p>
                     <p><label for="password">Contraseña </label>
-                        <input type="password" id="password" placeholder="Contraseña" required/></p>
+                        <input type="password" id="password" placeholder="Contraseña" name="pwd" required/></p>
                     <input type="submit" value ="Entrar"/>
                 </form>
                 <a href="registro.html">Registro</a>
