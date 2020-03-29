@@ -285,7 +285,7 @@ else
                           $VALORES['ID_FICHERO'] = $ID_FICHERO;
 
                           $RESPONSE_CODE = 201;
-                          $R['RESULTADO']   = 'ERROR';
+                          $R['RESULTADO']   = 'OK';
                           $R['CODIGO']      = $RESPONSE_CODE;
                           $R['DESCRIPCION'] = 'Foto subida correctamente';
                         }
