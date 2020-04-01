@@ -9,7 +9,7 @@
         <script src="js/codigo.js"></script>
         <title>Acerca</title>
     </head>
-    <body>
+    <body data-pagina="acerca">
         <header>
             <div>
                 <a href="index.html" title="Walacom">
@@ -21,15 +21,7 @@
             <nav class="menu_lateral">
                 <label for="m_lateral"><i class="flaticon-list"></i></label>
                 <input type="checkbox" class="checkMenu" name="m_lateral" id="m_lateral"/>
-                <ul id="menu_options">
-                    <li title = "Inicio"><a href="index.html"><i class="flaticon-home"></i> <span>Inicio</span></a></li>
-                    <li title = "Buscar"><a href="buscar.html"><i class="flaticon-loupe"></i> <span>Buscar</span></a></li>
-                    <li title = "Nuevo"><a href="nuevo.html"><i class="flaticon-plus"></i> <span>Nuevo</span></a></li>
-                    <li title = "Login"><a href="login.html"><i class="flaticon-enter"></i> <span>Login</span></a></li>
-                    <li title = "Logout"><a href="index.html"><i class="flaticon-logout"></i> <span>Logout</span></a></li>
-                    <li title = "Registro"><a href="registro.html"><i class="flaticon-id-card"></i> <span>Registro</span></a></li>
-                    <li title = "Acerca"><a href="acerca.html"><i class="flaticon-user"></i> <span>Acerca</span></a></li>
-                </ul>
+                <ul id="menu_options"></ul>
             </nav>
         </header>
         <main id="acerca_principal">
@@ -77,5 +69,8 @@
             </div>
             <a href="#" class="ir-arriba" title="Arriba"><i class="flaticon-up-arrow"></i></a>
         </footer>
+        <script>
+            menu();
+        </script>
     </body>
 </html>

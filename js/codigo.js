@@ -20,3 +20,31 @@ function hacerLogin(frm) {
 
     return false; // Para no recargar la página
 }
+
+function menu() {
+    let html = '';
+
+    if (document.body.getAttribute('data-pagina') != 'inicio')
+        html += '<li title = "Inicio"><a href="index.html"><i class="flaticon-home"></i> <span>Inicio</span></a></li>';
+    
+    if (document.body.getAttribute('data-pagina') != 'buscar')
+        html += '<li title = "Buscar"><a href="buscar.html"><i class="flaticon-loupe"></i> <span>Buscar</span></a></li>';
+       
+    if (document.body.getAttribute('data-pagina') != 'nuevo')
+        html += '<li title = "Nuevo"><a href="nuevo.html"><i class="flaticon-plus"></i> <span>Nuevo</span></a></li>';
+       
+    if (document.body.getAttribute('data-pagina') != 'login')
+        html += '<li title = "Login"><a href="login.html"><i class="flaticon-enter"></i> <span>Login</span></a></li>';
+
+    if (document.body.getAttribute('data-pagina') != 'registro')
+        html += '<li title = "Registro"><a href="registro.html"><i class="flaticon-id-card"></i> <span>Registro</span></a></li>';
+
+    if (document.body.getAttribute('data-pagina') != 'acerca')
+        html += '<li title = "Acerca"><a href="acerca.html"><i class="flaticon-user"></i> <span>Acerca</span></a></li>';
+
+
+    if(sessionStorage['usuario'])
+        html += '<li title = "Logout"><a href="index.html"><i class="flaticon-logout"></i> <span>Logout</span></a></li>';
+
+    document.querySelector('body>header>nav>ul').innerHTML = html;
+}
