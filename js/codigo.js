@@ -1,24 +1,53 @@
+function mensajeModal(html) {
+    let div = document.createElement('div');
+    div.setAttribute('id','capa-fondo');
+    div.innerHTML = html;
+    document.body.appendChild(div);
+    
+    document.body.setAttribute('style','overflow-x:hidden; overflow-y:hidden;');
+}
+
+function cerrarMensajeModal(redirigir) {
+    document.querySelector('#capa-fondo').remove();
+    document.body.removeAttribute('style');
+
+    if (redirigir)
+        window.location.replace("index.html");
+}
+
 function hacerLogin(frm) {
     let url = 'api/usuarios/login',
         fd  = new FormData(frm);
 
     fetch(url, {method:'POST', 
-                body:fd}).then(function(respuesta){
-                    if(respuesta.ok) {
-                        respuesta.json().then(function(datos){
-                            console.log(datos);
+        body:fd}).then(function(respuesta){
+            if(respuesta.ok) {
+                respuesta.json().then(function(datos){
+                    sessionStorage['usuario'] = JSON.stringify(datos);
 
-                            console.log(JSON.stringify(datos));
-                            sessionStorage['usuario'] = JSON.stringify(datos);
-                        });
-                    } else if(respuesta.status == 401) {
-                        
-                            console.log('Usuario incorrecto - sacar modal');
-                    } else 
-                        console.log('Error en la petición fetch');
+                    // Texto del mensaje
+                    let html = '';
+                    html += '<article>';
+                    html +=   '<h2>HACER LOGIN</h2>';
+                    html +=   '<p>El usuario '+ datos.login +' se ha logueado correctamente.</p>';
+                    html +=   '<footer><button onclick="cerrarMensajeModal(true);">Aceptar</button></footer>';
+                    html += '</article>';
+
+                    mensajeModal(html);
                 });
-    
-      //window.location.replace("index.html");          
+            } else if(respuesta.status == 401) {
+                
+                    // Texto del mensaje
+                    let html = '';
+                    html += '<article>';
+                    html +=   '<h2>LOGIN INCORRECTO</h2>';
+                    html +=   '<footer><button onclick="cerrarMensajeModal(false);">Cerrar</button></footer>';
+                    html += '</article>';
+
+                    mensajeModal(html);
+            } else 
+                console.log('Error en la petición fetch');
+        });
     return false; // Para no recargar la página
 }
 
