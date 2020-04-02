@@ -41,24 +41,24 @@ function menu() {
     let html = '';
 
     if (document.body.getAttribute('data-pagina') != 'inicio')
-        html += '<li title = "Inicio"><a href="index.html"><i class="flaticon-home"></i> <span>Inicio</span></a></li>';
+        html += '<li><a href="index.html" title="Inicio"><i class="flaticon-home"></i> <span>Inicio</span></a></li>';
     
     if (document.body.getAttribute('data-pagina') != 'buscar')
-        html += '<li title = "Buscar"><a href="buscar.html"><i class="flaticon-loupe"></i> <span>Buscar</span></a></li>';
+        html += '<li><a href="buscar.html" title="Buscar"><i class="flaticon-loupe"></i> <span>Buscar</span></a></li>';
 
     if(sessionStorage['usuario']) {
         if (document.body.getAttribute('data-pagina') != 'nuevo')
-            html += '<li title = "Nuevo"><a href="nuevo.html"><i class="flaticon-plus"></i> <span>Nuevo</span></a></li>';
+            html += '<li><a href="nuevo.html" title="Nuevo"><i class="flaticon-plus"></i> <span>Nuevo</span></a></li>';
         
         let usu = JSON.parse(sessionStorage['usuario']);
-        html += `<li title = "Logout" onclick="logout();"><a href="index.html"><i class="flaticon-logout"></i> <span>Logout (${usu.nombre})</span></a></li>`;
+        html += `<li onclick="logout();"><a href="index.html" title="Logout"><i class="flaticon-logout"></i> <span>Logout (${usu.nombre})</span></a></li>`;
     
     } else {
         if (document.body.getAttribute('data-pagina') != 'login')
-        html += '<li title = "Login"><a href="login.html"><i class="flaticon-enter"></i> <span>Login</span></a></li>';
+        html += '<li><a href="login.html" title="Login"><i class="flaticon-enter"></i> <span>Login</span></a></li>';
 
         if (document.body.getAttribute('data-pagina') != 'registro')
-            html += '<li title = "Registro"><a href="registro.html"><i class="flaticon-id-card"></i> <span>Registro</span></a></li>';
+            html += '<li><a href="registro.html" title="Registro"><i class="flaticon-id-card"></i> <span>Registro</span></a></li>';
     }
 
     document.querySelector('body>header>nav>ul').innerHTML = html;
