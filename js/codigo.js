@@ -11,8 +11,11 @@ function cerrarMensajeModal(redirigir) {
     document.querySelector('#capa-fondo').remove();
     document.body.removeAttribute('style');
 
+    // Login correcto, redirigimos a index
     if (redirigir)
         window.location.replace("index.html");
+    else // si nos, devolvemos el foco al input de login
+        document.querySelector("#login_name_lg").focus();
 }
 
 function hacerLogin(frm) {
