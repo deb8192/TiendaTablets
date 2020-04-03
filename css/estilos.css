@@ -773,26 +773,6 @@ textarea {
     min-height: 100px;
 }
 
-/*#articulo_principal input[type="checkbox"] {
-    display: none;
-}
-
-#articulo_principal input[type="checkbox"] + label {
-    display: inline-block;
-    height: 50px;
-    cursor: pointer;
-    font-size: .7em;
-}
-
-#articulo_principal input[type="checkbox"]:checked + label {
-    color: #0b8100;
-}
-
-#articulo_principal input[type="checkbox"] + label:hover,
-#articulo_principal input[type="checkbox"] + label:active {
-    color: #ffa600;
-}*/
-
 #articulo_principal .flaticon-user {
     margin-left: auto;
 }
