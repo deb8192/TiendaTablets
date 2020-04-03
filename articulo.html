@@ -34,11 +34,14 @@
                     </div>
                     
                     <div id=fotos_articulo>
-                        <p><img src="img/art1/art1-1.jpg" alt="Wacom Cintiq Pro 32">
                         <img src="img/art1/art1-1.jpg" alt="Wacom Cintiq Pro 32">
-                        <img src="img/art1/art1-1.jpg" alt="Wacom Cintiq Pro 32"></p>
                     </div>
-                    <p><i class="flaticon-gallery"> 1/5</i></p>
+
+                    <div>
+                        <i class="flaticon-gallery"> 1/5</i>
+                        <i class="flaticon-user"> 2</i>
+                    </div>
+
                     <div class="paginacion">
                         <ul>
                             <li><a href="#" title="Anterior"><i class="flaticon-left-arrow"></i> <span>Anterior</span> </a></li>
@@ -46,12 +49,8 @@
                         </ul>
                     </div>
 
-                    <div>
+                    <div id="padre">
                         <p>2000 €</p>
-                        <p>
-                            <input type="checkbox" name="seguir" id="seguir"/>
-                            <label for="seguir"><i class="flaticon-user"></i></label>
-                            2</p>
                         <a href="#preguntas_respuestas">? 3</a>
                     </div>
 
@@ -91,8 +90,8 @@
             <section id="form_preguntas">
                 <h2>Dejar pregunta para el vendedor</h2>
 
-                <form action="articulo.html" enctype="multipart/form-data" method="post">
-                    <p><textarea id="art-pre" placeholder="Preguntar..." required autofocus></textarea></p>
+                <form onsubmit="return hacerPregunta(this);">
+                    <p><textarea name="texto" id="art-pre" placeholder="Preguntar..." required autofocus></textarea></p>
                     <input type="submit" value="Enviar"/>
                 </form>
             </section>
@@ -107,6 +106,7 @@
         </footer>
         <script>
             menu();
+            crearBotonSeguir();
         </script>
     </body>
 </html>

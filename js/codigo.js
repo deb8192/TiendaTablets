@@ -4,6 +4,7 @@ function mensajeModal(html) {
     div.innerHTML = html;
     document.body.appendChild(div);
     
+    // Ocultamos las barras de desplazamiento
     document.body.setAttribute('style','overflow-x:hidden; overflow-y:hidden;');
 }
 
@@ -99,4 +100,53 @@ function menu() {
 function logout() {
     delete sessionStorage['usuario'];
     window.location.replace("index.html");
+}
+
+function crearBotonSeguir() {
+    if (sessionStorage['usuario']) {
+        // TODO: flaticon-unlock
+        // Boton Seguir/Dejar de seguir
+        let p = document.createElement('p');
+        p.setAttribute('id','seguir');
+        p.innerHTML = '<i class="flaticon-lock" onclick="seguirArticulo();"></i> Seguir';
+        
+        // Recojemos el boton de preguntas y le insertamos antes el boton de seguir
+        let btn_preg = document.querySelector('#padre').querySelector('a');
+        document.querySelector('#padre').insertBefore(p,btn_preg);
+    }
+}
+
+function seguirArticulo() {
+    let id = 1;
+    let url = 'api/articulos/'+id+'/seguir/true',
+        usu = JSON.parse(sessionStorage['usuario']); // TODO: comprobar si está logueado
+
+    fetch(url, {method:'POST',
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+            if(respuesta.ok) {
+                respuesta.json().then(function(datos){
+                    console.log(datos);
+                });
+            } else 
+                console.log('Error en la petición fetch de seguir artículo.');
+        });
+}
+
+function hacerPregunta(frm) {
+    let id = 1;
+    let url = 'api/articulos/'+id+'/pregunta',
+        fd  = new FormData(frm),
+        usu = JSON.parse(sessionStorage['usuario']); // TODO: comprobar q esta
+
+    fetch(url, {method:'POST', 
+        body:fd,
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+            if(respuesta.ok) {
+                respuesta.json().then(function(datos){
+                    console.log(datos);
+                });
+            } else 
+                console.log('Error en la petición fetch de hacer pregunta.');
+        });
+    return false; // Para no recargar la página
 }
