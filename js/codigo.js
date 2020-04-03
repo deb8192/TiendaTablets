@@ -189,3 +189,24 @@ function crearFormPreguntas() {
         div.appendChild(p);
     }
 }
+
+function pedirCategorias() {
+    let url="api/categorias";
+
+    fetch(url).then(function(respuesta) {
+        if(respuesta.ok) { 
+            respuesta.json().then(function(datos) {
+                console.log(datos);
+                if (datos.RESULTADO == 'OK') {
+                    let html = '';
+                    datos.FILAS.forEach(function(e) {
+                        html += `<option id="${e.id}" value="${e.nombre}">`;
+                    });
+                    document.querySelector('#categorias' ).innerHTML = html;
+                } else
+                    console.log('ERROR: ' + datos.DESCRIPCION);
+            });
+        } else
+            console.log('Error en la petición fetch');
+    });
+}

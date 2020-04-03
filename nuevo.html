@@ -37,12 +37,8 @@
 					
 				<p><label for="categoria">Categor&iacute;a </label>
 					<input type="text" name="categoria" id="categoria" list="categorias" maxlength="100" required>
-					<datalist id="categorias">
-						<option value="Todas">
-						<option value="Tableta">
-						<option value="Stylus">
-						<option value="Soporte">
-					</datalist></p>
+                    <datalist id="categorias"></datalist>
+                </p>
 				
 				<section id="fotos-nuevas">
 					<h2>Fotos del art&iacute;culo</h2>
@@ -71,6 +67,7 @@
         </footer>
         <script>
             menu();
+            pedirCategorias();
         </script>
     </body>
 </html>
