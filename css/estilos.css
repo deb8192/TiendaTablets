@@ -785,6 +785,11 @@ textarea {
     width: 50px;
 }
 
+.flaticon-unlock {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
 #seguir {
     width: 1px;
     margin-right: 10px;

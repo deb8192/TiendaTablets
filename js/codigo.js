@@ -104,11 +104,11 @@ function logout() {
 
 function crearBotonSeguir() {
     if (sessionStorage['usuario']) {
-        // TODO: flaticon-unlock
+        // TODO: flaticon-lock
         // Boton Seguir/Dejar de seguir
         let p = document.createElement('p');
         p.setAttribute('id','seguir');
-        p.innerHTML = '<i class="flaticon-lock" onclick="seguirArticulo();"></i> Seguir';
+        p.innerHTML = '<i class="flaticon-unlock" onclick="seguirArticulo();"></i> Seguir';
         
         // Recojemos el boton de preguntas y le insertamos antes el boton de seguir
         let btn_preg = document.querySelector('#padre').querySelector('a');
