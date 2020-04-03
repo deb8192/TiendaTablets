@@ -1,4 +1,11 @@
-function mensajeModal(html) {
+function mensajeModal(h2,p,f_boton,boton) {
+    let html = '';
+    html += '<article>';
+    html +=   '<h2>'+h2+'</h2>';
+    html +=   '<p>'+p+'</p>';
+    html +=   '<footer><button onclick="'+f_boton+'">'+boton+'</button></footer>';
+    html += '</article>';
+
     let div = document.createElement('div');
     div.setAttribute('id','capa-fondo');
     div.innerHTML = html;
@@ -8,15 +15,23 @@ function mensajeModal(html) {
     document.body.setAttribute('style','overflow-x:hidden; overflow-y:hidden;');
 }
 
-function cerrarMensajeModal(redirigir) {
+function cerrarMensajeModal(tipo, redirigir) {
     document.querySelector('#capa-fondo').remove();
     document.body.removeAttribute('style');
 
-    // Login correcto, redirigimos a index
-    if (redirigir)
-        window.location.replace("index.html");
-    else // si nos, devolvemos el foco al input de login
-        document.querySelector("#login_name_lg").focus();
+    if (tipo == '0') { // Login
+        // Login correcto, redirigimos a index
+        if (redirigir)
+            window.location.replace("index.html");
+        else // si nos, devolvemos el foco al input de login
+            document.querySelector("#login_name_lg").focus();
+
+    } else if (tipo == '1') { // Preguntas
+        if (redirigir)
+            document.querySelector("#art-pre").value = '';
+        else
+            document.querySelector("#art-pre").focus();
+    }
 }
 
 function hacerLogin(frm) {
@@ -30,27 +45,20 @@ function hacerLogin(frm) {
                     sessionStorage['usuario'] = JSON.stringify(datos);
 
                     // Texto del mensaje
-                    let html = '';
-                    html += '<article>';
-                    html +=   '<h2>HACER LOGIN</h2>';
-                    html +=   '<p>El usuario '+ datos.login +' se ha logueado correctamente.</p>';
-                    html +=   '<footer><button onclick="cerrarMensajeModal(true);">Aceptar</button></footer>';
-                    html += '</article>';
-
-                    mensajeModal(html);
+                    mensajeModal('LOGIN',
+                        'El usuario '+ datos.login +' se ha logueado correctamente.',
+                        'cerrarMensajeModal(0,true);',
+                        'Aceptar');
                 });
             } else if(respuesta.status == 401) {
                 
                     // Texto del mensaje
-                    let html = '';
-                    html += '<article>';
-                    html +=   '<h2>LOGIN INCORRECTO</h2>';
-                    html +=   '<footer><button onclick="cerrarMensajeModal(false);">Cerrar</button></footer>';
-                    html += '</article>';
-
-                    mensajeModal(html);
+                    mensajeModal('LOGIN INCORRECTO',
+                        'No se ha podido loguear.',
+                        'cerrarMensajeModal(0,false);',
+                        'Cerrar');
             } else 
-                console.log('Error en la petición fetch');
+                console.log('Error en la petición fetch de login.');
         });
     return false; // Para no recargar la página
 }
@@ -141,12 +149,19 @@ function hacerPregunta(frm) {
     fetch(url, {method:'POST', 
         body:fd,
         headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
-            if(respuesta.ok) {
+
+            if(respuesta.ok) { // TODO repe temporalmente
                 respuesta.json().then(function(datos){
-                    console.log(datos);
+                    mensajeModal('PREGUNTA',
+                    'Pregunta guardada correctamente.',
+                    'cerrarMensajeModal(1,true);',
+                    'Cerrar');
                 });
-            } else 
-                console.log('Error en la petición fetch de hacer pregunta.');
+            } else
+                mensajeModal('PREGUNTA',
+                    'No se ha podido guardar la pregunta.',
+                    'cerrarMensajeModal(1,false);',
+                    'Cerrar');
         });
     return false; // Para no recargar la página
 }
