@@ -89,11 +89,6 @@
             </section>
             <section id="form_preguntas">
                 <h2>Dejar pregunta para el vendedor</h2>
-
-                <form onsubmit="return hacerPregunta(this);">
-                    <p><textarea name="texto" id="art-pre" placeholder="Preguntar..." required autofocus></textarea></p>
-                    <input type="submit" value="Enviar"/>
-                </form>
             </section>
 
         </main>
@@ -107,6 +102,7 @@
         <script>
             menu();
             crearBotonSeguir();
+            crearFormPreguntas();
         </script>
     </body>
 </html>

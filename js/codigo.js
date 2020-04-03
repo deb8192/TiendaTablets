@@ -165,3 +165,27 @@ function hacerPregunta(frm) {
         });
     return false; // Para no recargar la página
 }
+
+function crearFormPreguntas() {
+    let div = document.querySelector('#form_preguntas');
+    let html = '';
+    if (sessionStorage['usuario']) {
+        // TODO codigo temporal, se tiene que hacer una llamada ajax/fetch para acceder a un fichero.html
+        html +=  '<p><textarea name="texto" id="art-pre" placeholder="Preguntar..." required autofocus></textarea></p>';
+        html +=  '<input type="submit" value="Enviar"/>';
+
+        let frm = document.createElement('form');
+        frm.setAttribute('onsubmit','return hacerPregunta(this);');
+        frm.innerHTML = html;
+        div.appendChild(frm);
+
+    } else {
+        html = 'Debes hacer ';
+        html += '<a href="login.html" title="Login">login</a>' ;
+        html += ' para poder dejar una pregunta al vendedor.';
+
+        let p = document.createElement('p');
+        p.innerHTML = html;
+        div.appendChild(p);
+    }
+}

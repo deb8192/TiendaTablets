@@ -826,12 +826,16 @@ textarea {
     font-size: 1.2em;
 }
 
-#vendedor:hover {
+#vendedor:hover, #form_preguntas a:hover {
     color: #ffa600;
 }
 
 #articulo_principal .paginacion {
     margin: 0;
+}
+
+#form_preguntas a {
+    color: #08b;
 }
 
 #preguntas_respuestas, #form_preguntas {
