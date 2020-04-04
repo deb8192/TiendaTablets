@@ -210,3 +210,35 @@ function pedirCategorias() {
             console.log('Error en la petición fetch');
     });
 }
+
+function cambiarFoto(inp) {
+    let fr = new FileReader();
+    fr.onload = function() {
+        inp.parentNode.querySelector('img').src = fr.result;
+    };
+    fr.readAsDataURL(inp.files[0]);
+}
+
+
+function pedirInfoArticulo() {
+    let url = 'api/articulos/1',
+        usu = JSON.parse(sessionStorage['usuario']),
+        cabecera;
+
+    cabecera = usu.login + ':' + usu.token;
+
+    // method get es por defecto y body no hace falta
+    // la cabecera con el login hace que aparezca el campo 'estoy_siguiendo'
+    fetch(url, { headers:{'Authorization':cabecera}}).then(function(respuesta) {
+        if(respuesta.ok) {
+            respuesta.json().then(function(datos) {
+                console.log(datos);
+
+                //document.querySelector('#info-articulo-2').innerHTML = JSON.stringify(datos); // sacarlo como texto en el html
+                /*pedirFotos();
+                pedirPreguntas();*/
+            });
+        } else
+            console.log('Error en la petición fetch');
+    }); 
+}
