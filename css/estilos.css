@@ -215,7 +215,8 @@ input:focus, #registro>p>input:focus, #login_f>p>input:focus
     align-items: center;
 }
 
-#registro div input {
+#registro div input,
+#login_f input[type='submit'] {
     margin-top: 20px;
 }
 
@@ -224,9 +225,16 @@ input:focus, #registro>p>input:focus, #login_f>p>input:focus
     visibility: hidden;
 }
 
-.ficha-foto > img {
-    width: 256px;
-    height: 256px;
+.ficha-foto label img {
+    margin-top: 20px;
+    width: 128px;
+    height: 128px;
+    transition: .3s;
+}
+
+.ficha-foto label img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .ficha-foto button {
@@ -385,13 +393,13 @@ aside, #buscar, #art-nuevo {
     width: fit-content;
 }
 
-.grid article, #registro>p:nth-last-child(3), #login_principal>section>a,
+.grid article, #login_principal>section>a,
 #seguir
 {
 	transition: .3s;
 }
 
-#registro>p:nth-last-child(3):hover, #login_principal>section>a:hover, 
+#login_principal>section>a:hover, 
 #articulo_principal a:hover
 {
 	cursor: pointer;
@@ -728,17 +736,16 @@ footer a:hover {
         background-color: #fff;
     }
 
+    .ficha-foto label img {
+        width: 256px;
+        height: 256px;
+    }
+
     #login_principal
     {
         margin: 180px 20%; 
         padding: 100px 10%;
         background-color: #fff; 
-    }
-    
-    #registro>p>label>img
-    {
-        height: 256px;
-        width: 256px;
     }
 
     #acerca_principal>section>div

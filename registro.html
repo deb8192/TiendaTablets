@@ -43,17 +43,14 @@
                         <input type="email" id="email" placeholder="Ej: fulanito_94@email.com" required/></p>
                     
                     <div class="ficha-foto">
-                        <img src="img/user-img.png" alt="foto usuario"/>
-                        <input type="file" name="foto" accept="image/*" onchange="cambiarFoto(this);"/>
+                        <label for="fotoReg"><img src="img/user-img.png" alt="foto usuario"/></label>
+                        <input id="fotoReg" type="file" accept="image/*" onchange="cambiarFoto(this);"/>
                         <button onclick="this.parentNode.querySelector('input').click(); return false;">Buscar foto</button>
                     </div>
-                    
                     <div>
-                        <input type="reset" value="Borrar formulario"/>
+                        <input type="reset" value="Borrar formulario" onclick="limpiarFotoRegistro();"/>
                         <input type="submit" value ="Registrarse"/>
                     </div>
-                    
-    
                 </form>
             </section>
         </main>

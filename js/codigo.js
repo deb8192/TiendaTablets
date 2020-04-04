@@ -214,9 +214,35 @@ function pedirCategorias() {
 function cambiarFoto(inp) {
     let fr = new FileReader();
     fr.onload = function() {
-        inp.parentNode.querySelector('img').src = fr.result;
+        if (inp.files[0].size <= 300000) //bytes -> 300KB
+            inp.parentNode.querySelector('img').src = fr.result;
     };
     fr.readAsDataURL(inp.files[0]);
+}
+
+function limpiarFotoRegistro() {
+    document.querySelector('label img').src = "img/user-img.png";
+}
+
+function enviarFoto(btn) { // TO DO
+
+    let url = 'api/articulos/3/foto',
+        usu = 'usuario3:8570f9e624d4d4aaf7de2805289efba2fc51c0017e0b865bc4aaefe23c14da9ba00296f873c8d99eb29d6d0efacced0d0026525077aa217c364cfc09b9ce2cb8',
+        fd  = new FormData();
+
+    fd.append('fichero', btn.parentNode.querySelector('input').files[0]);
+
+    fetch(url, {method:'POST', 
+        body:fd,
+        headers:{'Authorization':usu}}).then(function(respuesta){
+
+            if(respuesta.ok) { 
+                respuesta.json().then(function(datos){
+                    console.log(datos);
+                });
+            } else
+                console.log('Error en la petición fetch de dar de alta foto.');
+        });
 }
 
 
