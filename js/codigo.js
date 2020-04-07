@@ -92,7 +92,7 @@ function menu() {
             html += '<li><a href="nuevo.html" title="Nuevo"><i class="flaticon-plus"></i> <span>Nuevo</span></a></li>';
         
         let usu = JSON.parse(sessionStorage['usuario']);
-        html += `<li onclick="logout();"><a href="index.html" title="Logout"><i class="flaticon-logout"></i> <span>Logout (${usu.nombre})</span></a></li>`;
+        html += `<li onclick="logout();"><span><i class="flaticon-logout"></i> Logout (${usu.nombre})</span></li>`;
     
     } else {
         if (document.body.getAttribute('data-pagina') != 'login')
@@ -106,8 +106,22 @@ function menu() {
 }
 
 function logout() {
-    delete sessionStorage['usuario'];
-    window.location.replace("index.html");
+    let url = 'api/usuarios/logout',
+        usu = JSON.parse(sessionStorage['usuario']);
+
+        fetch(url, {method:'POST',
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+            if(respuesta.ok) {
+                respuesta.json().then(function(datos) {
+                    console.log(datos);
+                    console.log('Esdfsdfsdflogout.');
+                    delete sessionStorage['usuario'];
+                    window.location.replace("index.html");
+                });
+                
+            } else 
+                console.log('Error al intentar hacer logout.');
+        });
 }
 
 function crearBotonSeguir() {

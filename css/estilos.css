@@ -266,7 +266,8 @@ header
     color: #fff;
 }
 
-#menu_options>li>a
+#menu_options>li>a,
+#menu_options>li>span
 {
     transition: .3s ease-out .2s;
     border-top: solid 5px #6ad;
@@ -277,7 +278,8 @@ header
     font-size: 1.1em;
 }
 
-#menu_options>li>a:hover
+#menu_options>li>a:hover,
+#menu_options>li>span:hover
 {
     background-color: #bef;
     border-top: solid 5px #37a;
@@ -683,7 +685,8 @@ footer a:hover {
         top: 0;
         box-shadow: 0 0 0;
     }
-    #menu_options>li>a
+    #menu_options>li>a,
+    #menu_options>li>span
     {
         border-top: solid 5px #bef;
     }
@@ -692,7 +695,8 @@ footer a:hover {
         flex-grow: 1;
         text-align: center;
     }
-    #menu_options>li>a>span
+    #menu_options>li>a>span,
+    #menu_options>li>span
     {
         display: none;
     }
@@ -700,7 +704,8 @@ footer a:hover {
     {
         display: none;
     }
-    #menu_options>li>a>i
+    #menu_options>li>a>i,
+    #menu_options>li>i
     {
        padding: 0;
     }
@@ -790,6 +795,12 @@ footer a:hover {
     #menu_options>li>a>span
     {
         display: inline;
+    }
+
+    #menu_options>li>span
+    {
+        cursor: pointer;
+        display: block;
     }
     
     #acerca_principal>section>div>article>img
