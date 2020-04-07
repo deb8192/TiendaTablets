@@ -267,7 +267,7 @@ header
 }
 
 #menu_options>li>a,
-#menu_options>li>span
+#menu_options .logout
 {
     transition: .3s ease-out .2s;
     border-top: solid 5px #6ad;
@@ -279,16 +279,22 @@ header
 }
 
 #menu_options>li>a:hover,
-#menu_options>li>span:hover
+#menu_options .logout:hover
 {
     background-color: #bef;
     border-top: solid 5px #37a;
     color: #333;
 }
+
 #menu_options>li>a:active
 {
     transition: background-color 0s 0s;
     background-color: #37a
+}
+
+#menu_options .logout
+{
+    cursor: pointer;
 }
 
 .menu_lateral>label>i
@@ -589,6 +595,8 @@ footer a:hover {
 
 .add-img img {
     border-radius: 3px;
+    width: 230px;
+    height: 230px;
 }
 
 .add-img img:hover,
@@ -686,7 +694,7 @@ footer a:hover {
         box-shadow: 0 0 0;
     }
     #menu_options>li>a,
-    #menu_options>li>span
+    #menu_options .logout
     {
         border-top: solid 5px #bef;
     }
@@ -696,7 +704,7 @@ footer a:hover {
         text-align: center;
     }
     #menu_options>li>a>span,
-    #menu_options>li>span
+    #menu_options .logout>span
     {
         display: none;
     }
@@ -705,7 +713,8 @@ footer a:hover {
         display: none;
     }
     #menu_options>li>a>i,
-    #menu_options>li>i
+    #menu_options>li>i,
+    #menu_options .logout>i
     {
        padding: 0;
     }
@@ -792,15 +801,10 @@ footer a:hover {
         background-color: #fff; 
     }
 
-    #menu_options>li>a>span
+    #menu_options>li>a>span,
+    #menu_options .logout>span
     {
         display: inline;
-    }
-
-    #menu_options>li>span
-    {
-        cursor: pointer;
-        display: block;
     }
     
     #acerca_principal>section>div>article>img

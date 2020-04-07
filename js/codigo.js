@@ -92,7 +92,7 @@ function menu() {
             html += '<li><a href="nuevo.html" title="Nuevo"><i class="flaticon-plus"></i> <span>Nuevo</span></a></li>';
         
         let usu = JSON.parse(sessionStorage['usuario']);
-        html += `<li onclick="logout();"><span><i class="flaticon-logout"></i> Logout (${usu.nombre})</span></li>`;
+        html += `<li onclick="logout();" class="logout"><i class="flaticon-logout"></i> <span>Logout (${usu.nombre})</span></li>`;
     
     } else {
         if (document.body.getAttribute('data-pagina') != 'login')
@@ -229,12 +229,21 @@ function cambiarFoto(inp) {
     fr.onload = function() {
         if (inp.files[0].size <= 300000) //bytes -> 300KB
             inp.parentNode.querySelector('img').src = fr.result;
+        else
+            mensajeModal('IMAGEN',
+            'El tamaño de la imagen debe ser inferior a 300KB.',
+            'cerrarMensajeModal(2,true);', // valores que no hacen nada
+            'Aceptar');
     };
     fr.readAsDataURL(inp.files[0]);
 }
 
 function limpiarFotoRegistro() {
     document.querySelector('label img').src = "img/user-img.png";
+}
+
+function borrarIMGFicha(ficha) {
+    ficha.querySelector('label img').src = "img/no-img.jpg";
 }
 
 function enviarFoto(btn) { // TO DO
@@ -258,6 +267,10 @@ function enviarFoto(btn) { // TO DO
         });
 }
 
+function crearNuevoArticulo(frm) {
+
+    return false;
+}
 
 function pedirInfoArticulo() {
     let url = 'api/articulos/1',

@@ -26,7 +26,7 @@
         </header>
         <main id="art-nuevo">
 			<h1>Nuevo art&iacute;culo</h1>
-			<form action="nuevo.html" enctype="multipart/form-data" method="post">
+			<form onsubmit="return crearNuevoArticulo(this);">
 
 				<p><input type="text" id="nom-art" name="nom-art" placeholder="Nombre del art&iacute;culo" maxlength="100" required autofocus></p>
 				
@@ -50,7 +50,13 @@
                         </div>
                         <label for="fotoArt"><i class="flaticon-camera"></i></label>
                         
-                        <input id="fotoArt" name="fotoArt" type="file" accept="image/*" required/>
+                        <input id="fotoArt" name="fichero" type="file" accept="image/*" required onchange="cambiarFoto(this);"/>
+                    </div>
+
+                    <div class="ficha-foto">
+                        <label for="fotoReg"><img src="img/user-img.png" alt="foto usuario"/></label>
+                        <input id="fotoReg" type="file" accept="image/*" onchange="cambiarFoto(this);"/>
+                        <button onclick="this.parentNode.querySelector('input').click(); return false;">Buscar foto</button>
                     </div>
                         
 				</section>
