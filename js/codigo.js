@@ -105,6 +105,7 @@ function menu() {
     document.querySelector('body>header>nav>ul').innerHTML = html;
 }
 
+// Logout, los datos de sessionStorage se borran y en la BD borramos el token de dicho usuario
 function logout() {
     let url = 'api/usuarios/logout',
         usu = JSON.parse(sessionStorage['usuario']);
@@ -114,11 +115,9 @@ function logout() {
             if(respuesta.ok) {
                 respuesta.json().then(function(datos) {
                     console.log(datos);
-                    console.log('Esdfsdfsdflogout.');
                     delete sessionStorage['usuario'];
                     window.location.replace("index.html");
                 });
-                
             } else 
                 console.log('Error al intentar hacer logout.');
         });
