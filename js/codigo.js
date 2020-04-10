@@ -266,17 +266,36 @@ function crearNuevaFicha(abrirInput) {
         div.querySelector('input').click();
 }
 
-function enviarFoto(btn) { // TO DO
+function crearNuevoArticulo(frm) {
+    let url = 'api/articulos/',
+        fd  = new FormData(frm),
+        usu = JSON.parse(sessionStorage['usuario']); // TODO: comprobar q esta
 
-    let url = 'api/articulos/3/foto',
-        usu = 'usuario3:8570f9e624d4d4aaf7de2805289efba2fc51c0017e0b865bc4aaefe23c14da9ba00296f873c8d99eb29d6d0efacced0d0026525077aa217c364cfc09b9ce2cb8',
-        fd  = new FormData();
+    fetch(url, {method:'POST', 
+        body:fd,
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+
+            if(respuesta.ok) {
+                respuesta.json().then(function(datos){
+                    enviarFoto(datos.ID);
+                });
+            } else
+                console.log('Error en la petición fetch de nuevo artículo.');
+        });
+    return false; // Para no recargar la página
+}
+
+function enviarFoto(id) { // TO DO
+
+    let url = 'api/articulos/'+id+'/foto',
+        fd  = new FormData(),
+        usu = JSON.parse(sessionStorage['usuario']);
 
     fd.append('fichero', btn.parentNode.querySelector('input').files[0]);
 
     fetch(url, {method:'POST', 
         body:fd,
-        headers:{'Authorization':usu}}).then(function(respuesta){
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
 
             if(respuesta.ok) { 
                 respuesta.json().then(function(datos){
@@ -285,10 +304,6 @@ function enviarFoto(btn) { // TO DO
             } else
                 console.log('Error en la petición fetch de dar de alta foto.');
         });
-}
-
-function crearNuevoArticulo(frm) {
-    return false;
 }
 
 function pedirInfoArticulo() {

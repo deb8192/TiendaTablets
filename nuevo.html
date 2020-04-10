@@ -26,7 +26,7 @@
         </header>
         <main id="art-nuevo">
 			<h1>Nuevo art&iacute;culo</h1>
-			<form onsubmit="crearNuevoArticulo(this); return false;">
+			<form onsubmit="return crearNuevoArticulo(this);">
 				<p><input type="text" id="nom-art" name="nombre" placeholder="Nombre del art&iacute;culo" maxlength="100" required autofocus></p>
 				
 				<p><textarea id="art-des" maxlength="300" name="descripcion" placeholder="Descripci&oacute;n del art&iacute;culo...." required></textarea></p>
@@ -38,6 +38,7 @@
 					<input type="text" name="categoria" id="categoria" list="categorias" maxlength="100" required>
                     <datalist id="categorias"></datalist>
                 </p>
+                <input type="reset" value="Restablecer"/>
                 <input type="submit" value="Publicar" />
             </form>
 
