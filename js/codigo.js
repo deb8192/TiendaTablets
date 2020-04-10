@@ -246,12 +246,16 @@ function borrarIMGFicha(ficha) {
     ficha.querySelector('label img').src = "img/no-img.jpg";
 }
 
+function eliminarFicha(boton) {
+    boton.parentNode.remove();
+}
+
 function crearNuevaFicha() {
 
     let html = '<img src="img/no-img.jpg" alt="Foto nueva" onclick="this.parentNode.querySelector(\'input\').click();"/>';
         html += '<input name="fichero" type="file" accept="image/*" onchange="cambiarFoto(this);">';
-        html += '<button onclick="this.parentNode.querySelector(\'input\').click();"><i class="flaticon-plus"></i></button>';
-        html += '<button title="Eliminar foto"><i class="flaticon-trash"></i></button>';
+        html += '<button title="Añadir foto" onclick="this.parentNode.querySelector(\'input\').click();"><i class="flaticon-plus"></i></button>';
+        html += '<button title="Eliminar foto" onclick="eliminarFicha(this);"><i class="flaticon-trash"></i></button>';
 
     let div = document.createElement('div');
     div.innerHTML = html;
