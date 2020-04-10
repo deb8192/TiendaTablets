@@ -250,7 +250,7 @@ function eliminarFicha(boton) {
     boton.parentNode.remove();
 }
 
-function crearNuevaFicha() {
+function crearNuevaFicha(abrirInput) {
 
     let html = '<img src="img/no-img.jpg" alt="Foto nueva" onclick="this.parentNode.querySelector(\'input\').click();"/>';
         html += '<input name="fichero" type="file" accept="image/*" onchange="cambiarFoto(this);">';
@@ -261,7 +261,9 @@ function crearNuevaFicha() {
     div.innerHTML = html;
     document.querySelector('#add-img').insertBefore(div, document.querySelector('#add-img').querySelector('.cam'));
 
-    div.querySelector('input').click();
+    // Para cuando se llame desde el boton
+    if (abrirInput)
+        div.querySelector('input').click();
 }
 
 function enviarFoto(btn) { // TO DO
