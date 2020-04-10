@@ -260,6 +260,8 @@ function crearNuevaFicha() {
     let div = document.createElement('div');
     div.innerHTML = html;
     document.querySelector('#add-img').insertBefore(div, document.querySelector('#add-img').querySelector('.cam'));
+
+    div.querySelector('input').click();
 }
 
 function enviarFoto(btn) { // TO DO
