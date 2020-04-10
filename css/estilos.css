@@ -554,27 +554,84 @@ footer a:hover {
     margin-bottom: 100px;
 }
 
-.add-img img,
-.add-img div + label {
-    cursor: pointer;
+#art-nuevo h1 {
+    font-size: 1.5em;
 }
 
-.add-img {
+#fotos-nuevas {
+    margin-top: 40px;
+}
+
+#fotos-nuevas h2 {
+    border-bottom: 5px solid #6ad;
+    margin-bottom: 0;
+}
+
+#add-img {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-left: 30px;
 }
 
-.add-img div {
+#add-img div {
     width: 230px;
     height: 230px;
     position: relative;
+    margin: 0 auto;
+}
+
+#add-img div, .cam {
     margin: 30px 20px 0 0;
 }
 
-.add-img div + label {
-    box-sizing: border-box;
+#add-img div img {
+    border-radius: 3px;
+    width: 230px;
+    height: 230px;
+    cursor: pointer;
+}
+
+#add-img div > input[type="file"] {
+    display: none;
+}
+
+#add-img div img:hover {
+    box-shadow: 2px 2px 6px #333;
+}
+
+#add-img div input + button,      /* Anyadir y Eliminar*/
+#add-img div button + button {
+    border: none;
+    text-decoration: none;
+    width: 60px;
+    height: 48px;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    bottom: 1em;
+}
+
+#add-img div input + button { /* Anyadir */
+    background-color: #08b;
+    left: 2em;
+}
+
+#add-img div input + button:hover {
+    background-color: #4ac2ee;
+    box-shadow: 0 2px 6px #08b;
+}
+
+#add-img div button + button {  /* Eliminar */
+    background-color: #c52222;
+    right: 2em;
+}
+
+#add-img div button + button:hover {
+    background-color: #ff2f2f;
+    box-shadow: 0 2px 6px #c52222;
+}
+
+.cam {
     width: 230px;
     height: 230px;
     border: 3px dashed #66aadd;
@@ -583,72 +640,16 @@ footer a:hover {
     justify-content: center;
     align-items: center;
     font-size: 3em;
-    margin: 30px 20px 0 0;
+    /*box-sizing: border-box;
+    margin: 30px 20px 0 0;*/
 }
 
-.add-img div + label:hover,
-.add-img div + label:active {
+.cam:hover, .cam:active {
     border-color: #ffa600;
     color: #ffa600;
     box-shadow: 2px 2px 6px #ffa600;
 }
 
-.add-img img {
-    border-radius: 3px;
-    width: 230px;
-    height: 230px;
-}
-
-.add-img img:hover,
-.add-img img:active {
-    box-shadow: 2px 2px 6px #333;
-}
-
-.add-img div label .flaticon-plus, 
-.add-img button {
-    width: 60px;
-    height: 48px;
-    position: absolute;
-    bottom: 1em;
-    border-radius: 3px;
-    color: #fff;
-    cursor: pointer;
-}
-
-.add-img div label .flaticon-plus {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #08b;
-    left: 2em;
-}
-
-.add-img div label .flaticon-plus:hover,
-.add-img div label .flaticon-plus:active {
-    background-color: #4ac2ee;
-    box-shadow: 0 2px 6px #08b;
-}
-
-.add-img button {
-    border: none;
-    text-decoration: none;
-    background-color: #c52222;
-    right: 2em;
-}
-
-.add-img button:hover {
-    background-color: #ff2f2f;
-    box-shadow: 0 2px 6px #c52222;
-}
-
-.add-img input {
-    width: .1px;
-    height: .1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
 /* Artículo */
 #articulo_principal
 {
@@ -838,7 +839,6 @@ footer a:hover {
 
 #principal h1, #buscar h1, 
 #resultados h2, #art-nuevo h1,
-#fotos-nuevas h2,
 #acerca_principal h1,
 #articulo_principal h1,
 #preguntas_respuestas h2,

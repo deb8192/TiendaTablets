@@ -246,6 +246,18 @@ function borrarIMGFicha(ficha) {
     ficha.querySelector('label img').src = "img/no-img.jpg";
 }
 
+function crearNuevaFicha() {
+
+    let html = '<img src="img/no-img.jpg" alt="Foto nueva" onclick="this.parentNode.querySelector(\'input\').click();"/>';
+        html += '<input name="fichero" type="file" accept="image/*" onchange="cambiarFoto(this);">';
+        html += '<button onclick="this.parentNode.querySelector(\'input\').click();"><i class="flaticon-plus"></i></button>';
+        html += '<button title="Eliminar foto"><i class="flaticon-trash"></i></button>';
+
+    let div = document.createElement('div');
+    div.innerHTML = html;
+    document.querySelector('#add-img').insertBefore(div, document.querySelector('#add-img').querySelector('.cam'));
+}
+
 function enviarFoto(btn) { // TO DO
 
     let url = 'api/articulos/3/foto',
@@ -268,7 +280,6 @@ function enviarFoto(btn) { // TO DO
 }
 
 function crearNuevoArticulo(frm) {
-
     return false;
 }
 
