@@ -253,7 +253,7 @@ function eliminarFicha(boton) {
 function crearNuevaFicha(abrirInput) {
 
     let html = '<img src="img/no-img.jpg" alt="Foto nueva" onclick="this.parentNode.querySelector(\'input\').click();"/>';
-        html += '<input name="fichero" type="file" accept="image/*" onchange="cambiarFoto(this);">';
+        html += '<input type="file" accept="image/*" onchange="cambiarFoto(this);">';
         html += '<button title="Añadir foto" onclick="this.parentNode.querySelector(\'input\').click();"><i class="flaticon-plus"></i></button>';
         html += '<button title="Eliminar foto" onclick="eliminarFicha(this);"><i class="flaticon-trash"></i></button>';
 
@@ -266,32 +266,80 @@ function crearNuevaFicha(abrirInput) {
         div.querySelector('input').click();
 }
 
+function errorNoHayFoto() {
+    mensajeModal('NUEVO ARTICULO',
+        'Debe elegir al menos 1 foto del artículo.',
+        'cerrarMensajeModal(2,false);',
+        'Aceptar');
+}
+
+// Comprueba si hay fotos para enviar en el nuevo artículo y las guarda en un array
+function comprobarFotos(fichas) {
+    var fotos = [];
+    for (var i = 0; i < fichas.length; i++) {
+        let foto = fichas[i].querySelector('input').files[0];
+        if (foto != null)
+            fotos.push(foto);
+    }
+    return fotos;
+}
+
 function crearNuevoArticulo(frm) {
-    let url = 'api/articulos/',
-        fd  = new FormData(frm),
-        usu = JSON.parse(sessionStorage['usuario']); // TODO: comprobar q esta
 
-    fetch(url, {method:'POST', 
-        body:fd,
-        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+    // Comprobamos si hay fichas de fotos antes de enviar los datos del artículo
+    let fichas = document.querySelector('#add-img').querySelectorAll('div');
+    if (fichas.length > 0) {
+        let fotos = comprobarFotos(fichas);
 
-            if(respuesta.ok) {
-                respuesta.json().then(function(datos){
-                    enviarFoto(datos.ID);
+        if (fotos.length > 0) {
+            let url = 'api/articulos/',
+            fd  = new FormData(frm),
+            usu = JSON.parse(sessionStorage['usuario']); // TODO: comprobar q esta
+
+            fetch(url, {method:'POST', 
+                body:fd,
+                headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+
+                    if(respuesta.ok) {
+                        respuesta.json().then(function(datos){
+
+                            /*let foto = fotos[i];
+
+                            let envio = true;
+                            let i = 0;
+                            do {
+                                envio = enviarFoto(datos.ID, foto);
+                            }
+                            while (envio);*/
+
+                            for (var i = 0; i < fotos.length; i++) {
+                                enviarFoto(datos.ID, fotos[i]);
+                            }
+
+                            mensajeModal('NUEVO ARTICULO',
+                                'Se ha guardado correctamente el artículo',
+                                'cerrarMensajeModal(0,true);',
+                                'Aceptar');
+                        });
+                    } else
+                        console.log('Error en la petición fetch de nuevo artículo.');
                 });
-            } else
-                console.log('Error en la petición fetch de nuevo artículo.');
-        });
+        } else {
+            errorNoHayFoto();
+        }
+    } else {
+        errorNoHayFoto();
+    }
     return false; // Para no recargar la página
 }
 
-function enviarFoto(id) { // TO DO
+function enviarFoto(id, foto) {
 
     let url = 'api/articulos/'+id+'/foto',
         fd  = new FormData(),
         usu = JSON.parse(sessionStorage['usuario']);
 
-    fd.append('fichero', btn.parentNode.querySelector('input').files[0]);
+    fd.append('fichero', foto);
 
     fetch(url, {method:'POST', 
         body:fd,
@@ -299,10 +347,12 @@ function enviarFoto(id) { // TO DO
 
             if(respuesta.ok) { 
                 respuesta.json().then(function(datos){
-                    console.log(datos);
+                    return true;
                 });
-            } else
-                console.log('Error en la petición fetch de dar de alta foto.');
+            } else {
+                console.log('Error en la petición fetch de subir foto.');
+                return false;
+            }
         });
 }
 
