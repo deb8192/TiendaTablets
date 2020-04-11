@@ -440,7 +440,8 @@ function obtenerArticulos() {
         if(respuesta.ok) {
             respuesta.json().then(function(datos) {
                 datos.FILAS.forEach(function(art) {
-                    crearArticulo(art.ID, art.nombre, art.descripcion, parseInt(art.precio), 
+                    // Pasamos la descripcion sin <br>, gi es para que busque en todo el texto y que no distinga mayus de minus
+                    crearArticulo(art.ID, art.nombre, art.descripcion.replace(/<br>/gi,''), parseInt(art.precio), 
                         art.fecha, art.veces_visto, art.imagen, art.nfotos, art.nsiguiendo);
                 });
             });
