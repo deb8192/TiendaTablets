@@ -375,6 +375,7 @@ function crearFormPreguntas() {
     }
 }
 
+// TO DO
 function pedirInfoArticulo() {
     let url = 'api/articulos/1',
         usu = JSON.parse(sessionStorage['usuario']),
@@ -412,7 +413,41 @@ function limpiarFotoRegistro() {
 // Funciones para manejar index
 // =================================================================================
 
-// TO DO
+function crearArticulo(id, nombre, descripcion, precio, fecha, veces_visto, imagen, nfotos, nsiguiendo) {
+    html = '<a href="articulo.html?="'+id+' title="'+nombre+'">';
+    html += '<img src="fotos/articulos/'+imagen+'" alt="'+nombre+'">';
+    html += '<div>';
+    html += '<i class="flaticon-eye"> '+veces_visto+'</i>';
+    html += '<i class="flaticon-gallery"> '+nfotos+'</i>';
+    html += '</div>';
+    html += '<h2>'+nombre+'</h2>';
+    html += '<div>';
+    html += '<p>'+precio+' €</p>';
+    html += '<i class="flaticon-user"> '+nsiguiendo+'</i>';
+    html += '</div>';
+    html += '<p>'+descripcion+'</p></a>';
+
+    let article = document.createElement('article');
+    article.innerHTML = html;
+    document.querySelector('.grid').appendChild(article);
+}
+
+function obtenerArticulos() {
+    let url = 'api/articulos?pag={0}&lpag={6}';
+
+    // method get es por defecto y body no hace falta
+    fetch(url).then(function(respuesta) {
+        if(respuesta.ok) {
+            respuesta.json().then(function(datos) {
+                datos.FILAS.forEach(function(art) {
+                    crearArticulo(art.ID, art.nombre, art.descripcion, parseInt(art.precio), 
+                        art.fecha, art.veces_visto, art.imagen, art.nfotos, art.nsiguiendo);
+                });
+            });
+        } else
+            console.log('Error en la petición fetch');
+    }); 
+}
 
 
 // =================================================================================
