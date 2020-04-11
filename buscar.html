@@ -36,13 +36,8 @@
                         <label for="hasta">Hasta:</label>
                         <input type="number" id="hasta" min="1001" max="2000" step="1" value="2000"> €</p>
 
-                    <p><label for="categoria">Categor&iacute;a </label>
-                        <select id="categoria" name="categoria">
-                            <option value="todas" selected>Todas</option> 
-                            <option value="tableta">Tableta</option>
-                            <option value="stylus">Stylus</option>
-                            <option value="soporte">Soporte</option>
-                            </select>
+                    <p><label for="categorias">Categor&iacute;a </label>
+                        <select id="categorias" name="categoria"></select>
                     </p>
                 <div>
                     <p><label for="vendedor">Por vendedor </label>
@@ -242,6 +237,7 @@
         </footer>
         <script>
             menu();
+            pedirCategorias(true);
         </script>
     </body>
 </html>

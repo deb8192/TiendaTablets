@@ -640,8 +640,7 @@ footer a:hover {
     justify-content: center;
     align-items: center;
     font-size: 3em;
-    /*box-sizing: border-box;
-    margin: 30px 20px 0 0;*/
+    cursor: pointer;
 }
 
 .cam:hover, .cam:active {

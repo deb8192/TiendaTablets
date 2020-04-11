@@ -203,7 +203,7 @@ function crearFormPreguntas() {
     }
 }
 
-function pedirCategorias() {
+function pedirCategorias(buscar) {
     let url="api/categorias";
 
     fetch(url).then(function(respuesta) {
@@ -213,9 +213,12 @@ function pedirCategorias() {
                 if (datos.RESULTADO == 'OK') {
                     let html = '';
                     datos.FILAS.forEach(function(e) {
-                        html += `<option id="${e.id}" value="${e.nombre}">`;
+                        if (!buscar)
+                            html += `<option id="${e.id}" value="${e.nombre}">`;
+                        else
+                            html += `<option value="${e.id}">${e.nombre}</option>`;
                     });
-                    document.querySelector('#categorias' ).innerHTML = html;
+                    document.querySelector('#categorias').innerHTML = html;
                 } else
                     console.log('ERROR: ' + datos.DESCRIPCION);
             });
@@ -224,32 +227,31 @@ function pedirCategorias() {
     });
 }
 
-function cambiarFoto(inp) {
-    let fr = new FileReader();
-    fr.onload = function() {
-        if (inp.files[0].size <= 300000) //bytes -> 300KB
-            inp.parentNode.querySelector('img').src = fr.result;
-        else
-            mensajeModal('IMAGEN',
-            'El tamaño de la imagen debe ser inferior a 300KB.',
-            'cerrarMensajeModal(2,true);', // valores que no hacen nada
-            'Aceptar');
-    };
-    fr.readAsDataURL(inp.files[0]);
-}
-
+// Al resetear el form de registro, esto pone la imagen de usuario por defecto
 function limpiarFotoRegistro() {
     document.querySelector('label img').src = "img/user-img.png";
 }
 
-function borrarIMGFicha(ficha) {
-    ficha.querySelector('label img').src = "img/no-img.jpg";
+// Cambia la imagen por defecto que hay en registro.html y nuevo.html
+function cambiarFoto(inp) {
+    let fr = new FileReader();
+    fr.onload = function() {
+        if (inp.files[0].size <= 300000) //bytes -> 300KB 
+            inp.parentNode.querySelector('img').src = fr.result;
+        else
+            mensajeModal('IMAGEN',
+                'El tamaño de la imagen debe ser inferior a 300KB.',
+                'cerrarMensajeModal(2,true);', // valores que no hacen nada
+                'Aceptar');
+    };
+    fr.readAsDataURL(inp.files[0]);
 }
 
-function eliminarFicha(boton) {
-    boton.parentNode.remove();
-}
+// =================================================================================
+// Funciones para crear un nuevo artículo
+// =================================================================================
 
+// Crea las fichas para subir fotos, la primera llamada es desde la pagina y no abre el inputfilereader
 function crearNuevaFicha(abrirInput) {
 
     let html = '<img src="img/no-img.jpg" alt="Foto nueva" onclick="this.parentNode.querySelector(\'input\').click();"/>';
@@ -261,16 +263,14 @@ function crearNuevaFicha(abrirInput) {
     div.innerHTML = html;
     document.querySelector('#add-img').insertBefore(div, document.querySelector('#add-img').querySelector('.cam'));
 
-    // Para cuando se llame desde el boton
+    // Para cuando se llame desde el boton "Anyadir foto"
     if (abrirInput)
         div.querySelector('input').click();
 }
 
-function errorNoHayFoto() {
-    mensajeModal('NUEVO ARTICULO',
-        'Debe elegir al menos 1 foto del artículo.',
-        'cerrarMensajeModal(2,false);',
-        'Aceptar');
+// Elimina la ficha seleccionada
+function eliminarFicha(boton) {
+    boton.parentNode.remove();
 }
 
 // Comprueba si hay fotos para enviar en el nuevo artículo y las guarda en un array
@@ -285,52 +285,64 @@ function comprobarFotos(fichas) {
 }
 
 function crearNuevoArticulo(frm) {
+    try {
+        // Comprobamos si hay fichas de fotos antes de enviar los datos del artículo
+        let fichas = document.querySelector('#add-img').querySelectorAll('div');
+        if (fichas.length > 0) {
+            let fotos = comprobarFotos(fichas);
 
-    // Comprobamos si hay fichas de fotos antes de enviar los datos del artículo
-    let fichas = document.querySelector('#add-img').querySelectorAll('div');
-    if (fichas.length > 0) {
-        let fotos = comprobarFotos(fichas);
+            if (fotos.length > 0) {
+                let url = 'api/articulos/',
+                fd  = new FormData(frm),
+                usu = JSON.parse(sessionStorage['usuario']);
 
-        if (fotos.length > 0) {
-            let url = 'api/articulos/',
-            fd  = new FormData(frm),
-            usu = JSON.parse(sessionStorage['usuario']); // TODO: comprobar q esta
+                fetch(url, {method:'POST', 
+                    body:fd,
+                    headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
 
-            fetch(url, {method:'POST', 
-                body:fd,
-                headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+                        if(respuesta.ok) {
+                            respuesta.json().then(function(datos){
+                                
+                                let envio = true;
+                                fotos.forEach(function(foto) {
+                                    if (!enviarFoto(datos.ID, foto)) {
+                                        envio = false;
+                                        break;
+                                    }
+                                });
 
-                    if(respuesta.ok) {
-                        respuesta.json().then(function(datos){
-
-                            /*let foto = fotos[i];
-
-                            let envio = true;
-                            let i = 0;
-                            do {
-                                envio = enviarFoto(datos.ID, foto);
-                            }
-                            while (envio);*/
-
-                            for (var i = 0; i < fotos.length; i++) {
-                                enviarFoto(datos.ID, fotos[i]);
-                            }
-
-                            mensajeModal('NUEVO ARTICULO',
-                                'Se ha guardado correctamente el artículo',
-                                'cerrarMensajeModal(0,true);',
-                                'Aceptar');
-                        });
-                    } else
-                        console.log('Error en la petición fetch de nuevo artículo.');
-                });
+                                if (envio) {
+                                    mensajeModal('NUEVO ARTICULO',
+                                        'Se ha guardado correctamente el artículo',
+                                        'cerrarMensajeModal(0,true);',
+                                        'Aceptar');
+                                } else {
+                                    throw 'errFetchSF';
+                                } 
+                            });
+                        } else
+                            throw 'errFetchNA';
+                    });
+            } else {
+                throw 'errorNoHayFoto';
+            }
         } else {
-            errorNoHayFoto();
+            throw 'errorNoHayFoto';
         }
-    } else {
-        errorNoHayFoto();
+    } catch(e) {
+        if(e == 'errorNoHayFoto') {
+            mensajeModal('NUEVO ARTICULO',
+                'Debe elegir al menos 1 foto del artículo.',
+                'cerrarMensajeModal(2,false);',
+                'Aceptar');
+        } else if (e == 'errFetchNA') {
+            console.log('Error en la petición fetch de nuevo artículo.');
+        } else if (e == 'errFetchSF') {
+            console.log('Error al intentar subir las fotos.');
+        }
+    } finally {
+        return false; // Para no recargar la página
     }
-    return false; // Para no recargar la página
 }
 
 function enviarFoto(id, foto) {
@@ -356,6 +368,9 @@ function enviarFoto(id, foto) {
         });
 }
 
+// =================================================================================
+// TO DO: parte Debo
+// =================================================================================
 function pedirInfoArticulo() {
     let url = 'api/articulos/1',
         usu = JSON.parse(sessionStorage['usuario']),
