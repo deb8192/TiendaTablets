@@ -226,22 +226,23 @@ function crearNuevoArticulo(frm) {
                         if(respuesta.ok) {
                             respuesta.json().then(function(datos){
                                 
-                                let envio = true;
-                                fotos.forEach(function(foto) {
-                                    if (!enviarFoto(datos.ID, foto)) {
-                                        envio = false;
-                                        break;
-                                    }
-                                });
+                                let foto = 0;
+                                let continuar = true;
+                                while (foto < fotos.length && continuar) {
 
-                                if (envio) {
-                                    mensajeModal('NUEVO ARTICULO',
-                                        'Se ha guardado correctamente el artículo',
-                                        'cerrarMensajeModal(0,true);',
-                                        'Aceptar');
-                                } else {
-                                    throw 'errFetchSF';
-                                } 
+                                    enviarFoto(datos.ID, fotos[foto])
+                                        .then(() => {}, // Si todo va bien, no hacemos nada
+                                        function(err){
+                                            continuar = false;
+                                            console.log(err.status+': '+err.statusText);
+                                        });
+                                    foto++;
+                                }
+
+                               mensajeModal('NUEVO ARTICULO',
+                                    'Se ha guardado correctamente el artículo',
+                                    'cerrarMensajeModal(0,true);',
+                                    'Aceptar');
                             });
                         } else
                             throw 'errFetchNA';
@@ -260,8 +261,6 @@ function crearNuevoArticulo(frm) {
                 'Aceptar');
         } else if (e == 'errFetchNA') {
             console.log('Error en la petición fetch de nuevo artículo.');
-        } else if (e == 'errFetchSF') {
-            console.log('Error al intentar subir las fotos.');
         }
     } finally {
         return false; // Para no recargar la página
@@ -271,24 +270,24 @@ function crearNuevoArticulo(frm) {
 // Envia 1 foto al servidor y le pasa el resultado a crearNuevoArticulo(frm)
 function enviarFoto(id, foto) {
 
-    let url = 'api/articulos/'+id+'/foto',
-        fd  = new FormData(),
-        usu = JSON.parse(sessionStorage['usuario']);
+    return new Promise(function(todoOK, hayError) {
 
-    fd.append('fichero', foto);
+        let url = 'api/articulos/'+id+'/foto',
+            fd  = new FormData(),
+            usu = JSON.parse(sessionStorage['usuario']);
 
-    fetch(url, {method:'POST', 
-        body:fd,
-        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+        fd.append('fichero', foto);
 
-            if(respuesta.ok) { 
-                respuesta.json().then(function(datos){
-                    return true;
-                });
-            } else {
-                return false;
-            }
-        });
+        fetch(url, {method:'POST', 
+            body:fd,
+            headers:{'Authorization':usu.login + ':' + usu.token}})
+            .then(function(r) {
+                if(r.ok) {
+                    todoOK(r);
+                } else
+                    hayError(r);
+            });
+    });
 }
 
 
