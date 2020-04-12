@@ -195,81 +195,63 @@ function eliminarFicha(boton) {
 }
 
 // Comprueba si hay fotos para enviar en el nuevo articulo y las guarda en un array
-function comprobarFotos(fichas) {
+function comprobarFotos() {
+    let fichas = document.querySelector('#add-img').querySelectorAll('div');
     var fotos = [];
-    for (var i = 0; i < fichas.length; i++) {
-        let foto = fichas[i].querySelector('input').files[0];
-        if (foto != null)
-            fotos.push(foto);
+
+    if (fichas.length > 0) {
+        for (var i = 0; i < fichas.length; i++) {
+            let foto = fichas[i].querySelector('input').files[0];
+            if (foto != null)
+                fotos.push(foto);
+        }
     }
     return fotos;
 }
 
-// Crea el nuevo articulo pero antes comprueba que al menos tenga 1 foto seleccionada
+// Crea el nuevo articulo 
 function crearNuevoArticulo(frm) {
-    try {
-        // Comprobamos si hay fichas de fotos antes de enviar los datos del articulo
-        let fichas = document.querySelector('#add-img').querySelectorAll('div');
-        if (fichas.length > 0) {
 
-            // Comprobamos si tienen alguna foto seleccionada
-            let fotos = comprobarFotos(fichas);
-            if (fotos.length > 0) {
-                let url = 'api/articulos/',
-                fd  = new FormData(frm),
-                usu = JSON.parse(sessionStorage['usuario']);
+    let url = 'api/articulos/',
+    fd  = new FormData(frm),
+    usu = JSON.parse(sessionStorage['usuario']);
 
-                fetch(url, {method:'POST', 
-                    body:fd,
-                    headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+    fetch(url, {method:'POST', 
+        body:fd,
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
 
-                        if(respuesta.ok) {
-                            respuesta.json().then(function(datos){
-                                
-                                let foto = 0;
-                                let continuar = true;
-                                while (foto < fotos.length && continuar) {
+            if(respuesta.ok) {
+                respuesta.json().then(function(datos){
+                
+                    // Comprobamos si hay alguna foto seleccionada para subirla al server
+                    let fotos = comprobarFotos();
+                    if (fotos.length > 0) {
+                        let foto = 0;
+                        let continuar = true;
+                        while (foto < fotos.length && continuar) {
 
-                                    enviarFoto(datos.ID, fotos[foto])
-                                        .then(() => {}, // Si todo va bien, no hacemos nada
-                                        function(err){
-                                            continuar = false;
-                                            console.log(err.status+': '+err.statusText);
-                                        });
-                                    foto++;
-                                }
-
-                               mensajeModal('NUEVO ARTICULO',
-                                    'Se ha guardado correctamente el artículo',
-                                    'cerrarMensajeModal(0,true);',
-                                    'Aceptar');
-                            });
-                        } else
-                            throw 'errFetchNA';
-                    });
-            } else {
-                throw 'errorNoHayFoto';
-            }
-        } else {
-            throw 'errorNoHayFoto';
-        }
-    } catch(e) {
-        if(e == 'errorNoHayFoto') {
-            mensajeModal('NUEVO ARTICULO',
-                'Debe elegir al menos 1 foto del artículo.',
-                'cerrarMensajeModal(2,false);',
-                'Aceptar');
-        } else if (e == 'errFetchNA') {
-            console.log('Error en la petición fetch de nuevo artículo.');
-        }
-    } finally {
-        return false; // Para no recargar la página
-    }
+                            enviarFoto(datos.ID, fotos[foto])
+                                .then(() => {}, // Si todo va bien, no hacemos nada
+                                function(err){
+                                    continuar = false;
+                                    console.log(err.status+': '+err.statusText);
+                                });
+                            foto++;
+                        }
+                    }
+                    mensajeModal('NUEVO ARTICULO',
+                        'Se ha guardado correctamente el artículo',
+                        'cerrarMensajeModal(0,true);',
+                        'Aceptar');
+                });
+            } else
+                console.log('Error en la petición fetch de nuevo artículo.');
+        });
+    return false; // Para no recargar la página
 }
 
 // Envia 1 foto al servidor y le pasa el resultado a crearNuevoArticulo(frm)
 function enviarFoto(id, foto) {
-
     return new Promise(function(todoOK, hayError) {
 
         let url = 'api/articulos/'+id+'/foto',
