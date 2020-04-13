@@ -90,13 +90,13 @@ form>p, #acerca_principal>section>p,  #acerca_principal>section>div>article>div>
 #login_f input[type='submit'],
 #form_preguntas input[type='submit'], 
 #preguntas_respuestas input[type='submit'],
-#art-nuevo input[type='submit'] {
+#art-nuevo button[type='submit'] {
     display: block;
     margin: 0 auto;
 }
 
 #preguntas_respuestas input[type='submit'],
-#art-nuevo input[type='submit'] {
+#art-nuevo button[type='submit'] {
     margin-top: 20px;
 }
 
@@ -161,7 +161,7 @@ input:focus, #registro>p>input:focus, #login_f>p>input:focus
     margin: 20px auto;
 }
 
-#buscar input[type='submit'], #art-nuevo input[type='submit'],
+#buscar input[type='submit'], #art-nuevo button[type='submit'],
 #registro input[type='submit'], #registro input[type='reset'], 
 #login_f input[type='submit'], 
 #form_preguntas input[type='submit'],
@@ -181,7 +181,7 @@ input:focus, #registro>p>input:focus, #login_f>p>input:focus
 #buscar input[type='submit']:hover, #buscar input[type='submit']:hover, 
 #registro input[type='submit']:hover, #registro input[type='reset']:hover, 
 #login_f input[type='submit']:hover, .ir-arriba:hover,
-#art-nuevo input[type='submit']:hover, 
+#art-nuevo button[type='submit']:hover, 
 #form_preguntas input[type='submit']:hover,
 #preguntas_respuestas input[type='submit']:hover {
 	opacity: 1;

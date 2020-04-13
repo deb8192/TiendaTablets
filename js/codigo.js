@@ -301,17 +301,21 @@ function crearBotonSeguir(seguir) {
 // Cambia al instante el boton y en la BD, el valor de seguir o no el articulo
 function seguirArticulo(boton) {
     let seg = boton.getAttribute('data-seguir');
+    let etqUser = document.querySelector('.flaticon-user');
+    let nSeguidores = parseInt(etqUser.innerText);
 
     if (seg == '0') {
         seguir = true;
         texto   = 'Dejar de seguir';
         candado = 'lock';
         seg     = '1';
+        nSeguidores++;
     } else {
         seguir = false,
         texto   = 'Seguir',
         candado = 'unlock';
         seg     = '0';
+        nSeguidores--;
     }
 
     let url = 'api/articulos/'+getIdArticulo()+'/seguir/'+seguir,
@@ -324,6 +328,7 @@ function seguirArticulo(boton) {
                     boton.setAttribute('data-seguir',seg);
                     boton.innerHTML = 
                         `<i class="flaticon-${candado}"></i> ${texto}`;
+                    etqUser.innerText = nSeguidores;
                 });
             } else 
                 console.log('Error en la petición fetch de seguir artículo.');
@@ -379,7 +384,9 @@ function crearFormPreguntas() {
         div.appendChild(p);
     }
 }
-
+function enviar_formulario(){
+    document.formulario1.submit();
+ }
 // TO DO
 function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto, 
     vendedor, imagen, nfotos, nsiguiendo, npreguntas, seguir, propietario) {
@@ -405,7 +412,7 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
     mainArt.querySelector('#fotos_articulo').innerHTML = html;
 
     mainArt.querySelector('.flaticon-gallery').innerHTML = ` 1/${nfotos}`;
-    mainArt.querySelector('.flaticon-user').innerHTML = ` ${nsiguiendo}`;
+    mainArt.querySelector('.flaticon-user').innerHTML = `${nsiguiendo}`;
     
     html = `<p>${precio} €</p>`;
     html += `<a href="#preguntas_respuestas">? ${npreguntas}</a>`;

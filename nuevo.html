@@ -25,10 +25,9 @@
             </nav>
         </header>
         <main id="art-nuevo">
-			<h1>Nuevo art&iacute;culo</h1>
-			<form onsubmit="return crearNuevoArticulo(this);">
-                <input type="submit" value="Publicar" />
-                
+            <h1>Nuevo art&iacute;culo</h1>
+            
+            <form id="formNuevoArt" onsubmit="return crearNuevoArticulo(this);">
                 <p><input type="text" id="nom-art" name="nombre" placeholder="Nombre del art&iacute;culo" maxlength="100" required autofocus></p>
 				
 				<p><textarea id="art-des" maxlength="300" name="descripcion" placeholder="Descripci&oacute;n del art&iacute;culo...." required></textarea></p>
@@ -42,12 +41,14 @@
                 </p>
             </form>
 
-                <section id="fotos-nuevas">
-                    <h2>Fotos del art&iacute;culo</h2>
-                    <div id="add-img">
-                        <label class="cam" for="fotoArt-0" onclick="crearNuevaFicha(true);"><i class="flaticon-camera"></i></label>
-                    </div>
-                </section>
+            <section id="fotos-nuevas">
+                <h2>Fotos del art&iacute;culo</h2>
+                <div id="add-img">
+                    <label class="cam" for="fotoArt-0" onclick="crearNuevaFicha(true);"><i class="flaticon-camera"></i></label>
+                </div>
+            </section>
+            
+            <button type="submit" form="formNuevoArt">Publicar</button>
         </main>
         <footer>
             <div>
