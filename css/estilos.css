@@ -89,14 +89,12 @@ form>p, #acerca_principal>section>p,  #acerca_principal>section>div>article>div>
 
 #login_f input[type='submit'],
 #form_preguntas input[type='submit'], 
-#preguntas_respuestas input[type='submit'],
-#art-nuevo button[type='submit'] {
+#preguntas_respuestas input[type='submit'] {
     display: block;
     margin: 0 auto;
 }
 
-#preguntas_respuestas input[type='submit'],
-#art-nuevo button[type='submit'] {
+#preguntas_respuestas input[type='submit'] {
     margin-top: 20px;
 }
 
@@ -161,27 +159,54 @@ input:focus, #registro>p>input:focus, #login_f>p>input:focus
     margin: 20px auto;
 }
 
-#buscar input[type='submit'], #art-nuevo button[type='submit'],
-#registro input[type='submit'], #registro input[type='reset'], 
-#login_f input[type='submit'], 
+#buscar input[type='submit'], #login_f input[type='submit'],
+#registro input[type='submit'], #registro input[type='reset'],
 #form_preguntas input[type='submit'],
 #preguntas_respuestas input[type='submit'] {
-	background-color: #6ad;
+    opacity: .6;
+    padding: 15px 0;
+	width: 80%;
+}
+
+#buscar input[type='submit'], #login_f input[type='submit'],
+#registro input[type='submit'], #registro input[type='reset'],
+#form_preguntas input[type='submit'],
+#preguntas_respuestas input[type='submit'],
+#art-nuevo button[type='submit'],
+#art-nuevo button[type='reset'] {
+    background-color: #6ad;
     border: none;
     color: #fff;
-    padding: 15px 0;
     font-size: 1.2em;
     border-radius: 8px;
-	width: 80%;
     cursor: pointer;
-	opacity: .6;
+}
+
+#art-nuevo div {
+    display: flex;
+    align-items: center;
+}
+
+#art-nuevo button[type='submit'] {
+    margin: 0 auto;
+    margin-right: 0;    
+}
+
+#art-nuevo button[type='submit'],
+#art-nuevo button[type='reset'] {
+    padding: 15px 30px;
+	opacity: 1;
 	transition: .3s;
+}
+
+#art-nuevo button[type='submit']:hover,
+#art-nuevo button[type='reset']:hover {
+    opacity: .6;
 }
 
 #buscar input[type='submit']:hover, #buscar input[type='submit']:hover, 
 #registro input[type='submit']:hover, #registro input[type='reset']:hover, 
 #login_f input[type='submit']:hover, .ir-arriba:hover,
-#art-nuevo button[type='submit']:hover, 
 #form_preguntas input[type='submit']:hover,
 #preguntas_respuestas input[type='submit']:hover {
 	opacity: 1;
@@ -216,7 +241,9 @@ input:focus, #registro>p>input:focus, #login_f>p>input:focus
 }
 
 #registro div input,
-#login_f input[type='submit'] {
+#login_f input[type='submit'],
+#art-nuevo button[type='submit'],
+#art-nuevo button[type='reset'] {
     margin-top: 20px;
 }
 
