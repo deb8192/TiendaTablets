@@ -947,26 +947,44 @@ textarea {
     background-color: rgba(255,255,255,.8);
 }
     #capa-fondo > article {
-        background-color: #fff;
-        border: 2px solid #000;
+        background-color: #F2FAFF;
         text-align: center;
         width: 20em;
-        height: 10em;
+        height: 13em;
         position: absolute;
-        top: 14em;
+        top: 15em;
         left: 50%;
         transform: translateX(-50%);
+        border-radius: 8px;
+        box-shadow: 5px 5px #27323260;
     }
         #capa-fondo > article > h2 {
-            background-color: #83E389;
-            margin: 0;
+            background-color: #6ad;
+            margin: 0 0 1em 0;
             padding: .5em;
+            border-radius: 8px 8px 0 0;
         }
+
+        #capa-fondo > article > p {
+            padding: 0 14px 0 14px;
+        }
+        
+        #capa-fondo > article > footer {
+            border-radius: 0 0 8px 8px;
+        }
+
         #capa-fondo > article > footer > button {
             margin: .5em;
             font-size: 1em;
-            background-color: #ccc;
-            border: 1px solid #aaa;
+            font-weight: bold;
+            background-color: #6ad;
             padding: .5em 2em;
             cursor: pointer;
+            border: none;
+            border-radius: 3px;
+            transition: .3s;
+            color: #fff;
+        }
+        #capa-fondo > article > footer > button:hover {
+            opacity: .8;
         }
