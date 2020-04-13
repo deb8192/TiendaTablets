@@ -449,7 +449,8 @@ function pedirInfoArticulo() {
             respuesta.json().then(function(datos) {
                 let articulo = datos.FILAS[0];
                 let propietario = false;
-                if (usu.login == articulo.vendedor)
+
+                if ((init != null) && (usu.login == articulo.vendedor))
                     propietario = true;
 
                 anyadirInfoArticulo(articulo.nombre, articulo.descripcion, articulo.precio,
