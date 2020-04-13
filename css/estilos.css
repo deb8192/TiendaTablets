@@ -90,13 +90,13 @@ form>p, #acerca_principal>section>p,  #acerca_principal>section>div>article>div>
 #login_f input[type='submit'],
 #form_preguntas input[type='submit'], 
 #preguntas_respuestas input[type='submit'],
-#art-nuevo input[type='submit'] {
+#art-nuevo button[type='submit'] {
     display: block;
     margin: 0 auto;
 }
 
 #preguntas_respuestas input[type='submit'],
-#art-nuevo input[type='submit'] {
+#art-nuevo button[type='submit'] {
     margin-top: 20px;
 }
 
@@ -161,7 +161,7 @@ input:focus, #registro>p>input:focus, #login_f>p>input:focus
     margin: 20px auto;
 }
 
-#buscar input[type='submit'], #art-nuevo input[type='submit'],
+#buscar input[type='submit'], #art-nuevo button[type='submit'],
 #registro input[type='submit'], #registro input[type='reset'], 
 #login_f input[type='submit'], 
 #form_preguntas input[type='submit'],
@@ -181,7 +181,7 @@ input:focus, #registro>p>input:focus, #login_f>p>input:focus
 #buscar input[type='submit']:hover, #buscar input[type='submit']:hover, 
 #registro input[type='submit']:hover, #registro input[type='reset']:hover, 
 #login_f input[type='submit']:hover, .ir-arriba:hover,
-#art-nuevo input[type='submit']:hover, 
+#art-nuevo button[type='submit']:hover, 
 #form_preguntas input[type='submit']:hover,
 #preguntas_respuestas input[type='submit']:hover {
 	opacity: 1;
@@ -656,6 +656,46 @@ footer a:hover {
     font-size: 1.3em;
     text-align: justify;
 }
+
+#articulo_principal section[data-value='info'] h1 {
+   display: flex;
+   align-items: center;
+}
+
+#articulo_principal section[data-value='info'] h1 div {
+    margin: 0 auto;
+    margin-right: 0;
+}
+
+#articulo_principal section[data-value='info'] button {
+    padding: .5em;
+    font-size: .5em;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    transition: .3s;
+}
+
+#articulo_principal section[data-value='info'] button[title="Modificar"] {
+    background-color: #08b;
+    margin-right: 15px;
+}
+
+#articulo_principal section[data-value='info'] button[title="Modificar"]:hover {
+    background-color: #4ac2ee;
+    box-shadow: 0 2px 6px #08b;
+}
+
+#articulo_principal section[data-value='info'] button[title="Eliminar"] {
+    background-color: #c52222;
+}
+
+#articulo_principal section[data-value='info'] button[title="Eliminar"]:hover {
+    background-color: #ff2f2f;
+    box-shadow: 0 2px 6px #c52222;
+}
+
 #articulo_principal img
 {
     width: 192px;
@@ -674,6 +714,7 @@ footer a:hover {
 #articulo_principal div>p
 {
     flex-grow: 1;
+    width: 15%;
 }
 
 #articulo_principal p:nth-child(4)
@@ -986,5 +1027,5 @@ textarea {
             color: #fff;
         }
         #capa-fondo > article > footer > button:hover {
-            opacity: .8;
+            background-color: #08b;
         }
