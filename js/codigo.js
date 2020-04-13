@@ -284,7 +284,7 @@ function crearBotonSeguir(seguir) {
 
     if (seguir == 1) {
         candado = 'lock';
-        texto   = 'Siguiendo';
+        texto   = 'Dejar de seguir';
     }
     
     let p = document.createElement('p');
@@ -298,13 +298,21 @@ function crearBotonSeguir(seguir) {
     document.querySelector('#padre').insertBefore(p,btn_preg);
 }
 
-// Cambia en la BD el valor de seguir o no el articulo
+// Cambia al instante el boton y en la BD, el valor de seguir o no el articulo
 function seguirArticulo(boton) {
     let seg = boton.getAttribute('data-seguir');
-    let seguir = false;
 
-    if (seg == '0')
+    if (seg == '0') {
         seguir = true;
+        texto   = 'Dejar de seguir';
+        candado = 'lock';
+        seg     = '1';
+    } else {
+        seguir = false,
+        texto   = 'Seguir',
+        candado = 'unlock';
+        seg     = '0';
+    }
 
     let url = 'api/articulos/'+getIdArticulo()+'/seguir/'+seguir,
         usu = JSON.parse(sessionStorage['usuario']);
@@ -313,7 +321,9 @@ function seguirArticulo(boton) {
         headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
             if(respuesta.ok) {
                 respuesta.json().then(function(datos){
-                    console.log(datos);
+                    boton.setAttribute('data-seguir',seg);
+                    boton.innerHTML = 
+                        `<i class="flaticon-${candado}"></i> ${texto}`;
                 });
             } else 
                 console.log('Error en la petición fetch de seguir artículo.');
