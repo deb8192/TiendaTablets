@@ -276,9 +276,9 @@ function enviarFoto(id, foto) {
 // =================================================================================
 // Funciones para ver y manejar un articulo existente
 // =================================================================================
-function crearBotonSeguir(seguir) {
-    console.log(seguir);
 
+// Boton Seguir/Dejar de seguir
+function crearBotonSeguir(seguir) {
     let candado = 'unlock',
         texto   = 'Seguir';
 
@@ -286,7 +286,7 @@ function crearBotonSeguir(seguir) {
         candado = 'lock';
         texto   = 'Siguiendo';
     }
-    // Boton Seguir/Dejar de seguir
+    
     let p = document.createElement('p');
     p.setAttribute('id','seguir');
     p.setAttribute('onclick','seguirArticulo(this);');
@@ -296,9 +296,9 @@ function crearBotonSeguir(seguir) {
     // Recojemos el boton de preguntas y le insertamos antes el boton de seguir
     let btn_preg = document.querySelector('#padre').querySelector('a');
     document.querySelector('#padre').insertBefore(p,btn_preg);
-    
 }
 
+// Cambia en la BD el valor de seguir o no el articulo
 function seguirArticulo(boton) {
     let seg = boton.getAttribute('data-seguir');
     let seguir = false;
@@ -324,7 +324,7 @@ function hacerPregunta(frm) {
 
     let url = 'api/articulos/'+getIdArticulo()+'/pregunta',
         fd  = new FormData(frm),
-        usu = JSON.parse(sessionStorage['usuario']); // TODO: comprobar q esta
+        usu = JSON.parse(sessionStorage['usuario']);
 
     fetch(url, {method:'POST', 
         body:fd,
