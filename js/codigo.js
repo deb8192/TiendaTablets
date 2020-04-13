@@ -58,7 +58,7 @@ function hacerLogin(frm) {
                 
                     // Texto del mensaje
                     mensajeModal('LOGIN INCORRECTO',
-                        'No se ha podido loguear.',
+                        'Usuario o contraseña incorrectos.',
                         'cerrarMensajeModal(0,false);',
                         'Cerrar');
             } else 
@@ -456,7 +456,7 @@ function obtenerArticulos() {
             respuesta.json().then(function(datos) {
                 datos.FILAS.forEach(function(art) {
                     // Pasamos la descripcion sin <br>, gi es para que busque en todo el texto y que no distinga mayus de minus
-                    crearArticulo(art.id, art.nombre, art.descripcion.replace(/<br>/gi,''), parseInt(art.precio), 
+                    crearArticulo(art.id, art.nombre, art.descripcion.replace(/<br>/gi,''), art.precio, 
                         art.fecha, art.veces_visto, art.imagen, art.nfotos, art.nsiguiendo);
                 });
             });
