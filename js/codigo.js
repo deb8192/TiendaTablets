@@ -175,7 +175,7 @@ function cambiarFoto(inp) {
 // Crea las fichas para subir fotos, la primera llamada es desde la pagina y no abre el inputfilereader
 function crearNuevaFicha(abrirInput) {
 
-    let html = '<img src="img/no-img.jpg" alt="Foto nueva" onclick="this.parentNode.querySelector(\'input\').click();"/>';
+    let html = '<img src="fotos/no-img.jpg" alt="Foto nueva" onclick="this.parentNode.querySelector(\'input\').click();"/>';
         html += '<input type="file" accept="image/*" onchange="cambiarFoto(this);">';
         html += '<button title="Añadir foto" onclick="this.parentNode.querySelector(\'input\').click();"><i class="flaticon-plus"></i></button>';
         html += '<button title="Eliminar foto" onclick="eliminarFicha(this);"><i class="flaticon-trash"></i></button>';
@@ -357,21 +357,55 @@ function crearFormPreguntas() {
 }
 
 // TO DO
-function pedirInfoArticulo() {
-    let url = 'api/articulos/1',
-        usu = JSON.parse(sessionStorage['usuario']),
-        cabecera;
+function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto, 
+    vendedor, imagen, nfotos, nsiguiendo, npreguntas) {
 
-    cabecera = usu.login + ':' + usu.token;
+    let mainArt = document.querySelector('#articulo_principal');
+
+    mainArt.querySelector('h1').innerHTML = nombre;
+
+    let html = `<h2>Vendido por: <a id="vendedor" href="buscar.html">${vendedor}</a></h2>`;
+    html += `<i class="flaticon-eye"> ${veces_visto}</i>`;
+    mainArt.querySelector('.vendedor').innerHTML = html;
+
+    html = `<img src="fotos/articulos/${imagen}" alt="${nombre}"></img>`;
+    mainArt.querySelector('#fotos_articulo').innerHTML = html;
+
+    mainArt.querySelector('.flaticon-gallery').innerHTML = ` 1/${nfotos}`;
+    mainArt.querySelector('.flaticon-user').innerHTML = ` ${nsiguiendo}`;
+    
+    html = `<p>${precio} €</p>`;
+    html += `<a href="#preguntas_respuestas">? ${npreguntas}</a>`;
+    mainArt.querySelector('#padre').innerHTML = html;
+
+    let p = document.createElement('p');
+    p.innerHTML = descripcion;
+
+    mainArt.querySelector('section article').appendChild(p);
+
+    crearBotonSeguir();
+}
+
+// TO DO
+function pedirInfoArticulo() {
+    
+    let id = new URLSearchParams(window.location.search).get('id');
+
+    let url = 'api/articulos/'+id,
+        usu = JSON.parse(sessionStorage['usuario']);
 
     // method get es por defecto y body no hace falta
     // la cabecera con el login hace que aparezca el campo 'estoy_siguiendo'
-    fetch(url, { headers:{'Authorization':cabecera}}).then(function(respuesta) {
+    fetch(url, { headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta) {
         if(respuesta.ok) {
             respuesta.json().then(function(datos) {
-                console.log(datos);
+                let articulo = datos.FILAS[0];
+                anyadirInfoArticulo(articulo.nombre, articulo.descripcion, articulo.precio,
+                    articulo.veces_visto, articulo.vendedor, articulo.imagen, articulo.nfotos,
+                    articulo.nsiguiendo, articulo.npreguntas);
 
-                //document.querySelector('#info-articulo-2').innerHTML = JSON.stringify(datos); // sacarlo como texto en el html
+                //articulo.fecha, articulo.categoria, articulo.foto_vendedor
+
                 /*pedirFotos();
                 pedirPreguntas();*/
             });
@@ -386,7 +420,7 @@ function pedirInfoArticulo() {
 
 // Al resetear el form de registro, esto pone la imagen de usuario por defecto
 function limpiarFotoRegistro() {
-    document.querySelector('label img').src = "img/user-img.png";
+    document.querySelector('label img').src = "fotos/user-img.png";
 }
 
 
@@ -395,18 +429,18 @@ function limpiarFotoRegistro() {
 // =================================================================================
 
 function crearArticulo(id, nombre, descripcion, precio, fecha, veces_visto, imagen, nfotos, nsiguiendo) {
-    html = '<a href="articulo.html?="'+id+' title="'+nombre+'">';
-    html += '<img src="fotos/articulos/'+imagen+'" alt="'+nombre+'">';
+    html = `<a href="articulo.html?id=${id}" title="${nombre}">`;
+    html +=  `<img src="fotos/articulos/${imagen}" alt="${nombre}">`;
     html += '<div>';
-    html += '<i class="flaticon-eye"> '+veces_visto+'</i>';
-    html += '<i class="flaticon-gallery"> '+nfotos+'</i>';
+    html += `<i class="flaticon-eye"> ${veces_visto}</i>`;
+    html += `<i class="flaticon-gallery"> ${nfotos}</i>`;
     html += '</div>';
-    html += '<h2>'+nombre+'</h2>';
+    html += `<h2>${nombre}</h2>`;
     html += '<div>';
-    html += '<p>'+precio+' €</p>';
-    html += '<i class="flaticon-user"> '+nsiguiendo+'</i>';
+    html += `<p>${precio} €</p>`;
+    html += `<i class="flaticon-user"> ${nsiguiendo}</i>`;
     html += '</div>';
-    html += '<p>'+descripcion+'</p></a>';
+    html += `<p>${descripcion}</p></a>`;
 
     let article = document.createElement('article');
     article.innerHTML = html;
@@ -422,7 +456,7 @@ function obtenerArticulos() {
             respuesta.json().then(function(datos) {
                 datos.FILAS.forEach(function(art) {
                     // Pasamos la descripcion sin <br>, gi es para que busque en todo el texto y que no distinga mayus de minus
-                    crearArticulo(art.ID, art.nombre, art.descripcion.replace(/<br>/gi,''), parseInt(art.precio), 
+                    crearArticulo(art.id, art.nombre, art.descripcion.replace(/<br>/gi,''), parseInt(art.precio), 
                         art.fecha, art.veces_visto, art.imagen, art.nfotos, art.nsiguiendo);
                 });
             });
