@@ -276,24 +276,38 @@ function enviarFoto(id, foto) {
 // =================================================================================
 // Funciones para ver y manejar un articulo existente
 // =================================================================================
-function crearBotonSeguir() {
-    if (sessionStorage['usuario']) {
-        // TODO: flaticon-lock
-        // Boton Seguir/Dejar de seguir
-        let p = document.createElement('p');
-        p.setAttribute('id','seguir');
-        p.innerHTML = '<i class="flaticon-unlock" onclick="seguirArticulo();"></i> Seguir';
-        
-        // Recojemos el boton de preguntas y le insertamos antes el boton de seguir
-        let btn_preg = document.querySelector('#padre').querySelector('a');
-        document.querySelector('#padre').insertBefore(p,btn_preg);
+function crearBotonSeguir(seguir) {
+    console.log(seguir);
+
+    let candado = 'unlock',
+        texto   = 'Seguir';
+
+    if (seguir == 1) {
+        candado = 'lock';
+        texto   = 'Siguiendo';
     }
+    // Boton Seguir/Dejar de seguir
+    let p = document.createElement('p');
+    p.setAttribute('id','seguir');
+    p.setAttribute('onclick','seguirArticulo(this);');
+    p.setAttribute('data-seguir',seguir);
+    p.innerHTML = `<i class="flaticon-${candado}"></i> ${texto}`;
+    
+    // Recojemos el boton de preguntas y le insertamos antes el boton de seguir
+    let btn_preg = document.querySelector('#padre').querySelector('a');
+    document.querySelector('#padre').insertBefore(p,btn_preg);
+    
 }
 
-function seguirArticulo() {
-    let id = 1;
-    let url = 'api/articulos/'+id+'/seguir/true',
-        usu = JSON.parse(sessionStorage['usuario']); // TODO: comprobar si está logueado
+function seguirArticulo(boton) {
+    let seg = boton.getAttribute('data-seguir');
+    let seguir = false;
+
+    if (seg == '0')
+        seguir = true;
+
+    let url = 'api/articulos/'+getIdArticulo()+'/seguir/'+seguir,
+        usu = JSON.parse(sessionStorage['usuario']);
 
     fetch(url, {method:'POST',
         headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
@@ -307,8 +321,8 @@ function seguirArticulo() {
 }
 
 function hacerPregunta(frm) {
-    let id = 1;
-    let url = 'api/articulos/'+id+'/pregunta',
+
+    let url = 'api/articulos/'+getIdArticulo()+'/pregunta',
         fd  = new FormData(frm),
         usu = JSON.parse(sessionStorage['usuario']); // TODO: comprobar q esta
 
@@ -358,7 +372,7 @@ function crearFormPreguntas() {
 
 // TO DO
 function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto, 
-    vendedor, imagen, nfotos, nsiguiendo, npreguntas) {
+    vendedor, imagen, nfotos, nsiguiendo, npreguntas, seguir) {
 
     let mainArt = document.querySelector('#articulo_principal');
 
@@ -383,26 +397,34 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
 
     mainArt.querySelector('section article').appendChild(p);
 
-    crearBotonSeguir();
+    if (seguir != null)
+        crearBotonSeguir(seguir);
+}
+
+function getIdArticulo() {
+    return new URLSearchParams(window.location.search).get('id');
 }
 
 // TO DO
 function pedirInfoArticulo() {
-    
-    let id = new URLSearchParams(window.location.search).get('id');
 
-    let url = 'api/articulos/'+id,
+    let url = 'api/articulos/'+getIdArticulo(),
+        init = null;
+
+    if (sessionStorage['usuario']) {
         usu = JSON.parse(sessionStorage['usuario']);
+        // method get es por defecto y body no hace falta
+        init = { headers:{'Authorization':usu.login + ':' + usu.token} };
+    }
 
-    // method get es por defecto y body no hace falta
     // la cabecera con el login hace que aparezca el campo 'estoy_siguiendo'
-    fetch(url, { headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta) {
+    fetch(url, init).then(function(respuesta) {
         if(respuesta.ok) {
             respuesta.json().then(function(datos) {
                 let articulo = datos.FILAS[0];
                 anyadirInfoArticulo(articulo.nombre, articulo.descripcion, articulo.precio,
                     articulo.veces_visto, articulo.vendedor, articulo.imagen, articulo.nfotos,
-                    articulo.nsiguiendo, articulo.npreguntas);
+                    articulo.nsiguiendo, articulo.npreguntas, articulo.estoy_siguiendo);
 
                 //articulo.fecha, articulo.categoria, articulo.foto_vendedor
 
