@@ -382,13 +382,22 @@ function crearFormPreguntas() {
 
 // TO DO
 function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto, 
-    vendedor, imagen, nfotos, nsiguiendo, npreguntas, seguir) {
-
+    vendedor, imagen, nfotos, nsiguiendo, npreguntas, seguir, propietario) {
+    
+    let html = '';
     let mainArt = document.querySelector('#articulo_principal');
 
     mainArt.querySelector('h1').innerHTML = nombre;
 
-    let html = `<h2>Vendido por: <a id="vendedor" href="buscar.html">${vendedor}</a></h2>`;
+    if (propietario) {
+        html += '<button title="Modificar" onclick="modificarArt();"><i class="flaticon-pencil"></i></button>';
+        html += '<button title="Eliminar" onclick="eliminarArt();"><i class="flaticon-trash"></i></button>';
+        let div = document.createElement('div');
+        div.innerHTML = html;
+        mainArt.querySelector('h1').appendChild(div);
+    }
+
+    html = `<h2>Vendido por: <a id="vendedor" href="buscar.html">${vendedor}</a></h2>`;
     html += `<i class="flaticon-eye"> ${veces_visto}</i>`;
     mainArt.querySelector('.vendedor').innerHTML = html;
 
@@ -432,9 +441,13 @@ function pedirInfoArticulo() {
         if(respuesta.ok) {
             respuesta.json().then(function(datos) {
                 let articulo = datos.FILAS[0];
+                let propietario = false;
+                if (usu.login == articulo.vendedor)
+                    propietario = true;
+
                 anyadirInfoArticulo(articulo.nombre, articulo.descripcion, articulo.precio,
                     articulo.veces_visto, articulo.vendedor, articulo.imagen, articulo.nfotos,
-                    articulo.nsiguiendo, articulo.npreguntas, articulo.estoy_siguiendo);
+                    articulo.nsiguiendo, articulo.npreguntas, articulo.estoy_siguiendo, propietario);
 
                 //articulo.fecha, articulo.categoria, articulo.foto_vendedor
 

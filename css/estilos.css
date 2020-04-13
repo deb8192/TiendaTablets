@@ -656,6 +656,46 @@ footer a:hover {
     font-size: 1.3em;
     text-align: justify;
 }
+
+#articulo_principal section[data-value='info'] h1 {
+   display: flex;
+   align-items: center;
+}
+
+#articulo_principal section[data-value='info'] h1 div {
+    margin: 0 auto;
+    margin-right: 0;
+}
+
+#articulo_principal section[data-value='info'] button {
+    padding: .5em;
+    font-size: .5em;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    transition: .3s;
+}
+
+#articulo_principal section[data-value='info'] button[title="Modificar"] {
+    background-color: #08b;
+    margin-right: 15px;
+}
+
+#articulo_principal section[data-value='info'] button[title="Modificar"]:hover {
+    background-color: #4ac2ee;
+    box-shadow: 0 2px 6px #08b;
+}
+
+#articulo_principal section[data-value='info'] button[title="Eliminar"] {
+    background-color: #c52222;
+}
+
+#articulo_principal section[data-value='info'] button[title="Eliminar"]:hover {
+    background-color: #ff2f2f;
+    box-shadow: 0 2px 6px #c52222;
+}
+
 #articulo_principal img
 {
     width: 192px;
@@ -986,5 +1026,5 @@ textarea {
             color: #fff;
         }
         #capa-fondo > article > footer > button:hover {
-            opacity: .8;
+            background-color: #08b;
         }
