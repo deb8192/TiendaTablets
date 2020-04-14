@@ -431,11 +431,12 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
     mainArt.querySelector('.flaticon-gallery').innerHTML = ` 1/${nfotos}`;
     mainArt.querySelector('.flaticon-user').innerHTML = `${nsiguiendo}`;
     
-    html = `<p>${precio} €</p>`;
+    html = `<p id="precio">${precio} €</p>`;
     html += `<a href="#preguntas_respuestas">? ${npreguntas}</a>`;
     mainArt.querySelector('#padre').innerHTML = html;
 
     let p = document.createElement('p');
+    p.setAttribute('id','descp');
     p.innerHTML = descripcion;
 
     mainArt.querySelector('section article').appendChild(p);
@@ -508,10 +509,13 @@ function borrarArtServer() {
 }
 
 function modificarArt() {
-    let html = '<form id="modArt" onsubmit="modificarArtServer(); return false;">';
-        html += '<textarea maxlength="300" name="descripcion" placeholder="Descripci&oacute;n del art&iacute;culo...." required></textarea>';
-        html += '<p><label for="precio">Precio:</label>';
-        html += '<input type="number" id="precio" name="precio" min="0" max="9999" value="1.00" step="0.01" required> €</p>';
+    let precio = document.querySelector('#precio').innerHTML.replace(' €','');
+    let descp = document.querySelector('#descp').innerHTML.replace(/<br>/gi,'\r');
+    let html = '<form id="modArt" onsubmit="modificarArtServer(this); return false;">';
+        html += '<p>Nuevo precio:</p>';
+        html += `<input type="number" id="prec" name="precio" min="0" max="9999" value="${precio}" step="0.01" required> €`;
+        html += '<p>Nueva descripción:</p>';
+        html += `<textarea maxlength="300" name="descripcion" required>${descp}</textarea>`;
         html += '</form>';
 
     modalConfirmacion('MODIFICAR ARTICULO',
@@ -520,8 +524,28 @@ function modificarArt() {
         'borraCodigoModal();');
 }
 
-function modificarArtServer() {
-    console.log('modificar');
+function modificarArtServer(frm) {
+    console.log(frm.descripcion.value);
+    let url = 'api/articulos/'+getIdArticulo(),
+    fd  = new FormData(frm),
+    usu = JSON.parse(sessionStorage['usuario']);
+
+    fetch(url, {method:'POST', 
+        body:fd,
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+
+            if(respuesta.ok) {
+                document.querySelector('#precio').innerHTML = frm.precio.value+' €';
+                document.querySelector('#descp').innerHTML = frm.descripcion.value.replace(/\n/gi,'<br>');;
+
+                borraCodigoModal();
+                mensajeModal('MODIFICAR ARTICULO',
+                    'Se ha modificado correctamente el artículo',
+                    'borraCodigoModal();',
+                    'Aceptar');
+            } else
+                console.log('Error en la petición fetch de modificar artículo.');
+        });
 }
 
 

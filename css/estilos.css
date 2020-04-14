@@ -1060,3 +1060,12 @@ textarea {
             position: relative;
             margin: 1em 0 0 0;
         }
+
+        #capa-fondo textarea {
+            max-width: 85%;
+            min-width: 85%;
+        }
+
+        #modArt p {
+            font-weight: bold;
+        }
