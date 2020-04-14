@@ -7,9 +7,22 @@ function mensajeModal(h2,p,f_boton,boton) {
     html += '<article>';
     html +=   '<h2>'+h2+'</h2>';
     html +=   '<p>'+p+'</p>';
-    html +=   '<footer><button onclick="'+f_boton+'">'+boton+'</button></footer>';
+    html +=   '<footer class="modal"><button onclick="'+f_boton+'">'+boton+'</button></footer>';
     html += '</article>';
+    crearModal(html);
+}
 
+function modalConfirmacion(h2,codigo,btnAceptar,btnCancelar) {
+    let html = '';
+    html += '<article>';
+    html +=   '<h2>'+h2+'</h2>';
+    html +=   codigo;
+    html +=   '<footer class="modal">'+btnAceptar+'<button onclick="'+btnCancelar+'">Cancelar</button></footer>';
+    html += '</article>';
+    crearModal(html);
+}
+
+function crearModal(html) {
     let div = document.createElement('div');
     div.setAttribute('id','capa-fondo');
     div.innerHTML = html;
@@ -19,15 +32,19 @@ function mensajeModal(h2,p,f_boton,boton) {
     document.body.setAttribute('style','overflow-x:hidden; overflow-y:hidden;');
 }
 
-function cerrarMensajeModal(tipo, redirigir) {
+function borraCodigoModal() {
     document.querySelector('#capa-fondo').remove();
     document.body.removeAttribute('style');
+}
 
-    if (tipo == '0') { // Login
-        // Login correcto, redirigimos a index
-        if (redirigir)
+function cerrarMensajeModal(tipo, redirigir) {
+    borraCodigoModal();
+
+    if (tipo == '0') { // Login, nuevo articulo
+        
+        if (redirigir) // redirigimos en caso de login correcto y nuevo articulo creado
             window.location.replace("index.html");
-        else // si nos, devolvemos el foco al input de login
+        else // (solo para login) devuelve el foco al input 'login'
             document.querySelector("#login_name_lg").focus();
 
     } else if (tipo == '1') { // Preguntas
@@ -161,7 +178,7 @@ function cambiarFoto(inp) {
         else
             mensajeModal('IMAGEN',
                 'El tamaño de la imagen debe ser inferior a 300KB.',
-                'cerrarMensajeModal(2,true);', // valores que no hacen nada
+                'borraCodigoModal();',
                 'Aceptar');
     };
     fr.readAsDataURL(inp.files[0]);
@@ -414,11 +431,12 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
     mainArt.querySelector('.flaticon-gallery').innerHTML = ` 1/${nfotos}`;
     mainArt.querySelector('.flaticon-user').innerHTML = `${nsiguiendo}`;
     
-    html = `<p>${precio} €</p>`;
+    html = `<p id="precio">${precio} €</p>`;
     html += `<a href="#preguntas_respuestas">? ${npreguntas}</a>`;
     mainArt.querySelector('#padre').innerHTML = html;
 
     let p = document.createElement('p');
+    p.setAttribute('id','descp');
     p.innerHTML = descripcion;
 
     mainArt.querySelector('section article').appendChild(p);
@@ -466,6 +484,70 @@ function pedirInfoArticulo() {
             console.log('Error en la petición fetch');
     }); 
 }
+
+// Para eliminar un articulo, se abrira primero un modal para pedir confirmacion al usuario
+function eliminarArt() {
+    modalConfirmacion('ELIMINAR ARTICULO',
+        '<p>¿Está seguro que desea eliminar el artículo?</p>',
+        '<button onclick="borrarArtServer();">Aceptar</button>',
+        'borraCodigoModal();');
+}
+
+function borrarArtServer() {
+    let url = 'api/articulos/'+getIdArticulo(),
+        usu = JSON.parse(sessionStorage['usuario']);
+
+    fetch(url, {method:'DELETE', 
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+
+            if(respuesta.ok) {
+                respuesta.json().then(function(datos){
+                    window.location.replace("index.html");
+                });
+            }
+        });
+}
+
+function modificarArt() {
+    let precio = document.querySelector('#precio').innerHTML.replace(' €','');
+    let descp = document.querySelector('#descp').innerHTML.replace(/<br>/gi,'\r');
+    let html = '<form id="modArt" onsubmit="modificarArtServer(this); return false;">';
+        html += '<p>Nuevo precio:</p>';
+        html += `<input type="number" id="prec" name="precio" min="0" max="9999" value="${precio}" step="0.01" required> €`;
+        html += '<p>Nueva descripción:</p>';
+        html += `<textarea maxlength="300" name="descripcion" required>${descp}</textarea>`;
+        html += '</form>';
+
+    modalConfirmacion('MODIFICAR ARTICULO',
+        html,
+        '<button type="submit" form="modArt">Aceptar</button>',
+        'borraCodigoModal();');
+}
+
+function modificarArtServer(frm) {
+    console.log(frm.descripcion.value);
+    let url = 'api/articulos/'+getIdArticulo(),
+    fd  = new FormData(frm),
+    usu = JSON.parse(sessionStorage['usuario']);
+
+    fetch(url, {method:'POST', 
+        body:fd,
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+
+            if(respuesta.ok) {
+                document.querySelector('#precio').innerHTML = frm.precio.value+' €';
+                document.querySelector('#descp').innerHTML = frm.descripcion.value.replace(/\n/gi,'<br>');;
+
+                borraCodigoModal();
+                mensajeModal('MODIFICAR ARTICULO',
+                    'Se ha modificado correctamente el artículo',
+                    'borraCodigoModal();',
+                    'Aceptar');
+            } else
+                console.log('Error en la petición fetch de modificar artículo.');
+        });
+}
+
 
 // =================================================================================
 // Funciones para manejar registro
