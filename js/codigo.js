@@ -7,17 +7,17 @@ function mensajeModal(h2,p,f_boton,boton) {
     html += '<article>';
     html +=   '<h2>'+h2+'</h2>';
     html +=   '<p>'+p+'</p>';
-    html +=   '<footer><button onclick="'+f_boton+'">'+boton+'</button></footer>';
+    html +=   '<footer class="modal"><button onclick="'+f_boton+'">'+boton+'</button></footer>';
     html += '</article>';
     crearModal(html);
 }
 
-function modalConfirmacion(h2,codigo,f_btnAceptar,f_btnCancelar) {
+function modalConfirmacion(h2,codigo,btnAceptar,btnCancelar) {
     let html = '';
     html += '<article>';
     html +=   '<h2>'+h2+'</h2>';
     html +=   codigo;
-    html +=   '<footer><button onclick="'+f_btnAceptar+'">Aceptar</button> <button onclick="'+f_btnCancelar+'">Cancelar</button></footer>';
+    html +=   '<footer class="modal">'+btnAceptar+'<button onclick="'+btnCancelar+'">Cancelar</button></footer>';
     html += '</article>';
     crearModal(html);
 }
@@ -488,7 +488,7 @@ function pedirInfoArticulo() {
 function eliminarArt() {
     modalConfirmacion('ELIMINAR ARTICULO',
         '<p>¿Está seguro que desea eliminar el artículo?</p>',
-        'borrarArtServer();',
+        '<button onclick="borrarArtServer();">Aceptar</button>',
         'borraCodigoModal();');
 }
 
@@ -508,9 +508,15 @@ function borrarArtServer() {
 }
 
 function modificarArt() {
+    let html = '<form id="modArt" onsubmit="modificarArtServer(); return false;">';
+        html += '<textarea maxlength="300" name="descripcion" placeholder="Descripci&oacute;n del art&iacute;culo...." required></textarea>';
+        html += '<p><label for="precio">Precio:</label>';
+        html += '<input type="number" id="precio" name="precio" min="0" max="9999" value="1.00" step="0.01" required> €</p>';
+        html += '</form>';
+
     modalConfirmacion('MODIFICAR ARTICULO',
-        '<p>bla bla bla bla</p>',
-        'modificarArtServer();',
+        html,
+        '<button type="submit" form="modArt">Aceptar</button>',
         'borraCodigoModal();');
 }
 
