@@ -32,9 +32,9 @@
                     <p><label for="login_name">Login <span class=asterisco>* </span></label><br>
                         <input type="text" id="login_name" onfocusout="return comprobarDisponibilidad(this);" pattern="^[a-zA-Z][a-zA-Z0-9]{4,20}" minlength="4" maxlength="20" placeholder="Ej: fulanito-94" required autofocus/></p>
                     <p><label for="password">Contraseña <span class=asterisco>* </span></label><br>
-                        <input type="password" id="password" pattern="[a-zA-Z0-9_-]{6,20}" minlength="6" maxlength="20" required/></p>
+                        <input type="password" id="password" onfocusout="return comprobarContraseñas();" pattern="[a-zA-Z0-9_-]{6,20}" minlength="6" maxlength="20" required/></p>
                     <p><label for="password2">Repetir contraseña </label><br>
-                        <input type="password" id="password2" pattern="[a-zA-Z0-9_-]{6,20}" minlength="6" maxlength="20"/></p>
+                        <input type="password" id="password2" onfocusout="return comprobarContraseñas();" pattern="[a-zA-Z0-9_-]{6,20}" minlength="6" maxlength="20"/></p>
                     <p><label for="nombre">Nombre <span class=asterisco>* </span></label><br>
                         <input type="text" id="nombre" placeholder="Ej: Fulanito" required/></p>
                     <p><label for="apellidos">Apellidos <span class=asterisco>* </span></label><br>

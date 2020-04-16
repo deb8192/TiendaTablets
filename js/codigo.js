@@ -100,38 +100,48 @@ function comprobarLogin() {
 
 //Se comprueba si el login está disponible o no
 function comprobarDisponibilidad(login) {
-    let url = "api/usuarios/";
-    url += login.value;
+    if(login.value)
+    {
+        let url = "api/usuarios/";
+        url += login.value;
 
-    fetch(url).then(function(respuesta) {
-        if(respuesta.ok)
-        {
-            respuesta.json().then(function(datos) {
-                console.log(datos);
-                if(!datos.DISPONIBLE)
-                {
-                    document.getElementById ("resgistroSubmit").disabled = true;
-                    if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length == 0)
+        fetch(url).then(function(respuesta) {
+            if(respuesta.ok)
+            {
+                respuesta.json().then(function(datos) {
+                    console.log(datos);
+                    if(!datos.DISPONIBLE)
                     {
-                        document.getElementById("registro").getElementsByTagName("p")[0].appendChild(crearSpanTexto("El login introducido no se encuentra disponible", "loginUsado"));
-                        //document.getElementById("registro").getElementsByTagName("p")[0].createElement("span").innerHTML = "El login introducido no se encuentra disponible";
-                        //document.getElementById("registro").getElementsByTagName("p")[0].getElementsByTagName("span").setAttribute("class", "loginUsado");
+                        let elemento = document.getElementById ("resgistroSubmit");
+                        deshabilitarElemento(elemento, true);
+                        if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length == 0)
+                        {
+                            document.getElementById("registro").getElementsByTagName("p")[0].appendChild(crearSpanTexto("El login introducido no se encuentra disponible", "loginUsado"));
+                            //document.getElementById("registro").getElementsByTagName("p")[0].createElement("span").innerHTML = "El login introducido no se encuentra disponible";
+                            //document.getElementById("registro").getElementsByTagName("p")[0].getElementsByTagName("span").setAttribute("class", "loginUsado");
+                        }
                     }
-                }
-                else
-                {
-                    document.getElementById ("resgistroSubmit").disabled = false;
-                    if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length > 0)
+                    else
                     {
-                        let span = document.getElementById("registro").getElementsByTagName("p")[0];
-                        span.lastChild.remove();
+                        let elemento = document.getElementById ("resgistroSubmit");
+                        deshabilitarElemento(elemento, false);
+                        if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length > 0)
+                        {
+                            let span = document.getElementById("registro").getElementsByTagName("p")[0];
+                            span.lastChild.remove();
+                        }
                     }
-                }
-            });
-        } else
-            console.log('Error en la petición fetch');
+                });
+            } else
+                console.log('Error en la petición fetch');
 
-    });
+        });
+    }
+}
+//Función que deshabilita cualquier elemento que se le pase
+function deshabilitarElemento(elemento, value)
+{
+    elemento.disabled = value
 }
 
 function crearSpanTexto(texto, className)
@@ -140,6 +150,34 @@ function crearSpanTexto(texto, className)
     span.innerHTML = texto;
     span.setAttribute("class", className);
     return span;
+}
+
+function comprobarContraseñas()
+{
+    let password1 = document.getElementById("password");
+    let password2 = document.getElementById("password2");
+    if(password1.value && password2.value)
+    {
+        if(password1.value != password2.value)
+        {
+            let elemento = document.getElementById ("resgistroSubmit");
+            deshabilitarElemento(elemento, true);
+            if(document.getElementById("registro").getElementsByTagName("p")[3].getElementsByClassName("contrasennasDistintas").length == 0)
+            {
+                document.getElementById("registro").getElementsByTagName("p")[3].appendChild(crearSpanTexto("Las contrase&ntilde;as no coinciden", "contrasennasDistintas"));
+            }
+        }
+        else
+        {
+            let elemento = document.getElementById ("resgistroSubmit");
+            deshabilitarElemento(elemento, false);
+            if(document.getElementById("registro").getElementsByTagName("p")[3].getElementsByClassName("contrasennasDistintas").length > 0)
+            {
+                let span = document.getElementById("registro").getElementsByTagName("p")[3];
+                span.lastChild.remove();
+            }
+        }
+    }
 }
 
 function menu() {
