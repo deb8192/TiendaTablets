@@ -212,6 +212,12 @@ input:focus, #registro>p>input:focus, #login_f>p>input:focus
 	opacity: 1;
 }
 
+#registro input[type='submit']:disabled
+{
+    opacity: .6;
+    background-color: #777;
+}
+
 #articulo_principal a{
 	cursor: pointer;
 	transition: .3s;

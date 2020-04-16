@@ -98,6 +98,50 @@ function comprobarLogin() {
     }
 }
 
+//Se comprueba si el login está disponible o no
+function comprobarDisponibilidad(login) {
+    let url = "api/usuarios/";
+    url += login.value;
+
+    fetch(url).then(function(respuesta) {
+        if(respuesta.ok)
+        {
+            respuesta.json().then(function(datos) {
+                console.log(datos);
+                if(!datos.DISPONIBLE)
+                {
+                    document.getElementById ("resgistroSubmit").disabled = true;
+                    if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length == 0)
+                    {
+                        document.getElementById("registro").getElementsByTagName("p")[0].appendChild(crearSpanTexto("El login introducido no se encuentra disponible", "loginUsado"));
+                        //document.getElementById("registro").getElementsByTagName("p")[0].createElement("span").innerHTML = "El login introducido no se encuentra disponible";
+                        //document.getElementById("registro").getElementsByTagName("p")[0].getElementsByTagName("span").setAttribute("class", "loginUsado");
+                    }
+                }
+                else
+                {
+                    document.getElementById ("resgistroSubmit").disabled = false;
+                    if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length > 0)
+                    {
+                        let span = document.getElementById("registro").getElementsByTagName("p")[0];
+                        span.lastChild.remove();
+                    }
+                }
+            });
+        } else
+            console.log('Error en la petición fetch');
+
+    });
+}
+
+function crearSpanTexto(texto, className)
+{
+    let span = document.createElement("span");
+    span.innerHTML = texto;
+    span.setAttribute("class", className);
+    return span;
+}
+
 function menu() {
     comprobarLogin();
     let html = '';
