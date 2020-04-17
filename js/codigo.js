@@ -112,18 +112,16 @@ function comprobarDisponibilidad(login) {
                     console.log(datos);
                     if(!datos.DISPONIBLE)
                     {
-                        let elemento = document.getElementById ("resgistroSubmit");
+                        let elemento = document.getElementById ("registroSubmit");
                         deshabilitarElemento(elemento, true);
                         if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length == 0)
                         {
                             document.getElementById("registro").getElementsByTagName("p")[0].appendChild(crearSpanTexto("El login introducido no se encuentra disponible", "loginUsado"));
-                            //document.getElementById("registro").getElementsByTagName("p")[0].createElement("span").innerHTML = "El login introducido no se encuentra disponible";
-                            //document.getElementById("registro").getElementsByTagName("p")[0].getElementsByTagName("span").setAttribute("class", "loginUsado");
                         }
                     }
                     else
                     {
-                        let elemento = document.getElementById ("resgistroSubmit");
+                        let elemento = document.getElementById ("registroSubmit");
                         deshabilitarElemento(elemento, false);
                         if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length > 0)
                         {
@@ -160,7 +158,7 @@ function comprobarContraseñas()
     {
         if(password1.value != password2.value)
         {
-            let elemento = document.getElementById ("resgistroSubmit");
+            let elemento = document.getElementById ("registroSubmit");
             deshabilitarElemento(elemento, true);
             if(document.getElementById("registro").getElementsByTagName("p")[3].getElementsByClassName("contrasennasDistintas").length == 0)
             {
@@ -169,7 +167,7 @@ function comprobarContraseñas()
         }
         else
         {
-            let elemento = document.getElementById ("resgistroSubmit");
+            let elemento = document.getElementById ("registroSubmit");
             deshabilitarElemento(elemento, false);
             if(document.getElementById("registro").getElementsByTagName("p")[3].getElementsByClassName("contrasennasDistintas").length > 0)
             {
@@ -178,6 +176,34 @@ function comprobarContraseñas()
             }
         }
     }
+}
+
+function registro(frm)
+{
+    let url = 'api/usuarios/registro',
+    fd = new FormData(frm);
+
+    fetch(url, {method:'POST', body:fd}).then(function(respuesta){
+        if(respuesta.ok) {
+            respuesta.json().then(function(datos){
+
+                // Texto del mensaje
+                mensajeModal('REGISTRO',
+                    'El usuario '+ datos.login +' se ha registrado correctamente.',
+                    'cerrarMensajeModal(0,true);',
+                    'Aceptar');
+            });
+        } else if(respuesta.status == 422) {
+            
+                // Texto del mensaje
+                mensajeModal('REGISTRO INCORRECTO',
+                    'Las contraseñas no coinciden.',
+                    'cerrarMensajeModal(0,false);',
+                    'Cerrar');
+        } else 
+            console.log('Error en la petición fetch de login.');
+    });
+    return false;
 }
 
 function menu() {
