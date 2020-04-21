@@ -53,6 +53,16 @@ function cerrarMensajeModal(tipo, redirigir) {
         else
             document.querySelector("#art-pre").focus();
     }
+    else if (tipo == '2') { // Registro
+        if (redirigir)
+        {
+            window.location.replace("login.html");
+        }
+        else // (solo para login) devuelve el foco al input 'login'
+        {
+            document.querySelector("#login_name").focus();
+        }
+    }
 }
 
 function hacerLogin(frm) {
@@ -160,22 +170,32 @@ function comprobarContraseñas()
         {
             let elemento = document.getElementById ("registroSubmit");
             deshabilitarElemento(elemento, true);
-            if(document.getElementById("registro").getElementsByTagName("p")[3].getElementsByClassName("contrasennasDistintas").length == 0)
+            if(document.getElementById("registro").getElementsByTagName("p")[2].getElementsByClassName("contrasennasDistintas").length == 0)
             {
-                document.getElementById("registro").getElementsByTagName("p")[3].appendChild(crearSpanTexto("Las contrase&ntilde;as no coinciden", "contrasennasDistintas"));
+                document.getElementById("registro").getElementsByTagName("p")[2].appendChild(crearSpanTexto("Las contrase&ntilde;as no coinciden", "contrasennasDistintas"));
             }
         }
         else
         {
             let elemento = document.getElementById ("registroSubmit");
             deshabilitarElemento(elemento, false);
-            if(document.getElementById("registro").getElementsByTagName("p")[3].getElementsByClassName("contrasennasDistintas").length > 0)
+            if(document.getElementById("registro").getElementsByTagName("p")[2].getElementsByClassName("contrasennasDistintas").length > 0)
             {
-                let span = document.getElementById("registro").getElementsByTagName("p")[3];
+                let span = document.getElementById("registro").getElementsByTagName("p")[2];
                 span.lastChild.remove();
             }
         }
     }
+}
+function limpiarRegistro()
+{
+    document.querySelector("#login_name").value = "";
+    document.querySelector("#password").value = "";
+    document.querySelector("#password2").value = "";
+    document.querySelector("#nombre").value = "";
+    document.querySelector("#apellidos").value = "";
+    document.querySelector("#email").value = "";
+    limpiarFotoRegistro();
 }
 
 function registro(frm)
@@ -186,11 +206,12 @@ function registro(frm)
     fetch(url, {method:'POST', body:fd}).then(function(respuesta){
         if(respuesta.ok) {
             respuesta.json().then(function(datos){
+                limpiarRegistro();
 
                 // Texto del mensaje
                 mensajeModal('REGISTRO',
-                    'El usuario '+ datos.login +' se ha registrado correctamente.',
-                    'cerrarMensajeModal(0,true);',
+                    'El usuario '+ datos.LOGIN +' se ha registrado correctamente.',
+                    'cerrarMensajeModal(2,true);',
                     'Aceptar');
             });
         } else if(respuesta.status == 422) {
@@ -198,11 +219,12 @@ function registro(frm)
                 // Texto del mensaje
                 mensajeModal('REGISTRO INCORRECTO',
                     'Las contraseñas no coinciden.',
-                    'cerrarMensajeModal(0,false);',
+                    'cerrarMensajeModal(2,false);',
                     'Cerrar');
         } else 
             console.log('Error en la petición fetch de login.');
     });
+    
     return false;
 }
 
