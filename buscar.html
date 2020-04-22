@@ -9,7 +9,7 @@
         <script src="js/codigo.js"></script>
         <title>Buscar</title>
     </head>
-    <body data-pagina="buscar">
+    <body data-pagina="buscar" onload = "return rellenarBuscarConUrl();">
         <header>
             <div>
                 <a href="index.html" title="Walacom">
@@ -27,10 +27,10 @@
         <main id="buscar">
             <section>
                 <h1>Buscar</h1>
-                <form action="buscar.html" enctype="multipart/form-data" method="post">
+                <form action="buscar.html" enctype="multipart/form-data" method="post"  onsubmit="return buscarArticulo(this);">
                     
                     <input type="search" id="texto" placeholder="Buscar..." required autofocus/>
-
+                    
                     <p><label for="desde">Desde:</label>
                         <input type="number" id="desde" min="0" max="1000" step="1" value="0">
                         <label for="hasta">Hasta:</label>
@@ -39,15 +39,19 @@
                     <p><label for="categorias">Categor&iacute;a </label>
                         <select id="categorias" name="categoria"></select>
                     </p>
+
+                    <p><label for="textoVendedor">Vendedor </label>
+                        <input type="text" id="textoVendedor" placeholder="Vendedor" />
+                    </p>
                 <div>
                     <p><label for="vendedor">Por vendedor </label>
                         <input type="checkbox" id="vendedor"/></p>
 
-                    <p><label for="art-follow">Art&iacute;culos que sigo </label>
-                        <input type="checkbox" id="art-follow"/></p>
+                    <p><label for="artFollow">Art&iacute;culos que sigo </label>
+                        <input type="checkbox" id="artFollow"/></p>
 
-                    <p><label for="art-me">Mis art&iacute;culos </label>
-                        <input type="checkbox" id="art-me"/></p>
+                    <p><label for="artMe">Mis art&iacute;culos </label>
+                        <input type="checkbox" id="artMe"/></p>
                     </div>
                     <input type="submit" value="Buscar"/>
 

@@ -578,6 +578,12 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
 function getIdArticulo() {
     return new URLSearchParams(window.location.search).get('id');
 }
+function getVendedorArticulo() {
+    return new URLSearchParams(window.location.search).get('login');
+}
+function getTextoArticulo() {
+    return new URLSearchParams(window.location.search).get('texto');
+}
 
 // TO DO
 function pedirInfoArticulo() {
@@ -712,6 +718,14 @@ function crearArticulo(id, nombre, descripcion, precio, fecha, veces_visto, imag
     document.querySelector('.grid').appendChild(article);
 }
 
+function eliminarBusqueda()
+{
+    while(document.querySelector('.grid').children.length > 0)
+    {
+        document.querySelector('.grid').firstChild.remove();
+    }
+}
+
 function obtenerArticulos() {
     let url = 'api/articulos?pag={0}&lpag={6}';
 
@@ -735,4 +749,105 @@ function obtenerArticulos() {
 // Funciones para manejar buscar
 // =================================================================================
 
+function buscarArticulo(frm)
+{
+    let url = 'api/articulos?pag={0}&lpag={6}',
+    usuario = false;
+    fd = new FormData();
+
+    if(frm.texto.value)
+    {
+        url += '&t='+frm.texto.value;
+    }
+    if(frm.desde.value)
+    {
+        url += '&pd='+frm.desde.value;
+    }
+    if(frm.hasta.value)
+    {
+        url += '&ph='+frm.hasta.value;
+    }
+    if(frm.categorias.value)
+    {
+        url += '&c='+frm.categorias.value;
+    }
+    //TO DO
+    if(frm.vendedor.checked)
+    {
+        url += '&v=';
+    }
+    if(frm.artFollow.checked)
+    {
+        url += '&siguiendo';
+        usuario = true;
+    }
+    if(frm.artMe.checked)
+    {
+        url += '&mios';
+        usuario = true;
+    }
+    if(document.querySelector('.grid').children.length > 0)
+    {
+        eliminarBusqueda();
+    }
+    if(usuario && sessionStorage['usuario'])
+    {
+        usu = JSON.parse(sessionStorage['usuario']);
+            // method get es por defecto y body no hace falta
+            init = { headers:{'Authorization':usu.login + ':' + usu.token} };
+
+        fetch(url, init).then(function(respuesta) {
+            mostrarArticulosBuscar(respuesta);
+        });
+    }
+
+    else {
+        fetch(url).then(function(respuesta) {
+            mostrarArticulosBuscar(respuesta);
+        });
+    }
+
+    return false; // Para no recargar la página
+}
+
+function mostrarArticulosBuscar(respuesta)
+{
+    if(respuesta.ok)
+    {
+        respuesta.json().then(function(datos){
+                datos.FILAS.forEach(function(art) {
+                    // Pasamos la descripcion sin <br>, gi es para que busque en todo el texto y que no distinga mayus de minus
+                    crearArticulo(art.id, art.nombre, art.descripcion.replace(/<br>/gi,''), art.precio, 
+                        art.fecha, art.veces_visto, art.imagen, art.nfotos, art.nsiguiendo);
+                });
+        });
+    }
+    else
+    {
+        console.log('Error en la petición fetch');
+    }
+    return false; // Para no recargar la página
+}
 // TO DO
+function rellenarBuscarConUrl()
+{
+    let textoArticulo = getIdArticulo(),
+    loginVendedor = getVendedorArticulo(),
+    buscar = false;
+    
+    if(textoArticulo)
+    {
+        document.querySelector('#texto').value = textoArticulo;
+        buscar = true;
+    }
+    if(loginVendedor)
+    {
+        document.querySelector('#textoVendedor').value = loginVendedor;
+        buscar = true;
+    }
+    if(buscar)
+    {
+        buscarArticulo(document.querySelector('body>main>section>form'));
+    }
+    return false; // Para no recargar la página
+}
