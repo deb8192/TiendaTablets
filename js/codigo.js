@@ -64,6 +64,39 @@ function cerrarMensajeModal(tipo, redirigir) {
         }
     }
 }
+//-------------------------------------------------------------------
+//              Funciones para la botonera de paginación
+function prevPage()
+{
+    let base = 10,
+    actual = parseInt(document.querySelector("#actual").innerText, base),
+    lastPage = parseInt(document.querySelector("#lastPageNumber").innerText, base);
+
+    //Para cambiar de página no debemos estar en la primera
+    if(actual > 1)
+    {
+        actual--;
+        obtenerArticulos(actual-1);
+        
+        obtenerTotalArticulos(actual);
+    }
+    return false;
+}
+function nextPage()
+{
+    let actual = document.querySelector("#actual").innerText,
+    lastPage = document.querySelector("#lastPageNumber").innerText;
+
+    //Para cambiar de página no debemos estar en la primera
+    if(actual < lastPage)
+    {
+        actual++;
+        obtenerArticulos(actual-1);
+        
+        obtenerTotalArticulos(actual);
+    }
+    return false;
+}
 
 function hacerLogin(frm) {
     let url = 'api/usuarios/login',
@@ -226,6 +259,72 @@ function registro(frm)
     });
     
     return false;
+}
+function obtenerTotalPaginas(totalArticulos, actual) {
+    let articulosPorPagina = 6,
+    paginas = totalArticulos/articulosPorPagina;
+    if(paginas < 1)
+    {
+        paginas = 1;
+    }
+    paginacion(actual, paginas);
+}
+
+function paginacion(actual, last) {
+    let html = '',
+    anterior = actual-1,
+    siguiente = actual+1,
+    primera = 1,
+    segunda = 2,
+    penultima = last - 1;
+
+    html+= '<li><a href="#" id="prev" onclick="return prevPage();" title="Anterior"><i class="flaticon-left-arrow"></i></a></li>'
+    html+= '<li><a href="#" id="firstPage" title="Primera">Primera</a></li>'
+    if(actual > segunda)
+    {
+        html+= '<li class="puntitos"><i class="flaticon-ellipsis"></i></li>'
+    }
+    if(actual > primera)
+    {
+        html+= '<li><a href="#" onclick="return prevPage();" title="'+anterior+'">'+anterior+'</a></li>'
+    }
+    html+= '<li>P&aacute;gina <span id="actual" class="active" title="'+actual+'">'+actual+' </span> de <span id="lastPageNumber">'+last+'</a></li>'   
+    if(actual < last )
+    {
+        html+= '<li><a href="#" onclick="return nextPage();" title="'+siguiente+'">'+siguiente+'</a></li>'
+    }
+    if(actual < penultima)
+    {
+        html+= '<li class="puntitos"><i class="flaticon-ellipsis"></i></li>'
+    }
+    html+= '<li><a href="#" id="lastPage" title="&Uacute;ltima">&Uacute;ltima</a></li>'
+    html+= '<li><a href="#" id="next" onclick="return nextPage();" title="Siguiente"><i class="flaticon-next"></i></a></li></ul>'
+    //Si hemos subido de la penúltima página a la última deshabilitamos next y lastPage
+    if(actual == lastPage)
+    {
+        deshabilitarElemento(document.querySelector("#next"), true);
+        deshabilitarElemento(document.querySelector("#lastPage"), true);
+    }
+    //Si estamos en la penultima pagina se habilita el ir a la página siguiente y a la última
+    else if(actual == penultima)
+    {
+        deshabilitarElemento(document.querySelector("#next"), false);
+        deshabilitarElemento(document.querySelector("#lastPage"), false);
+    }
+    //Si hemos llegado a la primera página, prev y firstPage se deshabilitan
+    if(actual == primera)
+    {
+        deshabilitarElemento(document.querySelector("#prev"), true);
+        deshabilitarElemento(document.querySelector("#firstPage"), true);
+    }
+    
+    //Si estamos en la segunda pagina se habilita el ir a la página anterior y a la primera
+    else if(actual == segunda)
+    {
+        deshabilitarElemento(document.querySelector("#prev"), false);
+        deshabilitarElemento(document.querySelector("#firstPage"), false);
+    }
+    document.querySelector('.paginacion>ul').innerHTML = html;
 }
 
 function menu() {
@@ -718,16 +817,8 @@ function crearArticulo(id, nombre, descripcion, precio, fecha, veces_visto, imag
     document.querySelector('.grid').appendChild(article);
 }
 
-function eliminarBusqueda()
-{
-    while(document.querySelector('.grid').children.length > 0)
-    {
-        document.querySelector('.grid').firstChild.remove();
-    }
-}
-
-function obtenerArticulos() {
-    let url = 'api/articulos?pag={0}&lpag={6}';
+function obtenerArticulos(pagina) {
+    let url = 'api/articulos?pag={'+pagina+'}&lpag={6}';
 
     // method get es por defecto y body no hace falta
     fetch(url).then(function(respuesta) {
@@ -742,6 +833,24 @@ function obtenerArticulos() {
         } else
             console.log('Error en la petición fetch');
     }); 
+}
+
+function obtenerTotalArticulos(actual) {
+
+    let url = 'api/articulos',
+    totalArticulos = 0;
+
+    // method get es por defecto y body no hace falta
+    fetch(url).then(function(respuesta) {
+        if(respuesta.ok) {
+            respuesta.json().then(function(datos) {
+                totalArticulos = datos.FILAS.length;
+                obtenerTotalPaginas(totalArticulos, actual);
+            });
+        }
+        else
+            console.log('Error en la petición fetch');
+    });
 }
 
 
@@ -828,10 +937,19 @@ function mostrarArticulosBuscar(respuesta)
     }
     return false; // Para no recargar la página
 }
-// TO DO
+
+function eliminarBusqueda()
+{
+    while(document.querySelector('.grid').children.length > 0)
+    {
+        document.querySelector('.grid').firstChild.remove();
+    }
+}
+
+// TO FINISH
 function rellenarBuscarConUrl()
 {
-    let textoArticulo = getIdArticulo(),
+    let textoArticulo = getTextoArticulo(),
     loginVendedor = getVendedorArticulo(),
     buscar = false;
     
@@ -850,4 +968,15 @@ function rellenarBuscarConUrl()
         buscarArticulo(document.querySelector('body>main>section>form'));
     }
     return false; // Para no recargar la página
+}
+
+function irABuscar(frm)
+{
+    if(frm.busqueda.value)
+    {
+        let url = "buscar.html?texto="+frm.busqueda.value;
+        //url = url.substring(0, url.length);
+        window.location.replace(url);
+    }
+    return false;
 }
