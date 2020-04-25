@@ -513,10 +513,11 @@ aside, #buscar, #art-nuevo {
 	padding: 10px;
 }
   
-.paginacion a.active {
+.paginacion li.active {
 	background-color: #6ad;
 	color: #fff;
-	border-radius: 5px;
+    border-radius: 5px;
+    padding: 3px;
 }
   
 .paginacion a:hover:not(.active) {
@@ -532,6 +533,17 @@ aside, #buscar, #art-nuevo {
 	padding-top: 5px;
     margin: 0 10px;
     color: #145;
+}
+
+
+.paginacion a.disabledLink
+{
+    cursor: default;
+    color: #777;
+}
+.paginacion a.disabledLink:hover
+{
+    background-color: rgba(255, 255, 255, 0);
 }
 
 footer {
