@@ -326,9 +326,12 @@ function pedirCategorias(buscar) {
     fetch(url).then(function(respuesta) {
         if(respuesta.ok) { 
             respuesta.json().then(function(datos) {
-                console.log(datos);
                 if (datos.RESULTADO == 'OK') {
                     let html = '';
+
+                    if (buscar)         // opcion para el select
+                        html += '<option selected value="-">-</option>';
+
                     datos.FILAS.forEach(function(e) {
                         if (!buscar)    // opcion para el datalist
                             html += `<option id="${e.id}" value="${e.nombre}">`;
@@ -373,6 +376,7 @@ function crearNuevaFicha(abrirInput) {
         html += '<button title="Eliminar foto" onclick="eliminarFicha(this);"><i class="flaticon-trash"></i></button>';
 
     let div = document.createElement('div');
+    div.setAttribute("title","Picha para cambiar la foto");
     div.innerHTML = html;
     document.querySelector('#add-img').insertBefore(div, document.querySelector('#add-img').querySelector('.cam'));
 
@@ -462,6 +466,12 @@ function enviarFoto(id, foto) {
                     hayError(r);
             });
     });
+}
+
+// Al resetear el form de nuevo articulo, esto pone la imagen por defecto y el boton de la camara
+function limpiarFotos() {
+    document.querySelector('#add-img').innerHTML = '<label class="cam" onclick="crearNuevaFicha(true);" title="Añadir foto"><i class="flaticon-camera"></i></label>';
+    crearNuevaFicha(false);
 }
 
 

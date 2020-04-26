@@ -16,7 +16,7 @@
                     <h2>Walacom</h2>
                     <img src="fotos/logo1.png" alt="Walacom">
                 </a>
-                <h3>Tu tablet al mejor precio</h3>
+                <h3>Tus productos al mejor precio</h3>
             </div>
             <nav class="menu_lateral">
                 <label for="m_lateral"><i class="flaticon-list"></i></label>
@@ -44,11 +44,11 @@
             <section id="fotos-nuevas">
                 <h2>Fotos del art&iacute;culo</h2>
                 <div id="add-img">
-                    <label class="cam" for="fotoArt-0" onclick="crearNuevaFicha(true);"><i class="flaticon-camera"></i></label>
+                    <label class="cam" onclick="crearNuevaFicha(true);" title="Añadir foto"><i class="flaticon-camera"></i></label>
                 </div>
             </section>
             <div>
-                <button type="reset" form="formNuevoArt">Restablecer</button>
+                <button type="reset" form="formNuevoArt" onclick="limpiarFotos();">Restablecer</button>
                 <button type="submit" form="formNuevoArt">Publicar</button>
             </div>
         </main>
