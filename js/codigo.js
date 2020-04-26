@@ -224,7 +224,7 @@ function paginacion(actual, last) {
         html+= '<li><a href="#" onclick="return irPaginaEspecifica('+anterior+');" title="'+anterior+'">'+anterior+'</a></li>'
     }
     
-    html+= '<li class="active">P&aacute;gina <span id="actual" title="'+actual+'">'+actual+' </span> de <span id="lastPageNumber">'+last+'</a></li>'   
+    html+= '<li class="active"><span id="actual" title="'+actual+'">'+actual+' </span> de <span id="lastPageNumber">'+last+'</a></li>'   
     if(actual < penultima )
     {
         html+= '<li><a href="#" onclick="return irPaginaEspecifica('+siguiente+');" title="'+siguiente+'">'+siguiente+'</a></li>'
