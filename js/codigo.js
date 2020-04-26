@@ -607,30 +607,26 @@ function hacerPregunta(frm) {
 
 function crearFormPreguntas() {
     let div = document.querySelector('#form_preguntas');
-    let html = '';
-    if (sessionStorage['usuario']) {
-        fetch('formulario.html')
-            .then(res => res.text())
-            .then(content => {
-                content = "<h2>Dejar pregunta para el vendedor</h2>" + content;
-                div.innerHTML = content;
-            });
-    } else {
-        html = 'Debes hacer ';
-        html += '<a href="login.html" title="Login">login</a>' ;
-        html += ' para poder dejar una pregunta al vendedor.';
 
-        let p = document.createElement('p');
-        p.innerHTML = html;
-        div.appendChild(p);
+    let arch = 'noFormulario.html';
+    if (sessionStorage['usuario']) {
+        arch = 'formulario.html';
     }
+
+    fetch(arch)
+        .then(res => res.text())
+        .then(contenido => {
+            contenido = "<h2>Dejar pregunta para el vendedor</h2>" + contenido;
+            div.innerHTML = contenido;
+        });
 }
+
 function enviar_formulario(){
     document.formulario1.submit();
- }
-// TO DO
-function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto, 
-    vendedor, imagen, nfotos, nsiguiendo, npreguntas, seguir, propietario) {
+}
+
+ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto, 
+    vendedor, imagen, nfotos, nsiguiendo, npreguntas, seguir, propietario, id_categoria, categoria, fecha, foto_vendedor) {
     
     let html = '';
     let mainArt = document.querySelector('#articulo_principal');
@@ -645,7 +641,7 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
         mainArt.querySelector('h1').appendChild(span);
     }
 
-    html = `<h2>Vendido por: <a id="vendedor" href="buscar.html?login=${vendedor}">${vendedor}</a></h2>`;
+    html = `<h2>Vendido por: <a id="vendedor" href="buscar.html?login=${vendedor}">${vendedor}</a><img src="/pcw/practica02/fotos/usuarios/${foto_vendedor}" alt="foto vendedor" id="fotoVendedor"></h2>`;
     html += `<i class="flaticon-eye"> ${veces_visto}</i>`;
     mainArt.querySelector('.vendedor').innerHTML = html;
 
@@ -663,7 +659,17 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
     let p = document.createElement('p');
     p.setAttribute('id','descp');
     p.innerHTML = descripcion;
+    mainArt.querySelector('section article').appendChild(p);
 
+    p = document.createElement('p');
+    p.setAttribute('id', 'fecha_venta');
+    p.innerHTML = "Fecha de venta: "+obtenerFecha(fecha);
+    mainArt.querySelector('section article').appendChild(p);
+
+    p = document.createElement('p');
+    p.setAttribute('id', 'categoria-'+id_categoria);
+    p.setAttribute('class', 'categoria_articulo');
+    p.innerHTML = "Categoría: "+categoria;
     mainArt.querySelector('section article').appendChild(p);
 
     if (seguir != null)
@@ -680,7 +686,6 @@ function getTextoArticulo() {
     return new URLSearchParams(window.location.search).get('texto');
 }
 
-// TO DO
 function pedirInfoArticulo() {
 
     let url = 'api/articulos/'+getIdArticulo(),
@@ -704,7 +709,8 @@ function pedirInfoArticulo() {
 
                 anyadirInfoArticulo(articulo.nombre, articulo.descripcion, articulo.precio,
                     articulo.veces_visto, articulo.vendedor, articulo.imagen, articulo.nfotos,
-                    articulo.nsiguiendo, articulo.npreguntas, articulo.estoy_siguiendo, propietario);
+                    articulo.nsiguiendo, articulo.npreguntas, articulo.estoy_siguiendo, propietario,
+                    articulo.id, articulo.categoria, articulo.fecha, articulo.foto_vendedor);
 
                 //articulo.fecha, articulo.categoria, articulo.foto_vendedor
                     
@@ -1217,7 +1223,7 @@ function buscarArticulo(frm,pagina)
     {
         url += '&ph='+frm.hasta.value;
     }
-    if(frm.categorias.value)
+    if(frm.categorias.value && frm.categorias.value != '-')
     {
         url += '&c='+frm.categorias.value;
     }
