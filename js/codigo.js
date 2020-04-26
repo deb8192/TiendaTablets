@@ -214,7 +214,7 @@ function paginacion(actual, last) {
     antepenultima = penultima - 1;
 
     html+= '<li><a href="#" id="prev" onclick="return prevPage();" title="Anterior"><i class="flaticon-left-arrow"></i></a></li>'
-    html+= '<li><a href="#" id="firstPage" onclick="return irPaginaEspecifica('+primera+')"; title="Primera">Primera</a></li>'
+    html+= '<li><a href="#" id="firstPage" onclick="return irPaginaEspecifica('+primera+');" title="Primera">Primera</a></li>'
     if(actual > tercera)
     {
         html+= '<li class="puntitos"><i class="flaticon-ellipsis"></i></li>'
