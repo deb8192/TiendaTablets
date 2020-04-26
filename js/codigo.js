@@ -625,6 +625,10 @@ function enviar_formulario(){
     document.formulario1.submit();
 }
 
+function buscarVendedor() {
+
+}
+
  function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto, 
     vendedor, imagen, nfotos, nsiguiendo, npreguntas, seguir, propietario, id_categoria, categoria, fecha, foto_vendedor) {
     
@@ -641,7 +645,8 @@ function enviar_formulario(){
         mainArt.querySelector('h1').appendChild(span);
     }
 
-    html = `<h2>Vendido por: <a id="vendedor" href="buscar.html?login=${vendedor}">${vendedor}</a><img src="/pcw/practica02/fotos/usuarios/${foto_vendedor}" alt="foto vendedor" id="fotoVendedor"></h2>`;
+    html = `<h2>Vendido por: <a id="vendedor" title="${vendedor}" href="buscar.html?login=${vendedor}">${vendedor}</a>`;
+    html += `<a title="${vendedor}" href="buscar.html?login=${vendedor}"><img src="/pcw/practica02/fotos/usuarios/${foto_vendedor}" alt="foto vendedor" id="fotoVendedor"></a></h2>`;
     html += `<i class="flaticon-eye"> ${veces_visto}</i>`;
     mainArt.querySelector('.vendedor').innerHTML = html;
 
