@@ -326,7 +326,6 @@ function pedirCategorias(buscar) {
     fetch(url).then(function(respuesta) {
         if(respuesta.ok) { 
             respuesta.json().then(function(datos) {
-                console.log(datos);
                 if (datos.RESULTADO == 'OK') {
                     let html = '';
                     datos.FILAS.forEach(function(e) {
@@ -462,6 +461,12 @@ function enviarFoto(id, foto) {
                     hayError(r);
             });
     });
+}
+
+// Al resetear el form de nuevo articulo, esto pone la imagen por defecto y el boton de la camara
+function limpiarFotos() {
+    document.querySelector('#add-img').innerHTML = '<label class="cam" onclick="crearNuevaFicha(true);"><i class="flaticon-camera"></i></label>';
+    crearNuevaFicha(false);
 }
 
 
