@@ -1023,6 +1023,16 @@ textarea {
     margin-bottom: 2em;
 }
 
+img#fotoVendedor
+{
+    width: 128px;
+}
+
+#descp, #fecha_venta, .categoria_articulo
+{
+    margin-top: 12px;;
+}
+
 /* Estilos del modal */
 #capa-fondo {
     position: fixed;

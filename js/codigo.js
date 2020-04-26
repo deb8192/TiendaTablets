@@ -623,7 +623,7 @@ function enviar_formulario(){
  }
 // TO DO
 function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto, 
-    vendedor, imagen, nfotos, nsiguiendo, npreguntas, seguir, propietario) {
+    vendedor, imagen, nfotos, nsiguiendo, npreguntas, seguir, propietario, id_categoria, categoria, fecha, foto_vendedor) {
     
     let html = '';
     let mainArt = document.querySelector('#articulo_principal');
@@ -638,7 +638,7 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
         mainArt.querySelector('h1').appendChild(span);
     }
 
-    html = `<h2>Vendido por: <a id="vendedor" href="buscar.html?login=${vendedor}">${vendedor}</a></h2>`;
+    html = `<h2>Vendido por: <a id="vendedor" href="buscar.html?login=${vendedor}">${vendedor}</a><img src="/pcw/practica02/fotos/usuarios/${foto_vendedor}" alt="foto vendedor" id="fotoVendedor"></h2>`;
     html += `<i class="flaticon-eye"> ${veces_visto}</i>`;
     mainArt.querySelector('.vendedor').innerHTML = html;
 
@@ -656,7 +656,17 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
     let p = document.createElement('p');
     p.setAttribute('id','descp');
     p.innerHTML = descripcion;
+    mainArt.querySelector('section article').appendChild(p);
 
+    p = document.createElement('p');
+    p.setAttribute('id', 'fecha_venta');
+    p.innerHTML = "Fecha de venta: "+obtenerFecha(fecha);
+    mainArt.querySelector('section article').appendChild(p);
+
+    p = document.createElement('p');
+    p.setAttribute('id', 'categoria-'+id_categoria);
+    p.setAttribute('class', 'categoria_articulo');
+    p.innerHTML = "Categoría: "+categoria;
     mainArt.querySelector('section article').appendChild(p);
 
     if (seguir != null)
@@ -697,7 +707,8 @@ function pedirInfoArticulo() {
 
                 anyadirInfoArticulo(articulo.nombre, articulo.descripcion, articulo.precio,
                     articulo.veces_visto, articulo.vendedor, articulo.imagen, articulo.nfotos,
-                    articulo.nsiguiendo, articulo.npreguntas, articulo.estoy_siguiendo, propietario);
+                    articulo.nsiguiendo, articulo.npreguntas, articulo.estoy_siguiendo, propietario,
+                    articulo.id, articulo.categoria, articulo.fecha, articulo.foto_vendedor);
 
                 //articulo.fecha, articulo.categoria, articulo.foto_vendedor
                     
@@ -1210,7 +1221,7 @@ function buscarArticulo(frm,pagina)
     {
         url += '&ph='+frm.hasta.value;
     }
-    if(frm.categorias.value)
+    if(frm.categorias.value && frm.categorias.value != '-')
     {
         url += '&c='+frm.categorias.value;
     }
