@@ -1130,6 +1130,9 @@ function registro(frm)
 // =================================================================================
 
 function crearArticulo(id, nombre, descripcion, precio, fecha, veces_visto, imagen, nfotos, nsiguiendo) {
+    var fech = new Date(fecha);
+    var options = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
+
     html = `<a href="articulo.html?id=${id}" title="${nombre}">`;
     html +=  `<img src="fotos/articulos/${imagen}" alt="${nombre}">`;
     html += '<div>';
@@ -1137,6 +1140,7 @@ function crearArticulo(id, nombre, descripcion, precio, fecha, veces_visto, imag
     html += `<i class="flaticon-gallery"> ${nfotos}</i>`;
     html += '</div>';
     html += `<h2>${nombre}</h2>`;
+    html += `<p class="fecha">${fech.toLocaleDateString("es-ES", options)}</p>`;
     html += '<div>';
     html += `<p>${precio} €</p>`;
     html += `<i class="flaticon-user"> ${nsiguiendo}</i>`;

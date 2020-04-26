@@ -1097,3 +1097,7 @@ img#fotoVendedor
         #modArt p {
             font-weight: bold;
         }
+
+.fecha{
+    padding-left: 20px;
+}
