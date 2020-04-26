@@ -168,44 +168,7 @@ function comprobarLogin() {
     }
 }
 
-//Se comprueba si el login está disponible o no
-function comprobarDisponibilidad(login) {
-    if(login.value)
-    {
-        let url = "api/usuarios/";
-        url += login.value;
 
-        fetch(url).then(function(respuesta) {
-            if(respuesta.ok)
-            {
-                respuesta.json().then(function(datos) {
-                    console.log(datos);
-                    if(!datos.DISPONIBLE)
-                    {
-                        let elemento = document.getElementById ("registroSubmit");
-                        deshabilitarElemento(elemento, true);
-                        if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length == 0)
-                        {
-                            document.getElementById("registro").getElementsByTagName("p")[0].appendChild(crearSpanTexto("El login introducido no se encuentra disponible", "loginUsado"));
-                        }
-                    }
-                    else
-                    {
-                        let elemento = document.getElementById ("registroSubmit");
-                        deshabilitarElemento(elemento, false);
-                        if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length > 0)
-                        {
-                            let span = document.getElementById("registro").getElementsByTagName("p")[0];
-                            span.lastChild.remove();
-                        }
-                    }
-                });
-            } else
-                console.log('Error en la petición fetch');
-
-        });
-    }
-}
 //Función que deshabilita cualquier elemento que se le pase
 function deshabilitarElemento(elemento, value)
 {
@@ -225,81 +188,6 @@ function deshabilitarEnlaces(elemento, value)
     }
 }
 
-function crearSpanTexto(texto, className)
-{
-    let span = document.createElement("span");
-    span.innerHTML = texto;
-    span.setAttribute("class", className);
-    return span;
-}
-
-function comprobarContraseñas()
-{
-    let password1 = document.getElementById("password");
-    let password2 = document.getElementById("password2");
-    if(password1.value && password2.value)
-    {
-        if(password1.value != password2.value)
-        {
-            let elemento = document.getElementById ("registroSubmit");
-            deshabilitarElemento(elemento, true);
-            if(document.getElementById("registro").getElementsByTagName("p")[2].getElementsByClassName("contrasennasDistintas").length == 0)
-            {
-                document.getElementById("registro").getElementsByTagName("p")[2].appendChild(crearSpanTexto("Las contrase&ntilde;as no coinciden", "contrasennasDistintas"));
-            }
-        }
-        else
-        {
-            let elemento = document.getElementById ("registroSubmit");
-            deshabilitarElemento(elemento, false);
-            if(document.getElementById("registro").getElementsByTagName("p")[2].getElementsByClassName("contrasennasDistintas").length > 0)
-            {
-                let span = document.getElementById("registro").getElementsByTagName("p")[2];
-                span.lastChild.remove();
-            }
-        }
-    }
-}
-function limpiarRegistro()
-{
-    document.querySelector("#login_name").value = "";
-    document.querySelector("#password").value = "";
-    document.querySelector("#password2").value = "";
-    document.querySelector("#nombre").value = "";
-    document.querySelector("#apellidos").value = "";
-    document.querySelector("#email").value = "";
-    limpiarFotoRegistro();
-}
-
-function registro(frm)
-{
-    let url = 'api/usuarios/registro',
-    fd = new FormData(frm);
-
-    fetch(url, {method:'POST', body:fd}).then(function(respuesta){
-        if(respuesta.ok) {
-            respuesta.json().then(function(datos){
-                limpiarRegistro();
-
-                // Texto del mensaje
-                mensajeModal('REGISTRO',
-                    'El usuario '+ datos.LOGIN +' se ha registrado correctamente.',
-                    'cerrarMensajeModal(2,true);',
-                    'Aceptar');
-            });
-        } else if(respuesta.status == 422) {
-            
-                // Texto del mensaje
-                mensajeModal('REGISTRO INCORRECTO',
-                    'Las contraseñas no coinciden.',
-                    'cerrarMensajeModal(2,false);',
-                    'Cerrar');
-        } else 
-            console.log('Error en la petición fetch de login.');
-    });
-    
-    return false;
-}
 function obtenerTotalPaginas(totalArticulos, actual) {
     let articulosPorPagina = 6,
     paginas = Math.trunc(totalArticulos/articulosPorPagina);
@@ -581,6 +469,15 @@ function enviarFoto(id, foto) {
 // Funciones para ver y manejar un articulo existente
 // =================================================================================
 
+// Función que comprueba que hay ID en la url del articulo
+function comprobarID() {
+    let id = getIdArticulo();
+    if(id == null)
+    {
+        window.location.replace("index.html");
+    }
+}
+
 // Boton Seguir/Dejar de seguir
 function crearBotonSeguir(seguir) {
     let candado = 'unlock',
@@ -708,14 +605,15 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
         mainArt.querySelector('h1').appendChild(div);
     }
 
-    html = `<h2>Vendido por: <a id="vendedor" href="buscar.html">${vendedor}</a></h2>`;
+    html = `<h2>Vendido por: <a id="vendedor" href="buscar.html?login=${vendedor}">${vendedor}</a></h2>`;
     html += `<i class="flaticon-eye"> ${veces_visto}</i>`;
     mainArt.querySelector('.vendedor').innerHTML = html;
 
-    html = `<img src="fotos/articulos/${imagen}" alt="${nombre}"></img>`;
+    html = `<ul id="fotosArticulo"><li><img src="fotos/articulos/${imagen}" alt="${nombre}"></img></li></ul>`;
+    html += `<span id="fotoActiva" style="display: none">0</span>`;
     mainArt.querySelector('#fotos_articulo').innerHTML = html;
 
-    mainArt.querySelector('.flaticon-gallery').innerHTML = ` 1/${nfotos}`;
+    mainArt.querySelector('.flaticon-gallery').innerHTML = ` <span id="fotoSeleccionada">1</span>/${nfotos}`;
     mainArt.querySelector('.flaticon-user').innerHTML = `${nsiguiendo}`;
     
     html = `<p id="precio">${precio} €</p>`;
@@ -769,13 +667,38 @@ function pedirInfoArticulo() {
                     articulo.nsiguiendo, articulo.npreguntas, articulo.estoy_siguiendo, propietario);
 
                 //articulo.fecha, articulo.categoria, articulo.foto_vendedor
-
+                    
+                obtenerFotosArticulo(getIdArticulo()); 
                 /*pedirFotos();
                 pedirPreguntas();*/
             });
         } else
             console.log('Error en la petición fetch');
-    }); 
+    });
+}
+
+function obtenerFotosArticulo(id)
+{
+    let url = 'api/articulos/'+id+'/fotos';
+
+    fetch(url).then(function(respuesta) {
+        if(respuesta.ok) {
+            respuesta.json().then(function(datos) {
+                for(i = 0; i < datos.FILAS.length; i++)
+                {
+                    if(i > 0)
+                    {
+                        let art = datos.FILAS[i], 
+                        foto = document.createElement('li');
+                        foto.innerHTML = `<img src="fotos/articulos/${art.fichero}" alt="${document.querySelector('h1').innerText}"style="display: none"></img></li>`;
+                        document.querySelector('#fotosArticulo').append(foto);
+                    }
+                }
+            });
+        }
+        else
+        console.log('Error en la petición fetch');
+    });
 }
 
 // Para eliminar un articulo, se abrira primero un modal para pedir confirmacion al usuario
@@ -841,6 +764,29 @@ function modificarArtServer(frm) {
         });
 }
 
+function moverFotoArticulo(adelante)
+{
+    let base = 10,
+    selector = parseInt(document.querySelector("#fotoActiva").innerHTML, base),
+    mainArt = document.querySelector('#articulo_principal');
+    if(adelante && selector < document.querySelector("#fotosArticulo").children.length)
+    {
+        document.querySelector("#fotosArticulo").children[selector].querySelector("img").style.display="none";
+        selector++;
+        document.querySelector("#fotosArticulo").children[selector].querySelector("img").style.display="block";
+        document.querySelector("#fotoActiva").innerHTML = selector;
+        document.querySelector("#fotoSeleccionada").innerHTML = selector+1;
+    }
+    else if(!adelante && selector > 0)
+    {
+        document.querySelector("#fotosArticulo").children[selector].querySelector("img").style.display="none";
+        selector--;
+        document.querySelector("#fotosArticulo").children[selector].querySelector("img").style.display="block";
+        document.querySelector("#fotoActiva").innerHTML = selector;
+        document.querySelector("#fotoSeleccionada").innerHTML = selector+1;
+    }
+}
+
 
 // =================================================================================
 // Funciones para manejar registro
@@ -851,6 +797,120 @@ function limpiarFotoRegistro() {
     document.querySelector('label img').src = "fotos/user-img.png";
 }
 
+//Se comprueba si el login está disponible o no
+function comprobarDisponibilidad(login) {
+    if(login.value)
+    {
+        let url = "api/usuarios/";
+        url += login.value;
+
+        fetch(url).then(function(respuesta) {
+            if(respuesta.ok)
+            {
+                respuesta.json().then(function(datos) {
+                    console.log(datos);
+                    if(!datos.DISPONIBLE)
+                    {
+                        let elemento = document.getElementById ("registroSubmit");
+                        deshabilitarElemento(elemento, true);
+                        if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length == 0)
+                        {
+                            document.getElementById("registro").getElementsByTagName("p")[0].appendChild(crearSpanTexto("El login introducido no se encuentra disponible", "loginUsado"));
+                        }
+                    }
+                    else
+                    {
+                        let elemento = document.getElementById ("registroSubmit");
+                        deshabilitarElemento(elemento, false);
+                        if(document.getElementById("registro").getElementsByTagName("p")[0].getElementsByClassName("loginUsado").length > 0)
+                        {
+                            let span = document.getElementById("registro").getElementsByTagName("p")[0];
+                            span.lastChild.remove();
+                        }
+                    }
+                });
+            } else
+                console.log('Error en la petición fetch');
+
+        });
+    }
+}
+function crearSpanTexto(texto, className)
+{
+    let span = document.createElement("span");
+    span.innerHTML = texto;
+    span.setAttribute("class", className);
+    span.style.color = "#f00";
+    return span;
+}
+
+function comprobarContraseñas()
+{
+    let password1 = document.getElementById("password");
+    let password2 = document.getElementById("password2");
+    if(password1.value && password2.value)
+    {
+        if(password1.value != password2.value)
+        {
+            let elemento = document.getElementById ("registroSubmit");
+            deshabilitarElemento(elemento, true);
+            if(document.getElementById("registro").getElementsByTagName("p")[2].getElementsByClassName("contrasennasDistintas").length == 0)
+            {
+                document.getElementById("registro").getElementsByTagName("p")[2].appendChild(crearSpanTexto("Las contrase&ntilde;as no coinciden", "contrasennasDistintas"));
+            }
+        }
+        else
+        {
+            let elemento = document.getElementById ("registroSubmit");
+            deshabilitarElemento(elemento, false);
+            if(document.getElementById("registro").getElementsByTagName("p")[2].getElementsByClassName("contrasennasDistintas").length > 0)
+            {
+                let span = document.getElementById("registro").getElementsByTagName("p")[2];
+                span.lastChild.remove();
+            }
+        }
+    }
+}
+function limpiarRegistro()
+{
+    document.querySelector("#login_name").value = "";
+    document.querySelector("#password").value = "";
+    document.querySelector("#password2").value = "";
+    document.querySelector("#nombre").value = "";
+    document.querySelector("#apellidos").value = "";
+    document.querySelector("#email").value = "";
+    limpiarFotoRegistro();
+}
+
+function registro(frm)
+{
+    let url = 'api/usuarios/registro',
+    fd = new FormData(frm);
+
+    fetch(url, {method:'POST', body:fd}).then(function(respuesta){
+        if(respuesta.ok) {
+            respuesta.json().then(function(datos){
+                limpiarRegistro();
+
+                // Texto del mensaje
+                mensajeModal('REGISTRO',
+                    'El usuario '+ datos.LOGIN +' se ha registrado correctamente.',
+                    'cerrarMensajeModal(2,true);',
+                    'Aceptar');
+            });
+        } else if(respuesta.status == 422) {
+            
+                // Texto del mensaje
+                mensajeModal('REGISTRO INCORRECTO',
+                    'Las contraseñas no coinciden.',
+                    'cerrarMensajeModal(2,false);',
+                    'Cerrar');
+        } else 
+            console.log('Error en la petición fetch de login.');
+    });
+    
+    return false;
+}
 
 // =================================================================================
 // Funciones para manejar index
@@ -954,10 +1014,9 @@ function buscarArticulo(frm,pagina)
     {
         url += '&c='+frm.categorias.value;
     }
-    //TO DO
-    if(frm.vendedor.checked)
+    if(frm.textoVendedor.value)
     {
-        url += '&v=';
+        url += '&v='+frm.textoVendedor.value;
     }
     if(frm.artFollow.checked)
     {
@@ -1022,7 +1081,6 @@ function limpiarArticulosGrid()
     }
 }
 
-// TO FINISH
 function rellenarBuscarConUrl()
 {
     let textoArticulo = getTextoArticulo(),

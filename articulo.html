@@ -36,8 +36,8 @@
                     </div>
                     <div class="paginacion">
                         <ul>
-                            <li><a href="#" title="Anterior"><i class="flaticon-left-arrow"></i> <span>Anterior</span> </a></li>
-                            <li><a href="#" title="Siguiente"> <span>Siguiente</span> <i class="flaticon-next"></i></a></li>
+                            <li><a href="#" title="Anterior" onclick = "return moverFotoArticulo(false);"><i class="flaticon-left-arrow"></i> <span>Anterior</span> </a></li>
+                            <li><a href="#" title="Siguiente" onclick = "return moverFotoArticulo(true);""> <span>Siguiente</span> <i class="flaticon-next"></i></a></li>
                         </ul>
                     </div>
                     <div id="padre"></div>
@@ -87,6 +87,7 @@
         </footer>
         <script>
             menu();
+            comprobarID();
             pedirInfoArticulo();
             crearFormPreguntas();
         </script>
