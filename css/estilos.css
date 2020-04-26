@@ -707,7 +707,7 @@ footer a:hover {
    align-items: center;
 }
 
-#articulo_principal section[data-value='info'] h1 div {
+#articulo_principal section[data-value='info'] h1 span {
     margin: 0 auto;
     margin-right: 0;
 }

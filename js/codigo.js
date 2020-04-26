@@ -214,7 +214,7 @@ function paginacion(actual, last) {
     antepenultima = penultima - 1;
 
     html+= '<li><a href="#" id="prev" onclick="return prevPage();" title="Anterior"><i class="flaticon-left-arrow"></i></a></li>'
-    html+= '<li><a href="#" id="firstPage" onclick="return irPaginaEspecifica('+primera+')"; title="Primera">Primera</a></li>'
+    html+= '<li><a href="#" id="firstPage" onclick="return irPaginaEspecifica('+primera+');" title="Primera">Primera</a></li>'
     if(actual > tercera)
     {
         html+= '<li class="puntitos"><i class="flaticon-ellipsis"></i></li>'
@@ -224,7 +224,7 @@ function paginacion(actual, last) {
         html+= '<li><a href="#" onclick="return irPaginaEspecifica('+anterior+');" title="'+anterior+'">'+anterior+'</a></li>'
     }
     
-    html+= '<li class="active">P&aacute;gina <span id="actual" title="'+actual+'">'+actual+' </span> de <span id="lastPageNumber">'+last+'</a></li>'   
+    html+= '<li class="active"><span id="actual" title="'+actual+'">'+actual+' </span> de <span id="lastPageNumber">'+last+'</a></li>'   
     if(actual < penultima )
     {
         html+= '<li><a href="#" onclick="return irPaginaEspecifica('+siguiente+');" title="'+siguiente+'">'+siguiente+'</a></li>'
@@ -535,7 +535,42 @@ function seguirArticulo(boton) {
                 console.log('Error en la petición fetch de seguir artículo.');
         });
 }
+function enviarRespuesta(frm) {
+    let idPreguntaDividido = frm.id.split("-"),
+    idNum = idPreguntaDividido[1];
 
+    let url = 'api/preguntas/'+idNum+'/respuesta',
+    fd  = new FormData(frm),
+    usu = JSON.parse(sessionStorage['usuario']);
+
+    fetch(url, {method:'POST', 
+        body:fd,
+        headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
+
+            if(respuesta.ok) { 
+                mensajeModal('RESPUESTA',
+                    'Respuesta guardada correctamente.',
+                    'cerrarMensajeModal(1,true);',
+                    'Cerrar');
+
+                    let i = document.querySelector("#preguntas_respuestas").children.length-1;
+                    while(i >= 0)
+                    {
+                        if(document.querySelector("#preguntas_respuestas").children[i].tagName == "ARTICLE")
+                        {
+                            document.querySelector("#preguntas_respuestas").children[i].remove();
+                        }
+                        i--;
+                    }                
+                    pedirPreguntas(getIdArticulo());
+            } else
+                mensajeModal('RESPUESTA',
+                    'No se ha podido guardar la respuesta.',
+                    'cerrarMensajeModal(1,false);',
+                    'Cerrar');
+        });
+    return false; // Para no recargar la página
+}
 function hacerPregunta(frm) {
 
     let url = 'api/articulos/'+getIdArticulo()+'/pregunta',
@@ -547,12 +582,10 @@ function hacerPregunta(frm) {
         headers:{'Authorization':usu.login + ':' + usu.token}}).then(function(respuesta){
 
             if(respuesta.ok) { // TODO repe temporalmente
-                respuesta.json().then(function(datos){
-                    mensajeModal('PREGUNTA',
-                    'Pregunta guardada correctamente.',
-                    'cerrarMensajeModal(1,true);',
-                    'Cerrar');
-                });
+                mensajeModal('PREGUNTA',
+                'Pregunta guardada correctamente.',
+                'cerrarMensajeModal(1,true);',
+                'Cerrar');
             } else
                 mensajeModal('PREGUNTA',
                     'No se ha podido guardar la pregunta.',
@@ -600,9 +633,9 @@ function anyadirInfoArticulo(nombre, descripcion, precio, veces_visto,
     if (propietario) {
         html += '<button title="Modificar" onclick="modificarArt();"><i class="flaticon-pencil"></i></button>';
         html += '<button title="Eliminar" onclick="eliminarArt();"><i class="flaticon-trash"></i></button>';
-        let div = document.createElement('div');
-        div.innerHTML = html;
-        mainArt.querySelector('h1').appendChild(div);
+        let span = document.createElement('span');
+        span.innerHTML = html;
+        mainArt.querySelector('h1').appendChild(span);
     }
 
     html = `<h2>Vendido por: <a id="vendedor" href="buscar.html?login=${vendedor}">${vendedor}</a></h2>`;
@@ -669,12 +702,179 @@ function pedirInfoArticulo() {
                 //articulo.fecha, articulo.categoria, articulo.foto_vendedor
                     
                 obtenerFotosArticulo(getIdArticulo()); 
-                /*pedirFotos();
-                pedirPreguntas();*/
+                pedirPreguntas(getIdArticulo());
             });
         } else
             console.log('Error en la petición fetch');
     });
+}
+
+//Función que obtiene las preguntas del servidor
+function pedirPreguntas(id)
+{
+    let url = 'api/articulos/'+id+'/preguntas';
+
+    fetch(url).then(function(respuesta) {
+        if(respuesta.ok) {
+            respuesta.json().then(function(datos) {
+                for(let i = 0; i < datos.FILAS.length; i++)
+                {
+                    let preg = datos.FILAS[i];
+                    crearPregunta(preg.login, preg.fecha_hora, preg.pregunta, preg.respuesta, preg.id);
+                }
+            });
+        } else
+            console.log('Error en la petición fetch');
+    });
+}
+
+//Función que genera las preguntas con los datos del servidor
+function crearPregunta(usuario, fecha_hora, pregunta, respuesta, idPregunta)
+{
+    let html = '',
+    preg = document.createElement('article'),
+    fecha = obtenerFecha(fecha_hora),
+    hora = obtenerHora(fecha_hora),
+    usu = ''; 
+    if(sessionStorage['usuario'])
+    {
+        usu = JSON.parse(sessionStorage['usuario']);
+    }
+
+    html = `<h3>Pregunta</h3>`;
+    html += `<div><p>Autor: ${usuario}.</p><time datetime="${fecha_hora}">${fecha}, a las ${hora}h</time></div>`;
+    html += `<p class="pregunta">${pregunta}</p>`;
+        
+    if(respuesta != null)
+    {
+        html += `<h4>Respuesta</h4>`;
+        html += `<p class="respuesta">${respuesta}</p>`;
+    }
+    else if(usu != '' && usu.login == document.querySelector("#vendedor").innerText)
+    {
+        html += `<form id="responder-${idPregunta}" onsubmit="return responderPregunta(this);">`;
+        html += `<input type="submit" value="Responder"></form>`;
+    }
+    
+    preg.innerHTML = html;
+    document.querySelector('#preguntas_respuestas').append(preg);
+}
+
+//Función que genera el formulario de respuesta de preguntas
+function responderPregunta(frm)
+{
+    let html = '',
+    idForm = frm.id,
+    section = document.querySelector('#preguntas_respuestas'),
+    article = '',
+    h4 = document.createElement("h4"),
+    form = document.createElement("form");
+
+    for (let i = 0; i < section.children.length; i++)
+    {
+        if(section.children[i].tagName == "ARTICLE" && section.children[i].lastChild.id == idForm)
+        {
+            article = section.children[i];
+        }
+    }
+    article.lastChild.remove();
+    
+    form.id = idForm;
+    form.setAttribute("onsubmit", "return enviarRespuesta(this);");
+
+    h4.innerText = `Respuesta`;
+    article.append(h4);
+    html = `<p><textarea name="texto" placeholder="Respuesta" class="respuesta"></textarea></p>`;
+    html += `<input type="submit" value="Responder">`;
+
+    
+    form.innerHTML = html;
+    article.append(form);
+    return false;
+}
+
+function obtenerFecha(fecha_hora)
+{
+    let fecha = '',
+    fechaYHora = fecha_hora.split(" ");
+
+    fechaPartida = fechaYHora[0].split("-");
+    for(let i = fechaPartida.length - 1; i >= 0 ; i--)
+    {
+        if(i == 1)
+        {
+            mes = parseInt(fechaPartida[i]);
+            switch (mes)
+            {
+                case 1:
+                fecha += "-enero";
+                break;
+
+                case 2:
+                fecha += "-febrero";
+                break;
+
+                case 3:
+                fecha += "-marzo";
+                break;
+
+                case 4:
+                fecha += "-abril";
+                break;
+
+                case 5:
+                fecha += "-mayo";
+                break;
+
+                case 6:
+                fecha += "-junio";
+                break;
+
+                case 7:
+                fecha += "-julio";
+                break;
+
+                case 8:
+                fecha += "-agosto";
+                break;
+
+                case 9:
+                fecha += "-septiembre";
+                break;
+
+                case 10:
+                fecha += "-octubre";
+                break;
+
+                case 11:
+                fecha += "-nobiembre";
+                break;
+
+                case 12:
+                fecha += "-diciembre";
+                break;
+            }
+        }
+        else
+        {
+            switch (i)
+            {
+                case 2:
+                    fecha += fechaPartida[i];
+                    break;
+                case 0:
+                    fecha += "-"+fechaPartida[i];
+            }
+        }
+    }
+    return fecha;
+}
+function obtenerHora(fecha_hora)
+{
+    let fechaYHora = fecha_hora.split(" "),
+    hora = fechaYHora[1].split(":");
+    horaArreglada = hora[0]+":"+hora[1];
+    return horaArreglada;
 }
 
 function obtenerFotosArticulo(id)
@@ -769,7 +969,7 @@ function moverFotoArticulo(adelante)
     let base = 10,
     selector = parseInt(document.querySelector("#fotoActiva").innerHTML, base),
     mainArt = document.querySelector('#articulo_principal');
-    if(adelante && selector < document.querySelector("#fotosArticulo").children.length)
+    if(adelante && selector < document.querySelector("#fotosArticulo").children.length -1)
     {
         document.querySelector("#fotosArticulo").children[selector].querySelector("img").style.display="none";
         selector++;
